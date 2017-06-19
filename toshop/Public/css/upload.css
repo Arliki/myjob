@@ -1,0 +1,25 @@
+#con{
+ 	width:110px;
+	height:110px;
+	border:1px solid #ddd;
+	margin:50px auto;
+}
+#look{
+ 	width:100;
+ 	height:100;
+ 	border:1px solid #aaa;
+ 	margin:10px auto;
+ 	text-align: center;
+ 	line-height:100px;
+ 	color:#aaa;
+}
+#uploadBtn{
+ 	display:block;
+ 	width:80px;
+ 	line-height:35px;
+ 	background:#3F9F00;
+ 	color:#fff;
+ 	text-align: center;
+ 	margin:20px auto;
+ 	cursor:pointer;
+}

@@ -1,0 +1,124 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>控制台</title>
+    <link rel="stylesheet" type="text/css" href="ADMIN_CSS/identify.css">
+    <link rel="stylesheet" type="text/css" href="ADMIN_CSS/layout.css">
+    <link rel="stylesheet" type="text/css" href="ADMIN_CSS/account.css">
+    <link rel="stylesheet" type="text/css" href="ADMIN_CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="ADMIN_CSS/control_index.css">
+    <script type="text/javascript" src="ADMIN_JS/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="ADMIN_JS/layer.js"></script>
+    <script type="text/javascript" src="ADMIN_JS/haidao.offcial.general.js"></script>
+    <script type="text/javascript" src="ADMIN_JS/select.js"></script>
+    <script type="text/javascript" src="ADMIN_JS/haidao.validate.js"></script>
+    <link type="text/css" href="UP_USE/uploadify.css" rel="stylesheet" />
+    <script type="text/javascript" src="UP_USE/jquery.uploadify.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#file_upload').uploadify({
+                'swf'      : 'UP_USE/uploadify.swf',
+                'uploader' : '{:U("Home/Index/uploadify")}',
+                'buttonText' : '修改轮播图',
+                'onUploadSuccess' : function(file, data, response) {
+                    console.log(data);
+                    var newdata = data.split("_")[1];
+                    $('#im').append('<div style="float:left;margin:2px 0 0 2px"><img width="130px" height="130px" src="__ROOT__/uploads/'+data.split("_")[1]+'" height=80 width=80 />');
+                    $('#images').val('__ROOT__/Uploads/'+newdata+','+images.value);
+                },
+            });
+        })
+        function check(){
+            pic=document.getElementById('images').value;
+            if(pic.length==0){
+                alert("请上传后提交");
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+</head>
+<style>
+    .sidebar-trans{
+        display: none;
+    }
+</style>
+<body>
+<!--头部-->
+<include file="./bac/top" />
+<div class="view-body">
+
+    <!--侧栏-->
+    <if condition="$_SESSION['power'] eq 1"><include file='./bac/left' />
+        <else/><include file='./bac/newsleft'/>
+    </if>
+    <!--中心部分-->
+
+    <div class="view-product">
+        <div class="authority">
+            <div class="authority-head">
+                <div class="manage-head">
+                    <h6 class="layout padding-left manage-head-con"><a href="{:U('bac/index')}" style="font-size: 16px">首页</a> >> 风格轮播图修改</h6>
+                </div>
+            </div>
+            <div class="authority-content">
+                <div class="list-content show">
+                    <input id="file_upload" name="file_upload" type="file" multiple="true" value="" />
+                    <form onsubmit="return check()" action="{:U('Home/drop/sbox')}" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                        <input style="width:50px;height: 24px;border: 1px solid #afadad;background-color:#e0dfe3 ;margin-right: 10px; margin-top: 8px;" value="确认修改" type="submit" >
+                        <input style="width:50px;height: 24px;border: 1px solid #afadad;background-color:#e0dfe3;margin-top: 8px; " value="返回" type="button" onclick="history.go(-1)">
+                        <div class="offcial-table tr-border margin-big-top clearfix">
+                            <input type="hidden" id="images" name="pic"value="">
+                            <div class="tr-th clearfix">
+                                上传缩略图：
+                                <div id="im"class="im" name="im">
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                原始轮播图：
+                <input style=" height: 30px;border: 1px solid #afadad;background-color:#e0dfe3;margin-top: 8px; " type="button" id="but" onclick="dis()" value="点击显示">
+                <div id="yuan" style="border: 1px dashed #e1a531;display:none">
+                    <foreach name="sbox" item="vo">
+                        <if condition="$key lt count($sbox)-1">
+                            图片{$key+1}：<br/>
+                            <img src="{$vo}"width="790px"height="340px" alt=""><br/>
+                        </if>
+                    </foreach>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--javascript-->
+    <script>
+        $(".sidebar-title").live('click', function() {
+            if ($(this).parent(".sidebar-nav").hasClass("sidebar-nav-fold")) {
+                $(this).next().slideDown(200);
+                $(this).parent(".sidebar-nav").removeClass("sidebar-nav-fold");
+            } else {
+                $(this).next().slideUp(200);
+                $(this).parent(".sidebar-nav").addClass("sidebar-nav-fold");
+            }
+        });
+    </script>
+    </div>
+</body>
+<script type="text/javascript">
+    var but=document.getElementById('but');
+    var yuan=document.getElementById('yuan');
+    function dis(){
+        if(but.value=="点击隐藏"){
+            yuan.style.display='none';
+            but.value="点击显示";
+        }else{
+            yuan.style.display='';
+            but.value="点击隐藏";
+        }
+    }
+</script>
+</html>

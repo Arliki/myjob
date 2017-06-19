@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>控制台</title>
+        <link rel="stylesheet" type="text/css" href="ADMIN_CSS/identify.css">
+        <link rel="stylesheet" type="text/css" href="ADMIN_CSS/layout.css">
+        <link rel="stylesheet" type="text/css" href="ADMIN_CSS/account.css">
+        <link rel="stylesheet" type="text/css" href="ADMIN_CSS/style.css">
+        <link rel="stylesheet" type="text/css" href="ADMIN_CSS/control_index.css">
+        <script type="text/javascript" src="ADMIN_JS/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="ADMIN_JS/layer.js"></script>
+        <script type="text/javascript" src="ADMIN_JS/haidao.offcial.general.js"></script>
+        <script type="text/javascript" src="ADMIN_JS/select.js"></script>
+        <script type="text/javascript" src="ADMIN_JS/haidao.validate.js"></script>
+        <script type="text/javascript">
+            function check(){
+                id=document.getElementById('repassword').value;
+                pwd=document.getElementById('passwd').value;
+                if (id.length==0 || pwd.length==0) {
+                    alert("新密码或确认密码不能为空");
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        </script>
+    </head>
+    <style>
+        .sidebar-trans{
+            display: none;
+        }
+    </style>
+    <body>
+<!--头部-->
+   <include file="./bac/top" /> 
+   <div class="view-body">
+
+       <!--侧栏-->
+    <include file="./bac/left" /> 
+    <!--中心部分-->
+   
+   <div class="view-product">
+                <div class="authority">
+                    <div class="authority-head">
+                        <div class="manage-head">
+                            <h6 class="layout padding-left manage-head-con"><a href="{:U('bac/index')}" style="font-size: 16px">首页</a> >> 站点开关</h6>
+                        </div>
+                    </div>
+                    <div class="authority-content">
+                        <div class="list-content show">
+                            <form method="post" action="{:U(left/web)}">
+                                <foreach name="web" item="vo">
+                            <div class="offcial-table tr-border margin-big-top clearfix">
+                        	<if condition="$vo.value eq Y">
+	                        <div class="tr-th clearfix">
+	                            站点开启： <input type="radio"name="id"value="Y"id="id" checked="true">
+	                        </div>
+							<div class="tr-th clearfix">
+	                            站点关闭： <input type="radio"name="id"value="N"id="id">
+	                        </div>
+	                        <div class="tr-th clearfix">
+	                            关闭留言： <input class="common-text required" id="title" name="con" size="50" value="{$vo.con}"type="text">
+	                        </div>
+	                        <else/>
+	                        <div class="tr-th clearfix">
+	                            站点开启： <input type="radio"name="id"value="Y"id="id">
+	                        </div>
+							<div class="tr-th clearfix">
+	                            站点关闭： <input type="radio"name="id"value="N"id="id" checked="true">
+	                        </div>
+	                        <div class="tr-th clearfix">
+	                            关闭留言： <input class="common-text required" id="title" name="con" size="50" value="{$vo.con}"type="text">
+	                        </div>
+	                        </if>
+					</div>
+                    <input style="width:50px;height: 24px;border: 1px solid #afadad;background-color:#e0dfe3 ;margin-right: 10px; margin-top: 8px;" value="提交" type="submit" >
+                    </foreach>
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--javascript-->
+   <script>
+            $(".sidebar-title").live('click', function() {
+                if ($(this).parent(".sidebar-nav").hasClass("sidebar-nav-fold")) {
+                    $(this).next().slideDown(200);
+                    $(this).parent(".sidebar-nav").removeClass("sidebar-nav-fold");
+                } else {
+                    $(this).next().slideUp(200);
+                    $(this).parent(".sidebar-nav").addClass("sidebar-nav-fold");
+                }
+            });
+        </script>
+    </body>
+ 
+</html>

@@ -1,0 +1,254 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="FURNI_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="FURNI_CSS/index.css">
+    <title>牛仔家具风格</title>
+        <style>
+       <style type="text/css">
+       /*对轮播图的样式*/
+        *{margin: 0;padding: 0;}
+        ul,ol{list-style: none;}
+        #box{
+          width: 100%;
+           height: 70%; 
+            position: relative;
+             overflow:hidden;
+             float: left;
+          }
+          #box ul li a img{
+            width:  100%;
+            height:  100%;
+          }
+
+        ul{
+          margin:0;
+          padding:0;
+        }
+        #box ol{
+          position: absolute;
+           right:50%;
+            bottom: 3%;
+          }
+          .circle{
+          width:16px;
+          height:16px;
+          display: inline-block;
+          font-size:20px;
+          line-height: 16px;
+          text-align:center;
+          color:#fff;
+          text-decoration:none
+          }
+      
+          #box ol li{
+          float: left;
+            }
+        
+</style>
+  </head>
+  <body>
+      <nav class="nav navbar-fixed-top">
+        <div class="container">
+          <a class="logo" href="index.html"><img src="FURNI_IMG/1.png" alt=""></a>
+        </div>
+      </nav>
+        <section class="banner">
+            <img class="img-responsive" src="FURNI_IMG/news.jpg" alt="">
+        </section>
+
+        <!--中间部分的导航-->
+
+        <section class="">
+       <div class="nav-height" id="navHeight">
+        <nav class="nav-wrap" id="nav-wrap">
+        <div class="container">
+        <div class="row">
+            <ul class="clearfix">
+              <li><a href="{:U('Home/index/index')}">首页</a></li>
+              <li><a href="{:U('Home/index/aboutus')}">关于我们</a></li>
+              <li><a href="{:U('Home/index/assortment')}">产品展示</a></li>
+              <li id="active"><a href="{:U('Home/Style/index')}">家具风格</a></li>
+              <li><a href="{:U('Home/index/news')}">新闻中心</a></li>
+            </ul>
+        </div>
+        </div>
+        </nav>
+    </div>
+    </section>
+
+
+    <!--style_content-->
+    <section class="style" id="style">
+        <div id="box">
+            <ul>
+                <foreach name="sbox" item="vos">
+                    <if condition="$key lt count($sbox)-1">
+                        <li><img src="{$vos}" width="1920" height="600" class="responsive"></li>
+                    </if>
+                </foreach>
+            </ul>
+            <ol>
+                <li class="current"><a href="#" class="circle">.</a></li>
+                <foreach name="sbox" item="voa">
+                    <if condition="$key lt count($sbox)-2">
+                        <li><a href="#" class="circle">.</a></li>
+                    </if>
+                </foreach>
+            </ol>
+        </div>
+            <div class="container">
+              <div class="row">
+               <div class="col-md-12 col-xd-12 content11">
+                   <a href="####" id="style1" name="style1"></a>
+                  <h2>你的生活自己掌握</h2>
+                  <p>选择不一样的风格，遇见不一样的生活。</p>
+                  <p><a href="#">了解更多风格</a></p>
+               </div>
+                  <ul class="style1">
+                      <li><a href="index.html#style1">北欧风格</a></li>
+                      <li><a href="style_2.html#style1">英伦风格</a></li>
+                      <li class="fengge">牛仔风格</li>
+                      <li><a href="style_4.html#style1">贵族风格</a></li>
+                      <li><a href="style_5.html#style1">东方风格</a></li>
+                      <li><a href="style_6.html#style1">仿古风格</a></li>
+                  </ul>
+            </div>
+            <div class="beiou1">
+              <div class="beiou11">
+                <h3>牛仔风格</h3>
+                <p>实用的传统经典英伦情调，设计简单、大方、实用、针对普通大众、突出功能、没有太多繁琐装饰，最终形成了独具特色的设计风格。它反映出现代都市人进入后消费时代的一种理性取向。</p>
+                <span><a href="#">让你的生活充满牛仔范！</a></span>
+
+              </div>
+               <div class="beiou12"><a href="#"><img src="FURNI_IMG/beiou1.png" alt=""></a></div>
+            </div>
+            <div class="beiou2">
+              <a href="#"><img src="FURNI_IMG/beiou2.png" alt=""></a>
+               
+            </div>
+            <div class="beiou3">
+              <a href="#"><img src="FURNI_IMG/beiou3.png" alt=""></a>
+                <a href="#"><img src="FURNI_IMG/beiou4.png" alt=""></a>
+            </div>
+            </div>
+    </section>
+
+    <!--footer-->
+      <section class="footer" id="footer">
+          <div class="container">
+              <div class="row">
+                  <foreach name="copy" item="vo">
+                      <div class="col-md-3 col-xs-12 footer_left">
+                          <div class="left1">
+                              <p>{$vo.name}</p>
+                          </div>
+                          <p class="left2">{$vo.add}</p>
+                          <p class="left2">{$vo.icp}</p>
+                      </div>
+                      <div class="col-md-5 col-xs-12 footer_center">
+                          <p>TEL:{$vo.tel}</p>
+                          <p>FAX:{$vo.fax}</p>
+                          <p>E-MAIL：{$vo.email}</p>
+                      </div>
+                      <div class="col-md-4 col-xs-12 footer_right">
+                          <div class="right1">
+                              <ul class="right11">
+                                  <li><a href="http://weibo.com/"target="_blank"><img src="FURNI_IMG/wb.png" title="新浪微博"></a></li>
+                                  <li><a href="http://wx.qq.com"target="_blank"><img src="FURNI_IMG/wx.png" title="微信"></a></li>
+                                  <li><a href="https://www.tmall.com"target="_blank"><img src="FURNI_IMG/tm.png" title="天猫"></a></li>
+                                  <li><a href="http://www.suning.com"target="_blank"><img src="FURNI_IMG/sn.png" title="苏宁"></a></li>
+                                  <li><a href="https://www.jd.com"target="_blank"><img src="FURNI_IMG/jd.png" title="京东"></a></li>
+                                  <li><a href="#"><img src="FURNI_IMG/tj.png" title="自添加"></a></li>
+                              </ul>
+
+                          </div>
+                          <div class="right2">
+                              <ul class="right21">
+                                  <li><a href="#">品牌中心</a></li>
+                                  <li><a href="#">服务中心</a></li>
+                                  <li><a href="#">专卖店查询</a></li>
+                                  <li class="border"><a href="#">防伪查询</a></li>
+                                  <li><a href="{:U('bac/login')}" target="_blank">后台管理</a></li>
+                              </ul>
+                              </ul>
+                          </div>
+                      </div>
+                  </foreach>
+              </div>
+          </div>
+      </section>
+    <!--内容信息导航吸顶及锚点引入JS-->
+    <script type="text/javascript" src="FURNI_JS/jquery.min.js"></script>
+    <script src='FURNI_JS/nav.js'></script>
+        <script>
+    //内容信息导航吸顶
+      $(document).ready(function(){ 
+      var navHeight= $("#navHeight").offset().top; 
+      var navFix=$("#nav-wrap"); 
+      $(window).scroll(function(){ 
+        if($(this).scrollTop()>navHeight){ 
+          navFix.addClass("navFix"); 
+        } 
+        else{ 
+          navFix.removeClass("navFix"); 
+        } 
+        }) 
+      })
+    //内容信息导航锚点
+      /* $('.nav-wrap').navScroll({
+          mobileDropdown: true,
+          mobileBreakpoint: 768,
+          scrollSpy: true
+        });
+    
+        $('.click-me').navScroll({
+          navHeight: 0
+        });
+    
+        $('.nav-wrap').on('click', '.nav-mobile', function (e) {
+          e.preventDefault();
+          $('.nav-wrap ul').slideToggle('fast');
+        });*/
+
+
+/*轮播图*/
+        $(document).ready(function() {
+            $("#box ol li").mouseover(function() {
+                var index=$(this).index();
+        $("#box ul li").eq(index).show().siblings().hide();
+                 $(this).addClass('current').siblings().removeClass('current');
+            });
+      
+        });
+    
+    function slider(index){
+      var index = $(".current").index()+1;
+      if(index==6){
+        index=0;
+      }
+      console.log(index);
+      $("#box ol li").eq(index).addClass('current').siblings().removeClass('current');
+      $("#box ul li").eq(index).show().siblings().hide();
+      
+    }
+    setInterval('slider()',3000);
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

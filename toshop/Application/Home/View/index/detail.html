@@ -1,0 +1,279 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="FURNI_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="FURNI_CSS/index.css">
+    <title>商品详情</title>
+
+        <style type="text/css">
+        /*对轮播图的样式*/
+        *{margin: 0;padding: 0;}
+        ul{list-style: none;}
+        #box{
+            width: 518px;
+            height: 359px;
+            position: relative;
+            overflow:hidden;
+            float: left;
+        }
+
+        #box ul li a img{
+            width: 518px;
+            height: 359px;
+        }
+        ul{
+            margin:0;
+            padding:0;
+        }
+        #box1 ul{
+            position: absolute;
+            left:105px;
+            top: 910px;
+            margin-right: 20px;
+        }
+        #box1 ul{
+            float:left;
+        }
+        .circle img{
+            width:122px;
+            height:122px;
+            float: left;
+        }
+        .circle img:hover{
+            transform:scale(1.15,1.15);
+            border:1px solid #000;
+        }
+        .box2 li{
+            float:left;
+            padding-right: 10px;
+        }
+
+
+    </style>
+  </head>
+  <body>
+      <nav class="nav navbar-fixed-top">
+        <div class="container">
+          <a class="logo" href="index.html"><img src="FURNI_IMG/1.png" alt=""></a>
+        </div>
+      </nav>
+        <section class="banner">
+            <img class="img-responsive" src="FURNI_IMG/1.jpg" alt="">
+        </section>
+
+        <!--中间部分的导航-->
+
+        <section class="">
+       <div class="nav-height" id="navHeight">
+        <nav class="nav-wrap" id="nav-wrap">
+        <div class="container">
+        <div class="row">
+            <ul class="clearfix">
+              <li><a href="{:U('Home/index/index')}">首页</a></li>
+              <li><a href="{:U('Home/index/aboutus')}">关于我们</a></li>
+              <li id="active"><a href="{:U('Home/index/assortment')}">产品展示</a></li>
+              <li><a href="{:U('Home/Style/index')}">家具风格</a></li>
+              <li><a href="{:U('Home/index/news')}">新闻中心</a></li>
+            </ul>
+        </div>
+        </div>
+        </nav>
+    </div>
+    </section>
+
+        <!--content-->
+        <section class="detail" id="detail">
+         <div class="container">
+             <div id="box">
+                 <ul>
+                     <foreach name="box" item="vo">
+                        <if condition="$key lt count($box)-1">
+                            <li id="zhanshitupian.{$key+1}"><img src="{$vo}" width="518px"height="359px"></li>
+                        </if>
+                     </foreach>
+                 </ul>
+             </div>
+             <div id="box1">
+                 <ul class="box2">
+                     <foreach name="box" item="vo">
+                         <if condition="$key lt count($box)-1">
+                             <li><a href="#zhanshitupian.{$key+1}" class="circle"><img src="{$vo}"></a></li>
+                         </if>
+                     </foreach>
+                 </ul>
+             </div>
+
+
+          <div class="detail2">
+          <foreach name="detail" item="vo">
+            <div class="dingzhi">
+                <if condition="$vo.type eq 1 ">家庭家具
+                    <else/>办公家具
+                </if>
+            </div>
+            <div class="detail21">
+               <span class="detail221">{$vo.conner}</span>
+            </foreach>
+            </div>
+            <div class="detail22">
+                <p class="detail122">纯棉布料&nbsp;&nbsp;纯天然制作&nbsp;&nbsp;放心安全</p>
+                <p class="detail123">商家承诺：购买“送货入户并安装”服务，未履行最高可获300元赔付</p>
+            </div>
+            <div class="detail23">
+                <p>此商品正在周年庆活动，请立即购买···</p>
+            </div>
+            <div class="detail24">
+            <foreach name="detail" item="vo">
+                <p>全网实物共用满一万减一百</p>
+                <span class="detail241">￥<?php echo $vo[price]*1.25;?>.00</span>
+                <p>促销价</p>
+                <h2>￥{$vo.price}.00</h2>
+            </foreach>
+            </div>
+          </div> 
+          <div class="detail3">
+          <p class="fuwu">服务承诺:<p>
+            <ul>
+              
+              <li>假一赔五</li>
+              <li>送货上门</li>
+              <li>无忧安装</li>
+              <li>三年质保</li>
+              <li>正品保证</li>
+              <li>七天无理由退货</li>
+            </ul>
+          </div> 
+          <div class="detail3">
+          <p class="fuwu">支付方式：<p>
+            <ul>
+              <li>支付宝</li>
+              <li>微信</li>
+              <li>银行卡</li>
+              <li>电子银行</li>
+              <li>账号余额</li>
+            </ul>
+          </div> 
+          </div>  
+        </section>
+        <section class="xiangguantuijian">
+          <div class="container">
+          <div class="row">
+              <div class="col-xd-12 col-xl-12 col-sm-12">
+                <h3>相关推荐--
+                    <foreach name="detail" item="vo">
+                        <if condition="$vo.type eq 1 ">家庭家具
+                            <else/>办公家具
+                        </if>
+                    </foreach>
+                </h3>
+              </div>
+          </div>
+            <div class="row">
+                <foreach name="link" item="vo">
+                  <div class="col-xd-3 col-xl-12 col-sm-3">
+                    <a href="{:U('index/detail?id='.$vo['id'])}">
+                    <img src="{$vo.pic_pic}" class="responsive" width="293px"height="195px" alt="">
+                    <span>
+                            {$vo.title}<br/>
+                            ￥{$vo.price}.00
+                    </span>
+                    </a>
+                  </div>
+                </foreach>
+            </div>
+        </section>
+    <!--footer-->
+      <section class="footer" id="footer">
+    <div class="container">
+        <div class="row">
+            <foreach name="copy" item="vo">
+                <div class="col-md-3 col-xs-12 footer_left">
+                    <div class="left1">
+                        <p>{$vo.name}</p>
+                    </div>
+                    <p class="left2">{$vo.add}</p>
+                    <p class="left2">{$vo.icp}</p>
+                </div>
+                <div class="col-md-5 col-xs-12 footer_center">
+                    <p>TEL:{$vo.tel}</p>
+                    <p>FAX:{$vo.fax}</p>
+                    <p>E-MAIL：{$vo.email}</p>
+                </div>
+                <div class="col-md-4 col-xs-12 footer_right">
+                    <div class="right1">
+                        <ul class="right11">
+                            <li><a href="http://weibo.com/"target="_blank"><img src="FURNI_IMG/wb.png" title="新浪微博"></a></li>
+                            <li><a href="http://wx.qq.com"target="_blank"><img src="FURNI_IMG/wx.png" title="微信"></a></li>
+                            <li><a href="https://www.tmall.com"target="_blank"><img src="FURNI_IMG/tm.png" title="天猫"></a></li>
+                            <li><a href="http://www.suning.com"target="_blank"><img src="FURNI_IMG/sn.png" title="苏宁"></a></li>
+                            <li><a href="https://www.jd.com"target="_blank"><img src="FURNI_IMG/jd.png" title="京东"></a></li>
+                            <li><a href="#"><img src="FURNI_IMG/tj.png" title="自添加"></a></li>
+                        </ul>
+
+                    </div>
+                    <div class="right2">
+                        <ul class="right21">
+                            <li><a href="#">品牌中心</a></li>
+                            <li><a href="#">服务中心</a></li>
+                            <li><a href="#">专卖店查询</a></li>
+                            <li class="border"><a href="#">防伪查询</a></li>
+                            <li><a href="{:U('bac/login')}" target="_blank">后台管理</a></li>
+                        </ul>
+                        </ul>
+                    </div>
+                </div>
+            </foreach>
+        </div>
+    </div>
+  </section>
+    <!--内容信息导航吸顶及锚点引入JS-->
+    <script type="text/javascript" src="FURNI_JS/jquery.min.js"></script>
+    <script src='FURNI_JS/nav.js'></script>
+        <script>
+    //内容信息导航吸顶
+      $(document).ready(function(){ 
+      var navHeight= $("#navHeight").offset().top; 
+      var navFix=$("#nav-wrap"); 
+      $(window).scroll(function(){ 
+        if($(this).scrollTop()>navHeight){ 
+          navFix.addClass("navFix"); 
+        } 
+        else{ 
+          navFix.removeClass("navFix"); 
+        } 
+        }) 
+      })
+    //内容信息导航锚点
+      /* $('.nav-wrap').navScroll({
+          mobileDropdown: true,
+          mobileBreakpoint: 768,
+          scrollSpy: true
+        });
+    
+        $('.click-me').navScroll({
+          navHeight: 0
+        });
+    
+        $('.nav-wrap').on('click', '.nav-mobile', function (e) {
+          e.preventDefault();
+          $('.nav-wrap ul').slideToggle('fast');
+        });*/
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
