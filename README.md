@@ -1,2 +1,2 @@
 # myjob
-all options
+部分代表性项目
