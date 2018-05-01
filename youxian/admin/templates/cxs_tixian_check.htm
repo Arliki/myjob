@@ -1,0 +1,78 @@
+<!-- $Id: user_account_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<div class="main-div">
+  <form action="cxs_tixian.php" method="post" name="theForm">
+    <table width="100%">
+      <tr>
+        <td class="label">承销商:</td>
+        <td>{$cxs_info.user_name}</td>
+      </tr>
+      <tr>
+        <td class="label">手机:</td>
+        <td>{$cxs_info.cxs_phone}</td>
+      </tr>
+      <tr>
+        <td class="label">收款账号:</td>
+        <td>{$cxs_info.cxs_account}</td>
+      </tr>
+      <tr>
+        <td class="label">收款人:</td>
+        <td>{$cxs_info.cxs_account_name}</td>
+      </tr>
+      <tr>
+        <td class="label">账户余额:</td>
+        <td>
+          <!--{if $warning_info}-->
+          <span style="color:red">{$warning_info}</span>
+          <input type="hidden" name="account_error" value="1">
+          <!--{else}-->
+          {$cxs_account_money}
+          <!--{/if}-->
+        </td>
+      </tr>
+      <tr>
+        <td class="label">本次申请提现:</td>
+        <td>{$row_info.amount}</td>
+      </tr>
+      <tr>
+        <td class="label">申请时间:</td>
+        <td>{$row_info.add_time}</td>
+      </tr>
+      <tr>
+        <td class="label">供应商留言:</td>
+        <td>{$row_info.cxs_note}</td>
+      </tr>
+      <tr>
+        <td class="label">到款状态：</td>
+        <td>
+          <input type="radio" name="is_paid" value="0" {if $row_info.is_paid==0} checked="true" {/if} />待打款
+          <input type="radio" name="is_paid" value="1" {if $row_info.is_paid==1} checked="true" {/if} />已完成
+        </td>
+      </tr>
+      <tr>
+        <td class="label">说明：</td>
+        <td>
+          <textarea name="admin_note" cols="55" rows="3">{$row_info.admin_note}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">&nbsp;</td>
+        <td>
+          <input type="hidden" name="act" value="action">
+          <input type="hidden" name="id" value="{$row_info.id}">
+          <input type="submit" value="{$lang.button_submit}" class="button" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<script language="JavaScript">
+    <!--
+    {literal}
+
+    //-->
+    {/literal}
+</script>
+{include file="pagefooter.htm"}

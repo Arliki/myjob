@@ -1,0 +1,169 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+<style>
+  #sale_detail{
+    background:#DDEEF2;border:6px solid #BBDDE5;z-index: 99;
+    position: absolute;top:106px;width:80%;margin: 0 auto;
+    display:none;
+    overflow-y: auto;  height:600px;
+  }
+  #sale_detail .th{
+    border-bottom:1px solid #BBDDE5;
+    padding:6px 8px;
+    font-weight:bold;
+  }
+  #sale_detail .th .close{float:right;color:red;font-size:1rem;cursor: pointer;}
+  #sale_detail_list .item{
+    display: flex;
+    justify-content:space-between;
+    padding:6px;
+    border-bottom:1px solid #f1f1f1;
+  }
+  #sale_detail .goods_title{flex:1}
+  #sale_detail_list span{padding:0 1rem;}
+</style>
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+<div class="form-div">
+  <form action="javascript:searchDls()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    代理商<input name="username" type="text" id="username">
+
+    <input type="submit" value="{$lang.button_search}" class="button" />
+
+    <!--{if $can_export_dls}-->
+    <span style="float:right;padding: 4px 10px;border: 1px solid #5FA6B6;border-right: 2px solid #5FA6B6;border-bottom: 2px solid #5FA6B6;background: #FFF url(../images/icon_add.gif) no-repeat 3px center;color: #666;text-decoration: none;"><a onclick="exportDls()">导出列表</a></span>
+    <!--{/if}-->
+  </form>
+
+</div>
+
+<div class="list-div" id="listDiv">
+
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th><a href="javascript:listTable.sort('dls_id'); ">ID</a>{$sort_dls_id} </th>
+      <th>用户名{$sort_username}</th>
+      <th>保证金</th>
+      <th>审核</th>
+      <th>推荐人</th>
+      <th>电话</th>
+      <th>团队人数</th>
+      <th>总销售额</th>
+      <th>已结算</th>
+      <th>上次结算日期</th>
+      <th>{$lang.handler}</th>
+    </tr>
+    {foreach from=$dls_list item=dls key=dkey}
+    <tr>
+      <td>{$dls.dls_id}</td>
+      <td class="first-cell"><span>{$dls.username|escape:html}</span></td>
+      <td align="center">{if $dls.dls_deposit}<img src="images/yes.gif" title="已缴纳">{else}<img src="images/no.gif" title="未缴纳">{/if}</td>
+      <td align="center">{if $dls.is_validated}<img src="images/yes.gif" title="已审核">{else}<img src="images/notice.gif" title="待审核">{/if}</td>
+      <td>{$dls.parent_name}</td>
+      <td>{$dls.phone}</td>
+      <td>{$dls.team_num}人 [<a href="dls_jjr.php?act=list&dls_id={$dls.dls_id}">经纪人:{$dls.jjr_num}人</a>,注册会员:{$dls.reguser_num}人]</td>
+      <td><a data-url="dls_manage.php?act=sale_detail&dls_id={$dls.dls_id}" onclick="show_detail(this)">￥{$dls.total_sale|default:0}元</a></td>
+      <td>{$dls.money_yijiesuan}</td>
+      <td>{$dls.last_jiesuan_date}</td>
+      <td align="center">
+        {if $canEditDls}
+        <a href="dls_manage.php?act=edit&id={$dls.dls_id}" title="{$lang.edit}">{$lang.edit}</a>
+        {/if}
+        {if $canJiesuanDls}
+        <a href="dls_jiesuan.php?act=list&dls_id={$dls.dls_id}" title="结算">结算</a>
+        {/if}
+        <!-- |<a href="javascript:;" onclick="listTable.remove({$dls.dls_id}, '{$lang.drop_confirm}')" title="{$lang.remove}">{$lang.remove}</a>-->
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+<div id="sale_detail" style="">
+  <div class="th">
+    <span>销售明细</span> [<a style="color:red;" id="export_sale_detail_btn">导出</a>]
+    <span class="close" onclick="close_sale_detail()">&times;</span>
+  </div>
+  <div id="sale_detail_list" class="tb">
+
+  </div>
+</div>
+{if $full_page}
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      // 开始检查订单
+      startCheckOrder();
+  }
+
+      /**
+       * 搜索代理商
+       */
+    function searchDls()
+    {
+        listTable.filter['username'] = Utils.trim(document.forms['searchForm'].elements['username'].value);
+        listTable.filter['page'] = 1;
+        listTable.loadList();
+    }
+    function exportDls() {
+        var params = '&username='+Utils.trim(document.forms['searchForm'].elements['username'].value)+
+            '&page='+listTable.filter.page;
+        location.href = 'dls_manage.php?act=export_dls'+params;
+    }
+    function show_detail(e) {
+        var url = e.getAttribute('data-url');
+        Ajax.call(url, '', detail_call_back, 'POST', 'JSON');
+    }
+    function detail_call_back(result) {
+        var _html = '';
+        Utils.$('export_sale_detail_btn').setAttribute('href', result.export_url);
+        if(result.data.length>0){
+          result.data.forEach(function(e){
+            _html += '<div class="item">' +
+                    '<a href="order.php?act=info&order_id='+e.order_id+'">'+e.order_sn+'</a>' +
+                    '<span class="goods_title">'+e.goods_title+'</span>' +
+                    '<span>￥'+e.total_fee+'元</span>' +
+                    '<span>'+e.status+'</span>' +
+                    '<a href="javascript:;">'+e.username+'</a>'+
+                    '</div>';
+          })
+        }else{
+          _html = '没有数据';
+        }
+
+        Utils.$('sale_detail_list').innerHTML = _html;
+        Utils.$('sale_detail').style.display = 'block';
+    }
+    function close_sale_detail() {
+        Utils.$('sale_detail').style.display = 'none';
+        Utils.$('sale_detail_list').innerHTML = '';
+    }
+  {/literal}
+  //-->
+
+</script>
+{include file="pagefooter.htm"}
+{/if}

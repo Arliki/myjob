@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $hot_goods}-->
+<div class="goodsRecommend">
+  <h2>hot items 。热卖商品 <p class="more"><a href="../search.php?intro=hot"><img src="../images/btn_more.gif" alt="" /></a></p></h2>
+  <!--{foreach from=$hot_goods item=goods}-->
+  <li><p class="pic"><A href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" border="0" /></A></p>
+    {$goods.short_style_name}<br />
+        <!-- {if $goods.promote_price neq ""} -->
+        <span class="goods-price"><strong>{$goods.promote_price}</strong></span>
+        <!-- {else}-->
+        <span class="goods-price"><strong>{$goods.shop_price}</strong></span>
+        <!--{/if}-->
+  </li>
+  <!--{/foreach}-->
+</div>
+<div><br style="clear:both"/></div>
+<!-- {/if} -->

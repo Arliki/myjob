@@ -1,0 +1,59 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th><a href="javascript:listTable.sort('user_id'); ">ID</a>{$sort_user_id} </th>
+      <th>用户名</th>
+      <th>微信昵称</th>
+      <th>总销售额</th>
+    </tr>
+    {foreach from=$jjr_list item=jjr}
+    <tr>
+      <td>{$jjr.user_id}</td>
+      <td><span>{$jjr.user_name}</span></td>
+      <td><img src="{$jjr.headimgurl}" style="width:50px;height:50px;" alt="{$jjr.nickname}">{$jjr.nickname}</td>
+      <td>￥{$jjr.total_sale|default:0}元</td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      // 开始检查订单
+      startCheckOrder();
+  }
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

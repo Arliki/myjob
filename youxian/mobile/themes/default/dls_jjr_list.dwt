@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>我的经纪人</title>
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/amazeui.min.css">
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/dls_center.css">
+	</head>
+	<body>
+	<div class="header-title">
+		<a href="javascript:history.go(-1)" class="title-back am-icon am-icon-angle-left"></a>
+		<h1>我的经纪人</h1>
+		<div class="list-title">
+			<div>经纪人</div>
+			<div>发展会员</div>
+			<div>会员消费</div>
+		</div>
+	</div>
+	<div class="main">
+		<!--{if !empty($jjr_list)}-->
+		<!--{foreach name=jjr_list from=$jjr_list item=item}-->
+		<div class="img-item" data-url="{$item.jjr_url}">
+			<div class="img-item-left">
+				<div class="avatar">
+					<img src="{$item.headimgurl}" alt="">
+					<span>{$item.nickname}</span>
+				</div>
+				<div>{$item.reguser_num}人</div>
+				<div>{$item.total_sale} </div>
+			</div>
+			<div class="img-item-right">
+				<span class="am-icon am-icon-lg am-icon-angle-right"></span>
+			</div>
+		</div>
+		<!--{/foreach}-->
+		<!--{else}-->
+		<div style="margin: 3rem auto;text-align: center;">没有数据 <a href="javascript:history.go(-1)">返回</a></div>
+		<!--{/if}-->
+	</div>
+	<script src="__TPL__/dlsStatic/js/jquery-1.10.2.min.js"></script>
+	<script src="__TPL__/dlsStatic/js/common.js"></script>
+		<script>
+			$(function(){
+				$('.img-item').on('click', function () {
+					var url = $(this).data('url');
+					window.location.href = url;
+                })
+			})
+		</script>
+	</body>
+</html>

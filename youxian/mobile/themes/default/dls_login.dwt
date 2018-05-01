@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>代理商登录</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_550094_3rxbwasj6q9nqaor.css">
+		<link href="__TPL__/dlsStatic/css/login.css" rel="stylesheet" type="text/css" />
+		<script src="__TPL__/dlsStatic/js/jquery-1.10.2.min.js"></script>
+	</head>
+	<body>
+	    <div class="login-logo">
+	    	<img src="__TPL__/dlsStatic/images/logo.png" />
+	    </div>
+		<div class="form-box login">
+			<div class="item">
+				<span class="iconfont icon-phone1"></span>
+				<input type="text" name="phone" id="mobile" placeholder="请输入手机号码" class="login-name">
+				<span class="iconfont icon-quxiao"></span>
+			</div>
+			<div class="item">
+				<span class="iconfont icon-password"></span>
+				<input type="password" name="password" autocomplete="new-password" id="password" placeholder="请输入登录密码" class="login-password">
+				<span class="iconfont icon-quxiao"></span>
+			</div>
+			<div class="submit-box">
+				<a class="btn-block btn-success login-btn">代理商登录</a>
+				<a class="btn-block apply-join-in" href="javascript:;">申请加入</a>
+			</div>
+		</div>
+		<div class="form-box register">
+			<form action="">
+				<div class="item">
+					<span class="iconfont icon-phone1"></span>
+					<div class="con">
+						<input type="text" name="phone" placeholder="请输入手机号码">
+					</div>
+					<span class="need">*</span>
+				</div>
+				<div class="item">
+					<span class="iconfont icon-password"></span>
+					<div class="con">
+						<input type="text" name="password" autocomplete="new-password" placeholder="请输入登陆密码">
+					</div>
+					<span class="need">*</span>
+				</div>
+
+				<div class="item">
+					<span class="iconfont icon-user"></span>
+					<div class="con">
+						<input type="text" name="account_name" placeholder="请输入收款人姓名">
+					</div>
+					<span class="need">*</span>
+				</div>
+				<div class="item">
+					<span class="iconfont icon-card"></span>
+					<div class="con">
+						<input type="text" name="bank_card" placeholder="请输入收款人账号">
+					</div>
+					<span class="need">*</span>
+				</div>
+				<div class="item">
+					<span class="iconfont icon-house"></span>
+					<div class="con">
+						<select name="bank_info">
+							<option value="0">请选择开户行</option>
+							{foreach from="$khh" item="khh"}
+							<option value="{$khh.code}|{$khh.name}">{$khh.name}</option>
+							{/foreach}
+						</select>
+					</div>
+					<span class="need">*</span>
+				</div>
+				<div class="item">
+					<span class="iconfont icon-address"></span>
+					<div class="con">
+						<select name="province">
+							<option value="0">请选择开户行所在省份</option>
+							{foreach from="$khh_province" item="p"}
+							<option value="{$p}">{$p}</option>
+							{/foreach}
+						</select>
+					</div>
+					<span class="need">*</span>
+				</div>
+				<div class="item">
+					<span class="iconfont icon-address1"></span>
+					<div class="con">
+						<input type="text" name="city" placeholder="开户行所在城市,格式为**市(或县)">
+					</div>
+					<span class="need">*</span>
+				</div>
+			</form>
+			<div class="tips"><p>如有任何疑问，请联系讯罗优选客服微信：xlyxbest</p></div>
+			<div class="submit-box">
+				<a class="btn-block register-btn btn-success">申请代理</a>
+				<a class="btn-block back-to-login" href="javascript:;">返回登录</a>
+			</div>
+		</div>
+
+		<footer>
+			<p>
+				如果您想成为讯罗优选合伙人或代理商<br/>
+				详情咨询曹经理13892349382<br/>
+				欢迎您的加入！
+			</p>
+		</footer>
+	</body>
+	<script src="__TPL__/dlsStatic/js/common.js"></script>
+	<script type="text/javascript">
+		$(function () {
+		    if(location.hash=='#register'){
+		        $('.login').hide();
+		        $('.register').show();
+			}else{
+		        $('.register').hide();
+		        $('.login').show();
+			}
+		    $('.apply-join-in').on('click', function(){
+                $('.form-box.register').show();
+                $('.form-box.login').hide();
+                $('title').text('申请加入代理商');
+			})
+            $('.back-to-login').on('click', function(){
+                $('.form-box.login').show();
+                $('.form-box.register').hide();
+                $('title').text('代理商登录');
+            })
+            $(".login-btn").click(function(){
+                var username = $("#mobile").val();
+                var password = $("#password").val();
+                var msg = '';
+                if (username.length == 0)
+                {
+                    msg += "用户名不能为空" + '\n';
+                }
+
+                if (password.length == 0)
+                {
+                    msg += "密码不能为空" + '\n';
+                }
+
+                if (msg.length > 0)
+                {
+                    $.walert(msg);
+                    return false;
+                }
+                else
+                {
+                    var data = {
+                        phone: username,
+						password: password
+					}
+                    $.post("",data,function(res){
+                        if(res.success){
+                            window.location.href = res.redirect_uri;
+						}else{
+                            $.walert(res.info);
+						}
+					},'json')
+                }
+            })
+			$('input').on('keyup',function(){
+			    if($(this).val().length>0){
+			        $(this).next('.icon-quxiao').show();
+				}else{
+			        $(this).next('.icon-quxiao').hide();
+				}
+			})
+			$('.icon-quxiao').on('click',function () {
+				$(this).prev('input').val('');
+				$(this).hide();
+            })
+
+			$('.register-btn').on('click', function(){
+				var c = $('.register form').serialize();
+				$.post("{:url('register')}", c, function (res) {
+					$.walert(res.info, 3);
+				    if(res.success){
+				        setTimeout(function(){
+                            window.location.reload();
+						},3000)
+					}
+                },'json')
+			})
+
+        })
+
+	</script>
+</html>

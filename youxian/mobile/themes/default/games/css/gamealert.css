@@ -1,0 +1,42 @@
+#gamealert{
+    position: fixed;
+    bottom: -360px;
+    left: 0px;
+    right: 0px;
+    /*height: 300px;*/
+    width: 100%;
+    background: rgba(33,56,106,1);
+    padding: 5% 5% 0% 5%;
+}
+#gamealert a{
+    float: left;
+    width: 41%;
+    margin-right: 7%;
+}
+#gamealert a img{
+    width: 100%;
+    float: left;
+}
+#gamealert a.moregame {
+    width: 88% !important;
+    /*margin-top: 10%;*/
+    text-align: center;
+    float: left;
+    /*margin:0px;*/
+    /*margin-top: 10%;*/
+    text-decoration: none;
+    color: #fff;
+    padding: 1rem 0;
+}
+#gamealert a.del {
+    position: absolute;
+    top: 0px;
+    width: 23px !important;
+    height: 22px;
+    text-align: center;
+    right: 13px;
+    border-radius: 50%;
+    /* background: red; */
+    font-size: 20px;
+    color: white;
+}

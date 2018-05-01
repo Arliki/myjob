@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>玩赚果豆</title>
+    <link rel="stylesheet" href="__TPL__/games/css/index.css">
+    <link rel="stylesheet" href="__TPL__/games/css/msg.css">
+    <link rel="stylesheet" href="__TPL__/games/css/gamealert.css">
+</head>
+<body>
+<header>
+    <img src="__TPL__/games/image/header-banner.png" alt="">
+</header>
+<div class="nav" >
+    <div class="profile">
+        <span class="nickname"><span style="max-width:100px;float: right;overflow: hidden;">{$user_info.nickname}</span></span>
+        <img class="avatar" src="{$user_info.headimgurl}" alt="">
+        <span class="points">果豆:{$user_info.guodou}</span>
+    </div>
+    <div class="btns" style="margin: 1rem;">
+        <!--<a href="{:url('category/index',array('id'=>192))}">果豆充值</a>-->
+        <span class="guodouBtn" href="#">果豆获取和用途</span>
+    </div>
+</div>
+<div class="game-list1">
+    <!--<a class="more" href="/mobile/games/index.html" ></a>-->
+    <div class="item2" style="width:80%;margin:2.4rem auto;">
+        <a class="tan"><img src="__TPL__/games/image/godz.png"></a>
+        <a href="{:url('category/index',array('id'=>192))}"><img src="__TPL__/games/image/isvi.png"></a>
+    </div>
+    <div class="item2">
+        <a href="{:url('exchange/index')}"><img src="__TPL__/games/image/dvhr.png"></a>
+        <a href="{:url('auction/index')}"><img src="__TPL__/games/image/jkpd.png"></a>
+    </div>
+</div>
+<div id="msg" class="msg" {if 0 && $mobile_validated && !$agreed_txt}style="display:block;"{/if} >
+    <div class="msgbox">
+        <div class="textbox">
+	    	<span class="title">
+	    		欢迎您进入讯罗游戏中心!为了让您有更好的体验,下文将向您完整的介绍一些注意事项,帮助您更好的管理个人信息。
+	    	</span>
+            <h3>风险告知书</h3>
+            <span class="telpeople">尊敬的玩家:</span>
+            <span class="content">
+请您务必仔细阅读了解本《风险告知书》的所有内容，方可在成都讯罗科技有限公司参与网络电子游戏事宜。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络电子游戏一种具有风险的游戏方式，您的参与可能会产生部分损失；<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据《文化部关于规范网络游戏运营加强事中事后监管工作的通知》要求，网络游戏用户必须使用有效身份证件进行实名注册，以便于企业对未成年用户采取针对性地保护措施；<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;企业不得为使用游客模式登录的用户提供充值或消费服务，企业限定网络游戏用户在单款游戏内的单次充值金额，并对用户充值或者消费信息进行提示和确认。
+
+考虑是否进行游戏参与时，您应当明确以下几点：
+			<br/> 
+			一、您必须认真阅读并遵守成都讯罗科技有限公司网络游戏的参与规则，如果您无法满足规则规定的要求，您所参与的游戏将无法正常兑换，您将承担由此产生的一切损失。 
+			<br/> 
+			二、在某些市场情况下，游戏兑换的商品会有所不同。例如，您参与兑换的商品因季节性，或者上属供货商供货不足时，我们将为您提供同等商品价值的产品进行兑换。 
+			<br/> 
+
+			三、由于国家法律、法规、政策的变化、成都讯罗科技有限公司游戏交易规则的修改、紧急措施的出台等原因，您参与的游戏有可能会修改游戏规则，您将承担由此导致的损失及后果。 <br/> 
+			四、由于非成都讯罗科技有限公司所能控制的原因，例如：地震、水灾、火灾等不可抗力因素或者计算机系统、通讯系统故障等，可能造成您的指令无法达成或者无法全部达成，您必须承担由此导致的损失。 
+			<br/> 
+
+			五、由于网上系统存在被网络黑客和计算机病毒攻击的可能性，由此可能导致系统故障，使游戏无法进行或信息出现错误或延迟。 <br/> 
+			六、如果您缺乏网络游戏经验，可能存在密码失密或被他人盗用。<br/>  
+			本《风险告知书》无法揭示所有游戏全部情形。故您在参与之前，应全面了解成都讯罗科技有限公司的游戏规则及相关规定，对自身的经济承受能力、风险控制能力、身体及心理承受能力（仅对自然人客户而言）作出客观判断。<br/>
+			     点击同意即代表您已阅读并完全理解风险揭示书及各项条款内容，自愿参与成都讯罗科技有限公司网络电子游戏。
+
+	    	</span>
+        </div>
+        <a href="javascript:;" class="back" onclick="history.go(-1)">不同意</a>
+        <a href="javascript:;" class="rightnow" onclick="closeMsg()">同意</a>
+    </div>
+</div>
+<div class="alertbox" {if 1 || $mobile_validated}style="display:none"{/if}>
+    <div class="content">
+        <h2>手机验证</h2>
+        <label class="label1">
+            <input type="text"  placeholder="请输入手机号" id="phonenum">
+            <p class="tips"></p>
+        </label>
+        <label class="label2">
+            <input type="text" placeholder="请输入验证码" id="check">
+            <button data-c-url="{:url('verify_code')}" data-url="{:url('get_verify_code')}" id="getcode" class="getnum" value="获取验证码">获取验证码</button>
+            <p class="tips"></p>
+        </label>
+        <button class="yesbtn">确定</button>
+    </div>
+</div>
+<div class="guodouAlert">
+    <img src="__TPL__/games/image/guodouIntro.png" alt="">
+</div>
+<div class="gamealert" id="gamealert">
+    <a class="del">x</a>
+    <a class="zajindan" href="/mobile/index.php?m=default&c=games&a=index&id=5"><img src="__TPL__/games/image/gua.png"></a>
+    <a class="guaguale" href="/mobile/index.php?m=default&c=games&a=index&id=4"><img src="__TPL__/games/image/egg.png"></a>
+    <a href="/mobile/games/index.html" class="moregame">
+        更多游戏
+    </a>
+
+</div>
+<script src="__TPL__/games/js/jquery.min.js"></script>
+<script src="__TPL__/games/js/jquery.cookie.js"></script>
+<script src="__TPL__/games/js/login.js"></script>
+<script>
+    $(function(){
+        $('.guodouBtn').on('click',function(){
+            $('.guodouAlert').show();
+        })
+        $('.guodouAlert').on('click',function () {
+            $(this).hide();
+        })
+        $(document).on("click",".tan",function(){
+            $("#gamealert").animate({"bottom":"0px"},300)
+        })
+        $(document).on("click",".del",function(){
+            $("#gamealert").animate({"bottom":"-440px"},300)
+        })
+    })
+    function closeMsg() {
+        var xmlhttp;
+        try{
+            if (window.XMLHttpRequest)
+            {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    var res = JSON.parse(xmlhttp.responseText);
+                    if(res.success){
+                        document.getElementById('msg').style.display='none';
+                    }else{
+                        console.log('request error');
+                    }
+                }
+            }
+            xmlhttp.open("GET","{:url('agree_txt')}",true);
+            xmlhttp.send();
+        }catch (e){
+            return ''
+        }
+
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<style>
+    .wu-main{background: #ffffff;border-bottom:1px solid #d8d8d8;
+        text-align: center;}
+    .wu-main h3{padding: 2rem 0;}
+    .wu-main h3 i{font-size:3rem;}
+    .wu-main h3.success{color:#1CBB7F}
+    .wu-main h3.error{color:#cd5c5c}
+    .wu-main .wu-back-home a{display:block;margin:1rem 15px;border-radius:8px;height:35px;line-height:35px;color:#fff;background: #44b549;}
+</style>
+<div class="con">
+<div class="ect-bg">
+    <header class="ect-header ect-margin-tb ect-margin-lr text-center icon-write ect-bg"> <a href="javascript:history.go(-1)" class="pull-left ect-icon ect-icon1 ect-icon-history"></a> <span>{$title}</span> <a href="javascript:;"  onClick="openMune()" class="pull-right ect-icon ect-icon1 ect-icon-mune icon-write"></a></header>
+    <nav class="ect-nav ect-nav-list" style="display:none;"> <!-- #BeginLibraryItem "/library/page_menu.lbi" --><!-- #EndLibraryItem --> </nav>
+  </div>
+  <div class="wu-main">
+      <!-- {if $super eq 1} -->
+          <h3 class="success"><i class="fa fa-check-circle"></i> 支付成功</h3>
+          <p>抽奖号码：{$ordersn}</p>
+          <p>支付时间：{$paytime}</p>
+          <p>{$message}</p>
+      <!-- {elseif $super eq 2} -->
+          <h3 class="success"><i class="fa fa-check-circle"></i> 支付成功</h3>
+          <p>拼单码：{$ordersn}</p>
+          <p>支付时间：{$paytime}</p>
+          <p>{$message}</p>
+      <!-- {else} -->
+          <!-- {if $paySuccess==1} -->
+            <h3 class="success"><i class="fa fa-check-circle"></i> 支付成功</h3>
+            <p>订单号：{$ordersn}</p>
+            <p>支付时间：{$paytime}</p>
+            <p>{$message}</p>
+          <!--{elseif $paySuccess==2}-->
+            <h3 class="error"><i class="fa fa-times-circle"></i> 支付失败</h3>
+            <p>{$message}</p>
+            <p style="color: red">{$alarm}</p>
+          <!--{else}-->
+              <h3 class="error"><i class="fa fa-times-circle"></i> 支付失败</h3>
+              <p>订单号：{$ordersn}</p>
+              <p>{$message}</p>
+          <!-- {/if} -->
+      <!-- {/if} -->
+
+    <!--{if $virtual_card}-->
+    <div class="alert alert-warning" role="alert">
+    <!--{foreach from=$virtual_card item=vgoods}-->
+        <h3 style="color:#2359B1; font-size:12px;">{$vgoods.goods_name}</h3>
+        <!--{foreach from=$vgoods.info item=card}-->
+        <ul style="list-style:none;padding:0;margin:0;clear:both">
+          <!--{if $card.card_sn}-->
+          <li style="margin-right:50px;float:left;"> <strong>{$lang.card_sn}:</strong><span style="color:red;">{$card.card_sn}</span> </li>
+          <!--{/if}--> 
+          <!--{if $card.card_password}-->
+          <li style="margin-right:50px;float:left;"> <strong>{$lang.card_password}:</strong><span style="color:red;">{$card.card_password}</span> </li>
+          <!--{/if}--> 
+          <!--{if $card.end_date}-->
+          <li style="float:left;"> <strong>{$lang.end_date}:</strong>{$card.end_date} </li>
+          <!--{/if}-->
+        </ul>
+        <!--{/foreach}--> 
+    <!--{/foreach}--> 
+    </div>
+    <!-- {/if} -->
+<div> 
+  <!--<span class="p-link" style="display:block;background: #1CBB7F;color:#fff;line-height:35px;"><a href="{$shop_url}">{$lang.back_home}</a></span>-->
+    <div class="wu-back-home" href="{$shop_url}">{$lang.back_home}</div>
+</div>
+<div style="width:1px; height:1px; overflow:hidden">{foreach from=$lang.p_y item=pv}{$pv}{/foreach}</div>
+</div>
+</div>
+<!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

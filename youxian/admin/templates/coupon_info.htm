@@ -1,0 +1,97 @@
+<!-- $Id: agency_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="validator.js,../js/transport.js"}
+<div class="main-div">
+  <form method="post" action="coupon.php" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+    <table cellspacing="1" cellpadding="3" width="100%">
+      <tr>
+        <td class="label">优惠券名称：</td>
+        <td><input type="text" name="coupon_title" maxlength="60" value="{$coupon.coupon_title}" />{$lang.require_field}</td>
+      </tr>
+      <tr>
+        <td class="label">图片：</td>
+        <td><input type="file" value="{$coupon.coupon_img}" name="coupon_img" />
+          <input type="hidden" name="coupon_img_url" value="{$coupon.coupon_img}"><br/>
+        <!--{if $coupon.coupon_img}-->
+          <img src="../{$coupon.coupon_img}" style="width:200px;" alt="">
+          <!--{/if}-->
+        </td>
+      </tr>
+      <tr>
+        <td class="label">面值：</td>
+        <td><input type="number" name="coupon_money" value="{$coupon.coupon_money}" />{$lang.require_field}
+          <br/><span class="notice-span">优惠券面值</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">最小订单金额 :</td>
+        <td>
+          <input type="number" name="min_money" value="{$coupon.min_money}" /><span class="require-field">*</span>
+          <br/><span class="notice-span">单笔订单金额超过此值，方可使用此优惠券</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">发放日期：</td>
+        <td>
+          <input name="send_start_date" value="{$coupon.send_start_date}" style="width:80px;" id="send_start_date" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> - <input name="send_end_date" value="{$coupon.send_end_date}" style="width:80px;" id="send_end_date" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /><span class="require-field">*</span><br/>
+          <span class="notice-span">发放时间段,在此时间段内可领取</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">使用日期：</td>
+        <td>
+          <input name="use_start_date" value="{$coupon.use_start_date}" style="width:80px;" id="use_start_date" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> - <input name="use_end_date" value="{$coupon.use_end_date}" style="width:80px;" id="use_end_date" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /><span class="require-field">*</span><br/>
+          <span class="notice-span">使用时间段,在此时间段内可使用</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">总发放量 :</td>
+        <td><input type="number" name="coupon_num" value="{$coupon.coupon_num}" /><span class="require-field">*</span>
+          <span class="notice-span">0表示不限量</span>
+        </td>
+      </tr>
+    </table>
+    <table align="center">
+      <tr>
+        <td colspan="2" align="center">
+          <input type="submit" class="button" value="{$lang.button_submit}" />
+          <!--<input type="reset" class="button" value="{$lang.button_reset}" />-->
+          <input type="hidden" name="act" value="{$form_action}" />
+          <input type="hidden" name="coupon_id" value="{$coupon.id}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+{literal}
+<script language="JavaScript">
+    <!--
+
+    onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
+    /**
+     * 检查表单输入的数据
+     */
+    function validate()
+    {
+        validator = new Validator("theForm");
+//        validator.required("coupon_title",  '请填写优惠券名称');
+//        validator.required("coupon_money",  '请填写优惠券面值');
+//        validator.required("min_money",  '请填写最小订单金额');
+//        validator.required("send_start_date",  '请选择优惠券发放开始日期');
+//        validator.required("send_end_date",  '请选择优惠券发放结束日期');
+//        validator.required("use_start_date",  '请选择优惠券使用开始日期');
+//        validator.required("use_end_date",  '请选择优惠券使用结束日期');
+//        validator.required("coupon_num",  '请填写总发放量');
+        return validator.passed();
+    }
+    //-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

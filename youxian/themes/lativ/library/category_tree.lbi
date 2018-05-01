@@ -1,0 +1,12 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+{insert_scripts files='transport.js,utils.js'}
+<div class="catDiv">
+  <ul>
+    <!--{foreach from=$categories item=cat}-->
+    <li class="parentCat"><A href="{$cat.url}">{$cat.name|escape:html}</A></li>
+      <!--{foreach from=$cat.cat_id item=child}-->
+      <li><A href="{$child.url}">{$child.name|escape:html}</A></li>
+      <!--{/foreach}-->
+    <!--{/foreach}-->
+  </ul>
+</div>

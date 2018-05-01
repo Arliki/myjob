@@ -1,0 +1,126 @@
+<!-- $Id: agency_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/transport.js"}
+<div class="main-div">
+<form method="post" action="dls_manage.php" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">用户名：</td>
+    <td><input type="text" name="username" maxlength="60" value="{$dls.username}" />{$lang.require_field}</td>
+  </tr>
+  <tr>
+    <td class="label">密码：</td>
+    <td><input type="password" name="password" maxlength="60" />{$lang.require_field}<br/>
+      <span class="notice-span">如密码不修改可留空</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">承销商 :</td>
+    <td>
+      <select name="cxs_id">
+        <option value="0">无</option>
+        {foreach from=$cxs_list item=cxs}
+        <option {if $dls.cxs_id==$cxs.user_id} selected {/if} value="{$cxs.user_id}">{$cxs.user_name}</option>
+        {/foreach}
+      </select>
+      <span class="require-field">*</span></td>
+  </tr>
+  <tr>
+    <td class="label">推荐人 :</td>
+    <td>
+      <select name="parent_id">
+        <option value="0">无</option>
+        {foreach from=$dls_list item=d}
+        <option {if $dls.parent_id==$d.dls_id} selected {/if} value="{$d.dls_id}">{$d.username}</option>
+        {/foreach}
+      </select>
+      <span class="require-field">*</span></td>
+  </tr>
+  <tr>
+    <td class="label">手机号码 :</td>
+    <td><input type="text" name="phone" maxlength="13" value="{$dls.phone}" /><span class="require-field">*</span></td>
+  </tr>
+  <tr>
+    <td class="label">收款账号 :</td>
+    <td><input type="text" name="dls_bank_card" value="{$dls.dls_bank_card}" /><span class="require-field">*</span></td>
+  </tr>
+  <tr>
+    <td class="label">收款人 :</td>
+    <td><input type="text" name="dls_account_name" value="{$dls.dls_account_name}" /><span class="require-field">*</span></td>
+  </tr>
+
+  <tr>
+    <td class="label">开户行 :</td>
+    <td>
+      <select name="dls_bank_name">
+        {foreach from=$khh item=bank}
+        <option {if $dls.dls_bank_name==$bank.name} selected {/if} value="{$bank.code}|{$bank.name}">{$bank.name}</option>
+        {/foreach}
+      </select>
+      <span class="require-field">*</span></td>
+  </tr>
+  <tr>
+    <td class="label">开户行所在省份 :</td>
+    <td>
+      <!--<input type="text" name="agency_bank_province" value="{$agency.agency_bank_province}" />-->
+      <select name="dls_bank_province">
+        {foreach from=$khh_province item=p}
+        <option {if $dls.dls_bank_province==$p} selected {/if} value="{$p}">{$p}</option>
+        {/foreach}
+      </select>
+      <span class="require-field">*</span></td>
+  </tr>
+  <tr>
+    <td class="label">开户行所在城市 :</td>
+    <td>
+      <input type="text" name="dls_bank_city" value="{$dls.dls_bank_city}" /><span class="require-field">*</span><br/>
+      <span class="notice-span">格式为 "XX市(或县)"，对直辖市，市县名同省份名</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">诚意金</td>
+    <td>
+      <label><input type="radio" name="dls_deposit" {if $dls.dls_deposit=='0'}checked{/if} value="0">未缴纳</label>
+      <label><input type="radio" name="dls_deposit" {if $dls.dls_deposit=='1'}checked{/if} value="1">已缴纳</label>
+    </td>
+  </tr>
+</table>
+<table align="center">
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" class="button" value="{$lang.button_submit}/审核" />
+      <!--<input type="reset" class="button" value="{$lang.button_reset}" />-->
+      <input type="hidden" name="act" value="{$form_action}" />
+      <input type="hidden" name="dls_id" value="{$dls.dls_id}" />
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+{literal}
+<script language="JavaScript">
+<!--
+
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+    validator = new Validator("theForm");
+    validator.required("username",  '请填写用户名');
+    validator.required("phone",  '请填写代理商手机号码');
+    validator.required("dls_bank_card",  '请填写代理商收款账号');
+    validator.required("dls_account_name",  '请填写代理商收款人');
+    validator.required("dls_bank_city",  '请填写开户行所在城市');
+    return validator.passed();
+}
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

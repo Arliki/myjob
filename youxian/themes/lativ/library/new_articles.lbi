@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="libDiv">
+  <p class="top"></p>
+  <h2>{$lang.shop_notice}</h2>
+    <ul class="iconTitle">
+      {$shop_notice}
+    </ul>
+  <p class="bot"></p>
+</div>
+<div class="libDiv">
+  <p class="top"></p>
+  <h2>{$lang.new_article}</h2>
+    <ul class="iconTitle">
+      <!--{foreach from=$new_articles item=article}-->
+      <li><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a></li>
+      <!--{/foreach}-->
+    </ul>
+  <p class="bot"></p>
+</div>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <title>中奖详情</title>
+	 <meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	 <link rel="stylesheet" type="text/css" href="__TPL__/games/css/awards_list.css">
+</head>
+<body>
+  <div data-url="{$req_url}" class="box">
+	  	<img src="__TPL__/games/images/banner.png" class="bannerimg">
+	  	<div class="listbox">
+	  		<ul>
+	  			
+	  		</ul>
+	  	</div>
+  </div>
+  <script type="text/javascript" src="__TPL__/games/js/jquery.min.js"></script>
+  <script type="text/javascript" src="__TPL__/games/js/dot.js"></script>
+  <script type="text/javascript">
+  	window.onresize=function set(){
+			//看看此时视口多宽
+			var w = document.documentElement.clientWidth;
+			//看看此时视口是设计图的多少倍
+			var rate = w / 720;
+			//字号就设置为多少倍
+			var zihao = 20 * rate;
+			//设置html的字号
+			document.documentElement.style.fontSize = zihao + "px";
+			console.log("333")
+		}
+  </script>
+<script type="text/template" charset="utf-8" id="list">
+	{{if( it && it.length>0 ){ }}
+
+	    {{for(var i=0; i<it.length; i++){ }}
+	        
+	            <li>
+	  				<div class="lisleft">
+	  					<img title="{{=it[i].title}}" src="/../{{=it[i].img}}" class="goodsimg">
+	  				</div>
+	  				<div class="lisright">
+	  					<h3 class="name">{{=it[i].title}}</h3>
+	  					<span class="zjtime">中奖时间:
+							<i>{{=it[i].addtime}}</i>
+							<!--<i class="time1">2017-01-02</i><i class="time2">22:00:15</i>-->
+						</span>
+	  					
+	  					{{? it[i].gotit==1 }}
+							<span class="zjtime">领取时间:
+								<i>{{=it[i].gottime}}</i>
+								<!--<i class="time1">2017-01-02</i><i class="time2">22:00:15</i>-->
+							</span>
+						{{?? it[i].gotit==0}}
+						   <span class="btn lingjiang_btn" data-url="{{=it[i].lingjiang_url}}">领取奖品</span>
+				        {{?}}
+	  					
+	  				</div>
+	  			</li>   
+			
+	    {{ } }} 
+
+    {{ }else{ }}
+
+      <span>没有中奖记录</span>
+
+    {{ } }}       
+</script>
+<script type="text/javascript">
+	var listhtml=$("#list").html();
+$(function() {
+	var req_url = $('.box').data('url');
+	$.ajax({
+		type:"get",
+		url:req_url,
+		async:true,
+		dataType:'json',
+		success: function(data){
+			if(data.success){
+                var listdata=data.list;
+                $('.listbox ul').html(doT.template(listhtml)(listdata));
+                console.log(listdata);
+			}else{
+			    alert(data.info);
+			}
+
+		},
+		error: function(XMLHTTPRequest, textStatus, errorThrown){
+		 console.log("XMLHttpRequest :"+ XMLHTTPRequest);
+		 console.log("textStatus :"+textStatus);
+		 console.log("errorThrown :"+errorThrown);
+		}
+	});
+	$('.listbox').on('click','.lingjiang_btn',function(){
+        var requesting = $(this).data('requesting');
+        var _this = $(this);
+        if(requesting==1){
+            return false;
+        }
+	    var url = $(this).data('url');
+        $.ajax({
+            type:"post",
+            url:url,
+            async:true,
+            data:{},
+            dataType:'json',
+            success: function(res){
+                alert(res.info);
+                if(res.error && res.url){
+                    window.location.href = res.url;
+                }
+                window.location.reload();
+            },
+            error: function(){
+                alert('请求错误');
+                window.location.reload();
+            },
+            beforeSend: function () {
+                _this.data('requesting',1);
+            },
+            complete: function () {
+                _this.data('requesting',0);
+            }
+        })
+	})
+
+});
+</script>
+</body>
+</html>

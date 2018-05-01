@@ -1,0 +1,57 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<form method="GET" class="sort" name="listform">
+  <div {$controller} class="con">
+  	<!-- #BeginLibraryItem "/library/new_search_small.lbi" --><!-- #EndLibraryItem -->
+  	<aside>
+  		<div class="menu-left scrollbar-none" id="sidebar">
+  			<ul>
+  				{foreach from=$category item="vo" name="vo"}
+  				<a href="{$vo.url}"><li>
+  				{if $is_show == $vo.id}<span class="font-red">{$vo.name}</span>{else}{$vo.name}{/if}
+  				</li></a>
+  				{/foreach}
+  			</ul>
+  		</div>
+  	</aside>
+  </div>
+  <input type="hidden" name="id" value="{$id}" />
+  <input type="hidden" name="display" value="{$pager.display}" id="display" />
+  <input type="hidden" name="brand" value="{$brand_id}" />
+  <input type="hidden" name="price_min" value="{$price_min}" />
+  <input type="hidden" name="price_max" value="{$price_max}" />
+  <input type="hidden" name="filter_attr" value="{$filter_attr}" />
+  <input type="hidden" name="page" value="{$page}" />
+  <input type="hidden" name="sort" value="{$sort}" />
+  <input type="hidden" name="order" value="{$order}" />
+  <input type="hidden" name="keywords" value="{$keywords}" />
+</form>
+<!--{if $show_asynclist}-->
+<div class="ect-margin-tb ect-pro-list ect-margin-bottom0 ect-border-bottom0">
+  <ul id="J_ItemList">
+    <li class="single_item"></li>
+    <a href="javascript:;" class="get_more"></a>
+  </ul>
+</div>
+<!--{else}-->
+<!--{if $goods_list neq null}-->
+<div class=" ect-pro-list ect-margin-bottom0 ect-border-bottom0">
+  <ul id="J_ItemList">
+    <!--{foreach name=goods_list from=$goods_list item=groupbuy}-->
+    <li class="single_item"> <a href="{$groupbuy.url}"><img src="{$groupbuy.original_img}" alt="{$groupbuy.goods_name}"></a>
+      <dl>
+        <dt>
+          <h4 class="title"><a href="{$groupbuy.url}">{$groupbuy.goods_name}</a></h4>
+        </dt>
+        <dd class="dd-price"><span class="pull-left"><strong>{$lang.price}：<b class="ect-colory">{$groupbuy.exchange_integral} {$lang.exchange_integral}</b></strong><small class="ect-margin-lr"><del>{$groupbuy.market_price}</del></small></span><span class="ect-pro-price"> <i class="label zk">{$groupbuy.spare_discount}{$lang.favourable_zk}</i> </span></dd>
+        <dd class="dd-num"><span class="pull-left"><i class="fa fa-eye"></i> {$groupbuy.click_count}{$lang.scan_num}</span><span class="pull-right">{$lang.sort_sales}：{$groupbuy.sales_count}{$lang.piece}</span> </dd>
+        <dd style="display:none"> {$groupbuy.spare_price}</dd>
+      </dl>
+    </li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+<!--{else}-->
+<span id="desc">暂无商品 </span>
+<!--{/if}-->
+{include file='library/page.lbi '}
+<!--{/if} --> 

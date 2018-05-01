@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,lefttime.js'}
+<script type="text/javascript">
+  {foreach from=$lang.js_languages item=item key=key}
+    var {$key} = "{$item}";
+  {/foreach}
+</script>
+</head>
+<body>
+<div id="globalWrapper">
+  <div id="wrapper"><!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+    <!-- End #search-bar --><!-- TemplateBeginEditable name="通栏广告位" --><!-- TemplateEndEditable -->
+    <div id="container">
+      <div id="pageLeft"><!-- TemplateBeginEditable name="主区域左侧" --><!-- #BeginLibraryItem "/library/history.lbi" -->
+        <div class="titleDiv"><img src="images/history.gif" alt="History" width="158" height="39" /></div>
+        <div class="content-div">
+          <ul class="history-list">
+            {insert name='history'}
+          </ul>
+        </div>
+      <!-- #EndLibraryItem --><!-- TemplateEndEditable --> </div>
+      <!-- End #pageLeft -->
+      <div id="pageIn">
+        <!-- #BeginLibraryItem "/library/ur_here.lbi" --> {$lang.ur_here} {$ur_here} <!-- #EndLibraryItem -->
+        <table width="100%" border="0" style="background:#FFF;">
+          <tr>
+            <td width="200" valign="top" style="padding-right:30px;">
+              <a href="{$auction_goods.url}"><img src="{$auction_goods.goods_thumb}" alt="{$auction_goods.goods_name|escape:html}" /></a></td>
+            <td valign="top">
+              <form name="theForm" action="auction.php" method="post">
+                <table width="100%" border="0">
+                  <tr>
+                    <td width="90">{$lang.goods_name} </td>
+                    <td><span style="font-size: 14px; font-weight: bold; color: #2359B1;">{$auction.goods_name|escape:html}</span></td>
+                  </tr>
+                  <tr>
+                    <td>{$lang.au_current_price}</td>
+                    <td><strong>{$auction.formated_current_price}</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{$lang.act_start_time}</td>
+                    <td>{$auction.start_time}</td>
+                  </tr>
+                  <tr>
+                    <td>{$lang.act_end_time}</td>
+                    <td>{$auction.end_time}</td>
+                  </tr>
+                  <tr>
+                    <td>{$lang.au_start_price}</td>
+                    <td>{$auction.formated_start_price}</td>
+                  </tr>
+                  <tr>
+                    <td>{$lang.au_amplitude}</td>
+                    <td>{$auction.formated_amplitude}</td>
+                  </tr>
+                  <!-- {if $auction.end_price gt 0} -->
+                  <tr>
+                    <td>{$lang.au_end_price}</td>
+                    <td>{$auction.formated_end_price}</td>
+                  </tr>
+                  <!-- {/if} -->
+                  <!-- {if $auction.deposit gt 0} -->
+                  <tr>
+                    <td>{$lang.au_deposit}</td>
+                    <td>{$auction.formated_deposit}</td>
+                  </tr>
+                  <!-- {/if} -->
+                  <!-- {if $auction.status_no eq 0} 未开始 -->
+                  <tr>
+                    <td colspan="2"><strong>{$lang.au_pre_start}</strong></td>
+                  </tr>
+                  <!-- {elseif $auction.status_no eq 1} 进行中 -->
+                  <tr>
+                    <td height="51" colspan="2"><strong>{$lang.au_under_way}<br />
+                    <span id="leftTime">{$lang.please_waiting}</span></strong></td>
+                  </tr>
+                  <tr>
+                    <td>{$lang.au_i_want_bid}</td>
+                    <td><input name="price" type="text" id="price" size="8" />
+                      <input name="bid" type="submit" id="bid" value="{$lang.button_bid}" />
+                      <input name="act" type="hidden" value="bid" />
+                      <input name="id" type="hidden" value="{$auction.act_id}" /></td>
+                  </tr>
+                  <!-- {else} 已结束 -->
+                  <tr>
+                    <td colspan="2">
+                      <!-- {if $auction.is_winner} -->
+                      <div>
+                        <span style="color:red">{$lang.au_is_winner}</span>
+                        <input name="buy" type="submit" value="{$lang.button_buy}" />
+                        <input name="act" type="hidden" value="buy" />
+                        <input name="id" type="hidden" value="{$auction.act_id}" />
+                      </div>
+                      <!-- {else} -->
+                      <strong>{$lang.au_finished}</strong>
+                      <!-- {/if} -->
+                    </td>
+                  </tr>
+                  <!-- {/if} -->
+              </table>
+            </form>
+          </td>
+          </tr>
+        </table>
+        <!-- {if $auction.act_desc} 如果有说明，显示 -->
+        <div class="globalTitle">活动介绍</div>
+        <div class="content-div">{$auction.act_desc|escape:html|nl2br}</div>
+        <!-- {/if} -->
+        <div class="globalTitle">出价记录</div>
+        <div>
+      <table width="100%">
+            <tr>
+              <th>{$lang.au_bid_user}</th>
+              <th>{$lang.au_bid_price}</th>
+              <th>{$lang.au_bid_time}</th>
+              <th>{$lang.au_bid_status}</th>
+            </tr>
+      <!-- {foreach from=$auction_log item=log name=fe_bid_log} -->
+            <tr>
+              <td>{$log.user_name}</td>
+              <td align="right">{$log.formated_bid_price}</td>
+              <td align="center">{$log.bid_time}</td>
+              <td align="center">{if $smarty.foreach.fe_bid_log.first} {$lang.au_bid_ok}{else}&nbsp;{/if}</td>
+            </tr>
+      <!-- {foreachelse} -->
+      <tr>
+        <td colspan="4" align="center"><p>{$lang.no_bid_log}</p></td>
+      </tr>
+      <!-- {/foreach} -->
+          </table>
+        </div>
+      </div>
+      <!-- End #indexMiddle -->
+      <!-- End #indexRrigh -->
+      <div class="clear"></div>
+    </div>
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --></div>
+  <!-- End #Wrapper -->
+  </div>
+<!-- End #globalWrapper -->
+<script type="text/javascript">
+var gmt_end_time = "{$auction.gmt_end_time|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime();
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+</body>
+</html>
+

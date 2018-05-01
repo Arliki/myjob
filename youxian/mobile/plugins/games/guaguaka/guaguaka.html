@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html style="font-size: 40px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{$page_title}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="layoutmode" content="standard">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="renderer" content="webkit">
+    <meta name="wap-font-scale" content="no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Pragma" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="{$game_path}/css/base.min.css"/>
+</head>
+
+<body class="main_box">
+<a class="awards_list" href="{$awards_url}">
+    <b></b>
+    <img src="__TPL__/games/images/awards2.png" alt="">
+    <span>中奖记录</span>
+</a>
+<div class="contentbox">
+   <div class="box">
+        <div class="content">
+            <div id="mask_img_bg"><span class="cont-span"></span>
+                <!--<img/>-->
+            </div>
+            <img id="redux" src="{$game_path}/images/layer.png"/>
+        </div>
+   </div>
+    <div class="hint-show">
+        <img class="hint-img" src="{$game_path}/images/hint.png">
+        <img class="colour-img" src="{$game_path}/images/colour.png">
+        <!--<img class="prize-img"/>-->
+        <span class="prize-span"></span>
+        <a class="close"></a>
+        <a class="btn" href="#"></a>
+    </div>
+
+    <div class="mask"></div>
+
+    <div class="hint-num">
+        <h4><strong class="clicknum">{$user_info.guodou}</strong></h4>
+        <a href="javascript:;" class="rightnow"><img src="{$game_path}/images/btn.png" class="btn"></a>
+        <a href="javascript:;" class="again"></a>
+    </div>
+    <div class="msg">
+        <div class="msgbox">
+          <p>您的果豆不足,是否立即充值</p>
+          <a href="javascript:;" class="back">取消</a>
+          <a href="{$buy_guodou_url}" class="addnow">立即充值</a>
+        </div>
+   </div>
+</div>
+
+<script type="text/javascript" src="{$game_path}/js/jquery.min.js"></script>
+<script type="text/javascript" src="{$game_path}/js/jquery.eraser.js"></script>
+<script type="text/javascript">
+var game_id = "{$game.id}";
+$(".again").click(function(){
+    window.location.reload();
+});
+
+$("a.rightnow img").click(function(){
+    $.ajax({
+        type:"get",
+        url:"{:url('play')}",
+        async:true,
+        data:{id:game_id},
+        dataType:'json',
+        success: function(res){
+          if(res.success){
+              $('.clicknum').text(res.new_guodou);
+              $("a.rightnow").hide();
+
+              if(res.lucky) {
+                  $("#mask_img_bg>span").addClass('lucky').text(res.info);
+                  $(".prize-span").text(res.award_title);
+              }else{
+                  $("#mask_img_bg>span").addClass('fail').text(res.info);
+              }
+              $('#redux').eraser({
+                  size: 25,   //设置橡皮擦大小
+                  completeRatio: .4, //设置擦除面积比例
+                  completeFunction: function(){
+                      if(res.lucky){
+                          $('.main_box .hint-show .btn').attr('data-url',res.award_url);
+                          $(".main_box .hint-show,.main_box .mask").fadeIn(300);
+                      }
+                  }
+              });
+          }else{
+              alert(res.info);
+          }
+        },
+        error: function(){
+            alert('请求错误');window.location.reload();
+        }
+    });
+});
+$('.main_box .hint-show .btn').on('click',function(){
+    var requesting = $(this).data('requesting');
+    var _this = $(this);
+    if(requesting==1){
+        return false;
+    }
+    var lingjiang_url = $(this).data('url');
+    $.ajax({
+        type:"post",
+        url:lingjiang_url,
+        async:true,
+        data:{},
+        dataType:'json',
+        success: function(res){
+            alert(res.info);
+            if(res.error && res.url){
+                window.location.href = res.url;
+            }
+            $('.main_box .hint-show .close').trigger('click');
+        },
+        error: function(){
+            alert('请求错误');
+            window.location.reload();
+        },
+        beforeSend: function () {
+            _this.data('requesting',1);
+        },
+        complete: function () {
+            _this.data('requesting',0);
+        }
+    })
+//    $.post(lingjiang_url,{},function(res){
+//        alert(res.info);
+//        if(res.error && res.url){
+//            window.location.href = res.url;
+//        }
+//        $('.main_box .hint-show .close').trigger('click');
+//    },'json')
+})
+$(".main_box .hint-show .close").click(function () {
+    $(".main_box .hint-show,.main_box .mask").fadeOut(300);
+    window.location.reload();
+});
+
+$(".back").click(function(){
+  $(this).parents(".msg").hide()
+})
+</script>
+
+</body>
+
+</html>

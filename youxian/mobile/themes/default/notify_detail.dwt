@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$title}</title>
+    <link rel="stylesheet" href="__TPL__/css/style.css">
+    <link rel="stylesheet" href="__TPL__/css/notify.css">
+</head>
+<body>
+<div class="detail">
+    <p class="d_name">{$notify.name}</p>
+    <p class="d_time"><span class="s1">发布时间：</span><span class="s2">{$notify.ctime}</span></p>
+    <p class="d_content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$notify.content}</p>
+</div>
+{if $notify.link}
+    <div class="link_div">
+        <li class="_link">
+            <span>更多精彩请点击下面的链接：</span>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$notify.link}">{$notify.link_name}</a>
+        </li>
+    </div>
+{else}
+{/if}
+<li class="flip">
+    <div class="d_up_d">
+        {if $notify.up_id}
+        <a href="{:url('notice/shop_detail')}&nid={$notify.up_id}" class="d_up">上一篇</a>
+        {else}
+        <a href="javascript:;" class="d_up">已经第一篇咯</a>
+        {/if}
+    </div>
+    <div class="d_down_d">
+        {if $notify.down_id}
+        <a href="{:url('notice/shop_detail')}&nid={$notify.down_id}" class="d_down">下一篇</a>
+        {else}
+        <a href="javascript:;" class="d_down">已经最后一篇咯</a>
+        {/if}
+    </div>
+</li>
+</body>
+</html>

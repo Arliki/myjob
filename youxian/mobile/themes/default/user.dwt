@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>会员中心</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link rel="stylesheet" href="__TPL__/css/member.css">
+		<!--<link rel="stylesheet" type="text/css" href="__TPL__/css/search_index.css"/>-->
+		<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/font-awesome.min.css">
+		<link rel="stylesheet" href="__TPL__/statics/css/ectouch.css" />
+		<link rel="stylesheet" href="__TPL__/newTheme/css/footer.css" />
+		<link rel="stylesheet" href="__TPL__/newTheme/font/iconfont.css" />
+		<style>
+			.guanzhu{
+				color:#fefefe;font-size:1rem;text-align: center;
+			}
+			.guanzhu a{color:#1CBB7F}
+			.index-guanz-t{display:none;transition: width 2s;-moz-transition: width 2s;-webkit-transition: width 2s;-o-transition: width 2s;  text-align: center;  max-width: 640px; min-width: 320px;}
+			.index-guanz-t.active{display:block; transition: width 2s;-moz-transition: width 2s;-webkit-transition: width 2s;-o-transition: width 2s;}
+			.index-guanz-bg{background:rgba(0,0,0,0.7); position:fixed; top:0; left:0; right:0;bottom:0; z-index:1000;}
+			.index-guanz-show{ position:fixed; left:50%;  margin-left: -9.5rem; top:30%; background:#fff; z-index:1001; overflow:hidden; width: 19rem; height: 19rem; padding: 0.8rem 0.5rem;}
+			.index-guanz-show p{color:#4C4D51;font-size: 1rem;}
+			.index-guanz-show img{ width: 16rem;}
+			.index-guanz-show .left{float:left}
+			.index-guanz-show .right{float:right}
+		</style>
+	</head>
+	<body>
+	    <div class="con" style="margin-bottom: 4rem;">
+		<div class="member-main">
+			<div class="member-photo">
+				<a style="color:#fff;position: absolute;top:.8rem;right:.8rem;padding:.5rem;" href="{:url('user/profile')}"><i class="fa fa-gear"></i></a>
+				<a style="color:#fff;position: absolute;top:.8rem;left:.8rem;padding:.5rem;" href="javascript:$('.index-guanz-t').show();"><i class="fa fa-qrcode"></i></a>
+				<div class="member-photo-img">
+					<a href="{:url('user/profile')}">
+						{if $info.avatar}
+						<img src="{$info.avatar}" />
+						{else}
+						<img src="__TPL__/images/member-photo-img2.jpeg" />
+						{/if}
+					</a>
+				</div>
+				<div class="member-photo-name">
+					<p>{$info.name}</p><span>{$rank_name}</span>
+				</div>
+				{if !$isbind}
+				<div class="member-photo-address" style="left:1rem;">
+					<a href="{:url('user/bind')}"><span>电脑端账号绑定</span></a>
+				</div>
+				{/if}
+			</div>
+			<div class="member-order">
+
+				<div class="member-order-title" onclick="window.location = '{:url('user/order_list')}'">
+					<i class="iconfont fl member-order-title-i">&#xe61b; </i><span>我的订单</span><i class="iconfont fr member-order-i">&#xe60c;</i><span class="tip">全部订单</span>
+				</div>
+				<ul class="member-order-list">
+					<li class="fl" id="payment">
+						<span class="member-order-list-num"><!--{if $list.not_pays neq ''}--> {$list.not_pays}<!--{else}-->0<!--{/if}--></span>
+						<a href="{:url('user/not_pay_order_list')}"><i class="iconfont">&#xe61d; </i><span>待付款</span></a>
+					</li>
+					<li class="fl" id="goods">
+						<span class="member-order-list-num"><!--{if $list.not_shouhuos neq ''}--> {$list.not_shouhuos}<!--{else}-->0<!--{/if}--></span>
+						<a href="{:url('user/not_shoushuo')}"><i class="iconfont">&#xe61c; </i><span>待收货</span></a>
+					</li>
+					<li class="fl" id="comment">
+						<span class="member-order-list-num"><!--{if $list.not_comment neq ''}--> {$list.not_comment}<!--{else}-->0<!--{/if}--></span>
+						<a href="{:url('user/order_comment')}"><i class="iconfont">&#xe619; </i><span>待评价</span></a>
+					</li>
+					<!--<li class="fl" id="repick">-->
+						<!--<span class="member-order-list-num">0</span>-->
+						<!--<a href="member-serve1.htm"><i class="iconfont">&#xe61f; </i><span>返修/退货</span></a>-->
+					<!--</li>-->
+				</ul>
+			</div>
+			<div class="member-purse">
+				<div class="member-purse-title" onclick="window.location = '{:url('user/account_detail')}';">
+					<i class="iconfont fl member-purse-title-i">&#xe61b; </i><span>我的钱包</span><i class="iconfont fr member-order-i">&#xe60c;</i><span class="tip">资金管理</span>
+				</div>
+				<ul class="member-purse-list">
+					<li class="fl"><span><!--{if $list.user_money neq ''}--> {$list.user_money}<!--{else}-->0<!--{/if}--></span>
+						<p>余额</p>
+					</li>
+					<a href="{:url('coupon/coupon_list',array('type'=>'unuse'))}">
+					<li class="fl"><span><!--{if $list.coupon neq ''}--> {$list.coupon}<!--{else}-->0<!--{/if}--></span>
+						<p>优惠券</p>
+					</li>
+					</a>
+					<li class="fl"><span><!--{if $list.user_points neq ''}--> {$list.user_points}<!--{else}-->0<!--{/if}--></span>
+						<p>{$integralName}</p>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix">
+			</div>
+			<div class="member-serve">
+				<ul>
+					<li onclick="window.location = '{:url('user/address_list')}';"><i class="member-record-title-i fl fa fa-map-marker" style="font-size:2.5rem;line-height: 4rem;padding:0 .5rem;"></i><p class="fl">收货地址</p><i class="iconfont fr member-order-i">&#xe60c;</i></li>
+				</ul>
+			</div>
+			<div class="member-serve">
+				<ul>
+					<li onclick="window.location = '{:url('user/collection_list')}';"><i class="member-record-title-i iconfont fl member-serve-li-oi">&#xe62e;</i><p class="fl">我的收藏</p><i class="iconfont fr member-order-i">&#xe60c;</i></li>
+				</ul>
+			</div>
+			<div class="member-serve">
+				<ul>
+					<li onclick="window.location = '{:url('user/msg_list')}';"><i class="iconfont fl member-serve-li-oi">&#xe62d;</i><p class="fl">消息列表</p><i class="iconfont fr member-order-i">&#xe60c;</i></li>
+					<li onclick="window.location = '{:url('user/service')}';"><i class="iconfont fl member-serve-li-oi">&#xe61a;</i><p class="fl">客户服务</p><i class="iconfont fr member-order-i">&#xe60c;</i></li>
+				</ul>
+			</div>
+
+			<div class="member-serve">
+				<ul>
+					<li onclick="window.location = '{:url('user/share')}'"><i class="iconfont fl member-serve-li-ti">&#xe61e;</i><p class="fl">我的分享</p><i class="iconfont fr member-order-i">&#xe60c;</i></li>
+				</ul>
+			</div>
+
+			<!--{if $history}-->
+			<div class="member-record">
+				<div class="member-record-title">
+					<i class="iconfont fl member-record-title-i">&#xe624;</i>
+					<p class="fl">{$lang.user_history}</p><i class="iconfont fr member-order-i" style="display:none">&#xe60c;</i>
+				</div>
+				<div class="member-record-silde">
+					<div class="member-record-silde-div">
+						<ul class="fl">
+							<!-- {foreach from=$history item=val} -->
+							<li class="fl">
+								<a href="{:url('goods/index', array('id'=>$this->_var[val]['goods_id']))}"><img src="{$val.goods_thumb}" /></a>
+								<p>{$val.goods_name}</p>
+								<span style="font-size: 0.9375rem;">{$lang.sort_price}：{$val.shop_price}</span>
+							</li>
+							<!-- {/foreach} -->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--{/if}-->
+		</div>
+		</div>
+		<div class="index-guanz-t">
+			<div class="index-guanz-show">
+				<img src="__TPL__/images/guanzm.png">
+				<p><span class="">长按二维码关注公众号</span><span style="position: absolute;top:2px;right:2px;" class="right index-show-close">关闭</span></p>
+			</div>
+			<div class="index-guanz-bg"></div>
+		</div>
+		<!-- #BeginLibraryItem "/library/new_search.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/new_page_footer.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/newTheme_footer_nav.lbi" --><!-- #EndLibraryItem -->
+		<script>
+			$(function(){
+			    $('.index-guanz-bg').on('click',function(){
+			        $('.index-guanz-t').hide();
+				})
+			    $('.index-show-close').on('click',function () {
+					$('.index-guanz-t').hide();
+                })
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>{$title}</title>
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/amazeui.min.css">
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/dls_center.css">
+	</head>
+	<body>
+	<div class="header-title">
+		<a href="javascript:history.go(-1)" class="title-back am-icon am-icon-angle-left"></a>
+		<h1>{$title}</h1>
+		<div class="img-item my-jjr">
+			<div class="avatar">
+				<img src="{$avatar.headimgurl}" alt="">
+				<span>{$avatar.nickname}</span>
+			</div>
+			<div class="tj_time_quantum flex-column" >
+				<div class="flex">
+					<span>从</span>
+					<input id="start_day" type="text" placeholder="开始日期" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+				</div>
+				<div class="flex">
+					<span>到</span>
+					<input id="end_day" type="text" placeholder="结束日期" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+				</div>
+			</div>
+			<div class="flex-column">
+				<span id="calculator-sale-btn" style="font-size:2rem;" class="am-icon am-icon-calculator"></span>
+			</div>
+		</div>
+		<div class="total-cost">累计消费：￥<span id="cost-money">0.00</span>元</div>
+	</div>
+
+	<div class="main">
+
+	</div>
+	<script id="usercost-tpl" type="text/x-dot-template">
+		{{ if(it.error==0 && it.data.length>0){ }}
+		{{ for(var i=0;i<it.data.length;i++) { }}
+		<div class="img-item sm">
+			<div class="img-item-left">
+				<div class="avatar">
+					<img src="{{=it.data[i].headimgurl}}" alt="">
+					<span>{{=it.data[i].nickname}}</span>
+				</div>
+				<div class="flex-column" style="text-align: left;">
+					<span>购买时间：{{=it.data[i].pay_time}}</span>
+					<span>订单号：{{=it.data[i].order_sn}}</span>
+				</div>
+				<div>
+					<span>￥{{=it.data[i].goods_amount}}元</span>
+				</div>
+			</div>
+		</div>
+		{{ } }}
+		{{ }else{ }}
+		<div class="no-more-data" style="margin: 3rem auto;text-align: center;">{{=it.data}}</div>
+		{{ } }}
+	</script>
+	<script src="__TPL__/dlsStatic/js/jquery-1.10.2.min.js"></script>
+	<script src="__TPL__/dlsStatic/js/common.js"></script>
+	<script src="__TPL__/dlsStatic/js/amazeui.min.js"></script>
+	<script src="__TPL__/js/doT.min.js" type="text/javascript"></script>
+		<script>
+			$(function(){
+			    $('#calculator-sale-btn').on('click',function () {
+			        var url="{:url('dls/get_sale_list',array('jid'=>$_GET['jid']))}",
+						data = {
+							start_day: $('#start_day').val(),
+							end_day: $('#end_day').val()
+						};
+			        if(!data.start_day || !data.end_day){
+			            $.walert('请选择开始日期和结束日期');return;
+					}
+			        console.log(data);
+                    $.get(url,data,function(res){
+                        if(res.error>0){
+                            $.walert(res.data);
+                            if(res.error==4){window.location.reload()}
+                            return;
+                        }
+                        var _tpl = $("#usercost-tpl").html();
+                        var pagefn = doT.template(_tpl);
+						$('.main').html(pagefn(res));
+						$('#cost-money').html(res.total_sale);
+                    },'JSON');
+
+                })
+			})
+		</script>
+	</body>
+</html>

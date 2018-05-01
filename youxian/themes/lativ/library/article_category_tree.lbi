@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $article_categories} -->
+<div class="titleDiv">{$lang.article_cat}</div>
+<div id="catDiv" style="padding:5px 10px;">
+  <ul>
+    <!--{foreach from=$article_categories item=cat}-->
+    <li> <span class="parent-cat"><A href="{$cat.url}">{$cat.name|escape:html}</A></span><br />
+      <!--{foreach from=$cat.children item=child}-->
+      <span style="white-space:nowrap;"><A href="{$child.url}">{$child.name|escape:html}</A></span>
+      <!--{/foreach}-->
+    </li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+<!-- {/if} -->

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$title}</title>
+    <link rel="stylesheet" href="__TPL__/css/style.css">
+    <link rel="stylesheet" href="__TPL__/css/preorder.css">
+    <link rel="stylesheet" href="__TPL__/css/pintuan.css">
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+</head>
+<body>
+{if $show_type eq 1}
+{* 可参与的拼单列表 *}
+<div class="collage_list">
+    <img src="__TPL__/images/collage_banner.png" title="banner" alt="this is a banner">
+    <p class="bannerbtn">
+        <a href="#" class="guize"><img src="__TPL__/images/collage_rule.png"></a>
+        <a href="#" class="liucheng"><img src="__TPL__/images/collage_flow.png"></a>
+    </p>
+    <div class="altermask">
+        <a href="javascript:;">x</a>
+        <img src="__TPL__/images/detail_rule.png" class="guizepic">
+        <img src="__TPL__/images/detail_flow.jpg" class="liuchengpic">
+    </div>
+    {if $show_collage}
+    {foreach from=$collage_list item=vo}
+    <a href="{:url('collage/detail')}&id={$vo.collage_id}">
+        <span class="goodsimg"><img src="{$vo.goods_thumb}" alt="{$vo.goods_name}"></span>
+        <div class="goodsbox">
+            <span class="goodsname">{$vo.goods_name}</span>
+            <span class="goodsnum">尚缺人数:<i>{$vo.surplus}人</i></span>
+            <span class="goodstime">截止时间:<i>{$vo.end_time}</i></span>
+        </div>
+        <img src="__TPL__/images/collage_flower.png" class="xiaohonghua">
+    </a>
+    <br>
+    {/foreach}
+    {else}
+    <div style="margin:0 auto;text-align: center;">
+        <p>还没有发起的拼单</p>
+        <p>赶紧发起拼单享优惠咯</p>
+    </div>
+
+    {/if}
+</div>
+<a href="javascript:;" class="show_bingo bingo2" id="my_list"><img src="__TPL__/images/mycollage.png" class="wodepindan"></a>
+<a href="javascript:;" class="show_bingo bingo1" id="show_list"><img src="__TPL__/images/collage_launch.png" class="faqipindan"></a>
+{* 商品详情页 *}
+{elseif $show_type eq 2}
+{* 轮播图 *}
+<div id="focus" class="focus goods-focus ">
+    <div class="hd">
+        <ul>
+        </ul>
+    </div>
+    <div class="bd">
+        <ul id="Gallery">
+            <!--{if $pictures}-->
+            <!-- {foreach from=$pictures item=picture name=no}-->
+            <!--{if $smarty.foreach.no.index >= 0}-->
+            <li><a href="{$picture.img_url}"><img src="{$picture.img_url}" alt="{$picture.img_desc}" /></a></li>
+            <!--{/if}-->
+            <!--{/foreach}-->
+            <!--{else}-->
+            <li><a href="{$goods_img}"><img src="{$goods_img}" alt="{$goods_img}" /></a></li>
+            <!--{/if}-->
+        </ul>
+
+        {if $detail==1}
+            {* 拼主页面 *}
+            <p class="pull-left">
+                <span class="pull-left-name">{$goods_detail.goods_name}</span>
+            </p>
+    </div>
+</div>
+<div class="collage_price">
+    <p class="money1"><span class="txt">拼团价格</span><span class="price">{$goods_detail.collage_f_p}元</span></p>
+    <!--<p class="money2"><span>{$goods_detail.collage_o_p}元</span></p>-->
+</div>
+<div class="goods_size collage_f">
+    <p><span class="pull-left-size">规格：</span><span>{$goods_detail.collage_size}</span></p>
+    <span>所需人数：</span><span>{$goods_detail.collage_max}人</span>
+    <span>有效时间：</span><span>{$goods_detail.collage_time}小时</span>
+</div>
+        {else}
+            {* 他人 页 面 *}
+            <p class="pull-left otherpeople">
+                <span class="pull-left-name  othername">{$goods_name}</span>
+            </p>
+    </div>
+</div>
+<div class="goods_size collage_o">
+    <p><span class="pull-left-size">规格：</span><span>{$attr.collage_size}</span></p>
+    <p><span class="pull-left-price">价格：</span><span>{$attr.collage_o_p}元</span></p>
+</div>
+<div class="xian">
+    <span class="pull-left-time">截止：</span><span>{$end_time}</span>
+</div>
+{if $show_share}
+<div class="share_div">
+    <button class="share" id="wx_share">分享</button>
+    <div class="sharebox">
+        <img src="__TPL__/images/share.png" class="shareimg">
+        <p class="sharetitle">邀请好友一起来拼单吧</p >
+    </div>
+    {$wxjs}
+</div>
+{/if}
+            <div class="user_list">
+
+                <span class="notify">还差<span class="surplus">{$surplus}</span>人拼单成功</span>
+                {foreach from=$user_head item=vo}
+                <li>
+                    <img class="userimg" src="{$vo.head}" alt="用户头像" style="height: 132px;width: 132px;">
+                    <span class="username" >{$vo.nick}</span>
+                    <span class="userpay" >已支付</span>
+                </li>
+                {/foreach}
+            </div>
+        {/if}
+
+
+{$collage_btn}
+{elseif $show_type==3}
+{* 可被发起拼单的商品列表页 *}
+<div>
+    {if $no_collage}
+    <p class="nohave">暂时没有支持拼单的商品</p>
+    {else}
+    {foreach from=$collage_list item=vo}
+    <li class="launch_list">
+    <img src="{$vo.goods_thumb}" class="goodsimg">
+    <span class="goodsname">{$vo.goods_name}</span>
+    <span class="goodssize">规格：{$vo.collage_size}</span>
+    <span class="goodstime">拼单有效期：{$vo.collage_time}小时</span>
+    <a href="{:url('collage/launch_goods')}&goods_id={$vo.goods_id}" class="makebtn"><img src="__TPL__/images/collage_launch.png" class="faqipindan"></a>
+    </li>
+    {/foreach}
+    {/if}
+</div>
+{elseif $show_type==4}
+{* 用户的拼单列表  *}
+<div class="collage_list">
+    {if $show}
+    {foreach from=$collage_list item=vo}
+    {if $vo.status==0}
+    <a href="{:url('collage/detail')}&id={$vo.collage_id}" class="not_full">
+    {elseif $vo.status==1}
+    <a href="{:url('collage/detail')}&id={$vo.collage_id}" class="is_over">
+    {elseif $vo.status==2}
+    <a href="{:url('collage/detail')}&id={$vo.collage_id}" class="is_refun">
+    {elseif $vo.status==3}
+    <a href="{:url('collage/detail')}&id={$vo.collage_id}" class="is_wait">
+    {/if}
+        <span class="goodsimg"><img src="{$vo.goods_thumb}" alt="{$vo.goods_name}"></span>
+        <div class="goodsbox">
+            <span class="goodsname">{$vo.goods_name}</span>
+            {if $vo.status==0}
+            <span class="goodsnum">尚缺人数:<i>{$vo.surplus}人</i></span>
+            {elseif $vo.status==1}
+            <span class="goodsnum">拼单已完成并添加至订单</span>
+            {elseif $vo.status==2}
+            <span class="goodsnum">拼单未完成并完成退款</span>
+            {elseif $vo.status==3}
+            <span class="goodsnum">拼单已完成，请等待生成订单</span>
+            {/if}
+            <span class="goodstime">截止时间:<i>{$vo.end_time}</i></span>
+        </div>
+    </a>
+    {/foreach}
+    {else}
+    <p class="nohave2">您还没有发起的拼单</p>
+    <p class="atnow">赶紧发起拼单享拼主优惠咯</p>
+    {/if}
+</div>
+<a href="javascript:;" class="show_bingo bingo1 gobigin" id="show_list"><img src="__TPL__/images/collage_launch.png" class="faqipindan"></a>
+{/if}
+<script type="text/javascript" src="__TPL__/js/jquery.js"></script>
+<script type="text/javascript" src="__TPL__/statics/js/swiper-3.2.5.min.js"></script>
+<script type="text/javascript" src="__TPL__/statics/js/jquery-ui-1.10.1.custom.min.js"></script>
+<script type="text/javascript" src="__TPL__/statics/js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="__TPL__/statics/js/jquery.scrollUp.min.js"></script>
+<script type="text/javascript" src="__TPL__/statics/js/ectouch.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/template.js"></script>
+<script>
+    $("#show_list").click(function () {
+        url="{:url('collage/launch_list')}";
+        window.location.href=url;
+    });
+    $("#my_list").click(function () {
+        url="{:url('collage/my_collage')}";
+        window.location.href=url;
+    });
+    $("#wx_share").click(function () {
+        $(".sharebox").show();
+    });
+    $("#go_pay").click(function () {
+        $.ajax({
+            type:"get",
+            url:'{$url}',
+            success:function (data) {
+                $("#go_pay").after(data);
+                callpay();
+            }
+        });
+    });
+    $(document).on("click",".sharebox",function () {
+        $(this).hide();
+    });
+    $(document).on("click",".guize",function(){
+        $(".altermask").show();
+        $(".altermask .guizepic").show()
+    });
+    $(document).on("click",".liucheng",function(){
+        $(".altermask").show();
+        $(".altermask .liuchengpic").show()
+    });
+    $(document).on("click",".altermask a",function(){
+        $(".altermask").hide();
+    });
+</script>
+<script type="text/javascript" src="__TPL__/js/TouchSlide.1.1.js"></script>
+<script>
+    /*banner滚动图片1*/
+    TouchSlide({
+        slideCell : "#focus",
+        titCell : ".hd ul", // 开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+        mainCell : ".bd ul",
+        effect : "left",
+        autoPlay : true, // 自动播放
+        autoPage : true, // 自动分页
+        delayTime: 200, // 毫秒；切换效果持续时间（执行一次效果用多少毫秒）
+        interTime: 2500, // 毫秒；自动运行间隔（隔多少毫秒后执行下一个效果）
+        switchLoad : "_src" // 切换加载，真实图片路径为"_src"
+    });
+</script>
+</body>
+</html>

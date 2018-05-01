@@ -1,0 +1,149 @@
+<!-- #BeginLibraryItem "/library/user_header.lbi" --><!-- #EndLibraryItem -->
+<style>
+  .flow-consignee{margin-top:0;}
+  .tab{
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+  }
+  .tab span{
+    flex-grow:1;
+    text-align: center;
+    padding: 1rem;
+  }
+  .tab span.on{
+    color: #5d9d07;
+    border-bottom: 2px solid #5d9d07;
+  }
+  .tab-content{display:none;}
+  .tab-content.on{display:block;}
+  .select-blk{
+    display: block;
+    outline:none;border:0;
+    width:100%;}
+  section input{
+    outline:none;}
+</style>
+<script type="text/javascript">
+	  {foreach from=$lang.profile_js item=item key=key}
+		var {$key} = "{$item}";
+	  {/foreach}
+	</script>
+<form name="formEdit" action="{:url('user/profile')}" method="post" onSubmit="return userEdit()">
+  <div class="tab">
+    <span class="on">个人资料</span>
+    <span>银行卡</span>
+  </div>
+  <section class="tab-content on flow-consignee ect-bg-colorf">
+    <ul>
+      <li>
+        <div class="input-text"><b class="pull-left">{$lang.username}：</b><span>
+          {$info.username}
+          </span></div>
+      </li>
+      <li>
+        <div class="input-text"><b class="pull-left">{$lang.email}：</b><span>
+          <input name="email" type="text" placeholder="{$lang.no_emaill}"  value="{$profile.email}">
+          </span></div>
+      </li>
+      {foreach from=$extend_info_list item=field} 
+      <!-- {if $field.id eq 6} -->
+      <li>
+        <div class="form-select"> <i class="fa fa-sort"></i>
+          <select name="sel_question">
+            <option value='0'>{$lang.sel_question}</option>
+            
+            {html_options options=$passwd_questions selected=$profile.passwd_question}
+          
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="input-text"><b class="pull-left">{$lang.passwd_answer}:</b> <span>
+          <input placeholder="{$lang.passwd_answer}" name="passwd_answer" type="text" value="{$profile.passwd_answer}" />
+          </span></div>
+      </li>
+      <!-- {else} -->
+      <li>
+        <div class="input-text"><b class="pull-left">{$field.reg_field_name}:</b><span>
+          <input {if $field.id==5}disabled="disabled"{/if} name="extend_field{$field.id}" type="text" value="{$field.content}" placeholder="{$field.reg_field_name}">
+          </span></div>
+      </li>
+      </li>
+      <!-- {/if} --> 
+      {/foreach}
+    </ul>
+  </section>
+  <section class="tab-content flow-consignee ect-bg-colorf">
+    <ul>
+      <li>
+        <div class="input-text"><b class="pull-left">银行卡号：</b><span>
+          <input name="bank_account" type="text" placeholder="银行卡号"  value="{$profile.bank_account}">
+          </span></div>
+      </li>
+      <li>
+        <div class="input-text"><b class="pull-left">银行卡户名：</b><span>
+          <input name="bank_account_name" type="text" placeholder="银行卡户名"  value="{$profile.bank_account_name}">
+          </span></div>
+      </li>
+      <li>
+        <div class="input-text"><b class="pull-left">开户行：</b><span>
+          <select class="select-blk" name="bank">
+            {foreach name=khh from=$khh item=khh}
+            <option {if $profile.bank_code==$khh.code}selected{/if} value="{$khh.code}|{$khh.name}">{$khh.name}</option>
+            {/foreach}
+          </select></span>
+        </div>
+      </li>
+      <li>
+        <div class="input-text"><b class="pull-left">开户行省份：</b><span>
+          <select class="select-blk" name="bank_province">
+            {foreach name=khh_province from=$khh_province item=province}
+            <option {if $profile.bank_province==$province}selected{/if} value="{$province}">{$province}</option>
+            {/foreach}
+          </select>
+          </span></div>
+      </li>
+      <li>
+        <div class="input-text"><b class="pull-left">开户行城市：</b><span>
+          <input name="bank_city" type="text" placeholder="开户行所在城市[XX市]"  value="{$profile.bank_city}">
+          </span></div>
+      </li>
+    </ul>
+  </section>
+  <input name="act" type="hidden" value="profile" />
+  <div class="two-btn ect-padding-tb ect-padding-lr ect-margin-tb text-center">
+    <input name="submit" type="submit" value="{$lang.confirm_edit}" class="btn btn-info ect-bg" />
+  </div>
+</form>
+
+<!--<section style="display:none;" class="flow-consignee ect-bg-colorf">
+  <ul>
+   <a  href="{:url('user/edit_password')}">
+    <li>修改密码</li>
+   </a>
+   <a  href="{:url('user/address_list')}">
+    <li>收货地址</li>
+   </a>
+  </ul>
+</section>-->
+<!-- <section class="flow-consignee ect-bg-colorf">
+  <ul>
+    <li><a href="{:url('user/logout')}">注销退出</a></li>
+  </ul>
+</section> -->
+
+</div>
+<!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<script>
+  $(function(){
+    $('.tab span').on('click',function(){
+      var idx = $(this).index();
+      $(this).addClass('on').siblings().removeClass('on');
+      $('.tab-content').eq(idx).addClass('on').siblings().removeClass('on');
+    })
+  })
+</script>
+</body>
+</html>

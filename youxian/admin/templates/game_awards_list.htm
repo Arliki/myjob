@@ -1,0 +1,56 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="list-div" id="listDiv">
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>ID</th>
+      <th>奖项名称</th>
+      <th>中奖概率</th>
+      <th>人数控制</th>
+      <th>奖品类型</th>
+      <th>奖品</th>
+      <th>{$lang.handler}</th>
+    </tr>
+    {foreach from=$awards_list item=a}
+    <tr>
+      <td>{$a.id}</td>
+      <td align="center">{$a.title}</td>
+      <td align="center">{$a.rate} / {$game_base_number}人</td>
+      <td align="center">
+        {if $a.limit_num==1}
+          是
+        {else}
+          否
+        {/if}
+      </td>
+      {if $a.awards_type==0}
+        <td align="center">
+          积分奖励
+        </td>
+      {else}
+        <td align="center">
+          实物奖励
+        </td>
+      {/if}
+      <td align="center">{$a.awards_value_text}</td>
+      <td align="center">
+        <a href="yxgame_awards.php?act=edit&gid={$a.game_id}&id={$a.id}" title="{$lang.edit}">{$lang.edit}</a> |
+        <a onclick="javascript:return confirm('确定删除?');" href="yxgame_awards.php?act=remove&gid={$a.game_id}&id={$a.id}">{$lang.remove}</a>
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+  {literal}
+  onload = function() {}
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"}

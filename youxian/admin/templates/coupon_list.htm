@@ -1,0 +1,76 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>ID</th>
+      <th>优惠券名称</th>
+      <th>面值</th>
+      <th>最小订单金额</th>
+      <th>发放期</th>
+      <th>使用期</th>
+      <th>发放量</th>
+      <th>{$lang.handler}</th>
+    </tr>
+    {foreach from=$coupon_list item=c}
+    <tr>
+      <td>{$c.id}</td>
+      <td>
+        {$c.coupon_title}
+        <!--{if $c.coupon_img}--><br/>
+        <img style="width:200px;" src="../{$c.coupon_img}" alt="">
+        <!--{/if}-->
+        </td>
+      <td>{$c.coupon_money}</td>
+      <td>{$c.min_money}</td>
+      <td>{$c.send_start_date} - {$c.send_end_date}</td>
+      <td>{$c.use_start_date} - {$c.use_end_date}</td>
+      <td>{$c.coupon_num}</td>
+      <td align="center">
+        <a href="coupon.php?act=user_list&coupon_id={$c.id}" title="领取列表">领取列表</a> |
+        <a href="coupon.php?act=edit&coupon_id={$c.id}" title="{$lang.edit}">{$lang.edit}</a> |
+        <a href="coupon.php?act=remove&coupon_id={$c.id}">{$lang.remove}</a>
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+</div>
+
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      // 开始检查订单
+      startCheckOrder();
+  }
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

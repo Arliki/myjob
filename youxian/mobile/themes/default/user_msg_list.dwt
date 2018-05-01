@@ -1,0 +1,16 @@
+<!-- #BeginLibraryItem "/library/user_header.lbi" --><!-- #EndLibraryItem -->
+<div class="user-account-detail" >
+  <ul class="ect-bg-colorf" id="J_ItemList">
+    <li class="single_item"></li>
+    <a href="javascript:;" style="text-align:center" class="get_more"></a>
+  </ul>
+  <a style="display: block;color:white" class="btn btn-info ect-bg-colory" href="{:url('user/service')}">添加留言</a>
+</div>
+</div>
+<!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+<script type="text/javascript" src="__PUBLIC__/js/jquery.more.js"></script> 
+<script type="text/javascript">
+get_asynclist('{:url("user/msg_list")}' , '__TPL__/images/loader.gif');
+</script>
+</body></html>

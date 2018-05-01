@@ -1,0 +1,39 @@
+<!-- $Id: user_account_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<div class="main-div">
+
+    <table width="100%">
+      <tr>
+        <td class="label">状态值：</td>
+        <td>
+          {$status.status} : {$status.status_info}
+        </td>
+      </tr>
+      <tr>
+        <td class="label">状态值说明：</td>
+        <td>
+          {$status.statusdesc}
+        </td>
+      </tr>
+      <tr>
+        <td class="label">手续费：</td>
+        <td>
+          ￥{$status.v_fee}元
+        </td>
+      </tr>
+    </table>
+
+</div>
+
+<script language="JavaScript">
+    <!--
+    {literal}
+    onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
+    //-->
+    {/literal}
+</script>
+{include file="pagefooter.htm"}

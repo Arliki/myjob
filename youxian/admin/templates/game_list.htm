@@ -1,0 +1,54 @@
+<!-- $Id: shipping_list.htm 17043 2010-02-26 10:40:02Z sxc_shop $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- start game list -->
+<div class="list-div" id="listDiv">
+<table cellspacing='1' cellpadding='3'>
+  <tr>
+    <th>名称</th>
+    <th>描述</th>
+    <th nowrap="true">版本</th>
+    <th>作者</th>
+    <th>{$lang.sort_order}</th>
+    <th>中奖概率基数</th>
+    <th>{$lang.handler}</th>
+  </tr>
+  {foreach from=$modules item=module}
+  <tr>
+    <td class="first-cell" nowrap="true">{$module.title}</td>
+    <td>
+      {$module.desc}
+    </td>
+    <td align="center">
+      {$module.version}
+    </td>
+    <td align='center'>{$module.author}</td>
+    <td onclick="listTable.edit(this, 'edit_order', '{$module.id}'); return false;" align="center">{$module.sort_order}</td>
+    <td onclick="listTable.edit(this, 'edit_base_number', '{$module.id}'); return false;" align="center">{$module.base_number}</td>
+    <td align="center" nowrap="true">
+      {if $module.install == 1}
+      <a href="yxgame_logs.php?act=list&gid={$module.id}">玩家日志</a> |
+      <a href="yxgame_awards.php?act=list&gid={$module.id}">奖项设置</a> |
+      <a href="yxgame_action.php?act=list&gid={$module.id}">操作设置</a> |
+      {if $module.disabled == 1}
+        <a href="yxgames.php?act=disable_game&id={$module.id}">启用</a>
+        {else}
+        <a href="yxgames.php?act=disable_game&id={$module.id}">停用</a>
+      {/if}
+      {else}
+      <a href="yxgames.php?act=install&code={$module.name}">{$lang.install}</a>
+      {/if}
+    </td>
+  </tr>
+  {/foreach}
+</table>
+</div>
+<!-- end game list -->
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+onload = function() {}
+{/literal}
+//-->
+</script>
+{include file="pagefooter.htm"}

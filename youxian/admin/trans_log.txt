@@ -1,0 +1,16 @@
+in
+in
+INSERT INTO `yxg`.`ecs_gys_earn_log` VALUES('','2','45','0.01',time(),'管理员修改订单付款状态为未付款,取消已入账收益',1)
+in
+INSERT INTO `yxg`.`ecs_gys_earn_log` VALUES('','2','45','0.01','1505980614','管理员修改订单付款状态为未付款,取消已入账收益',1)
+in
+after insert
+before update
+after update
+1
+UPDATE `yxg`.`ecs_admin_user` SET gys_account='299.97' WHERE agency_id='3'before update
+after update
+1
+UPDATE `yxg`.`ecs_admin_user` SET gys_account='291.96' WHERE agency_id='2'before update
+after update
+1

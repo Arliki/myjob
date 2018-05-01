@@ -1,0 +1,102 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<script type="text/javascript" src="../js/calendar.php"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<div class="form-div">
+  <form action="javascript:searchLog()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    用户名：<input name="username" type="text" id="username">
+    奖项：
+    <select name="award" id="award">
+      <option value="0">请选择</option>
+      {foreach from=$awards item=aw}
+      <option value="{$aw.id}">{$aw.title}</option>
+      {/foreach}
+
+    </select>
+    领取状态：
+    <select name="gotit" id="gotit">
+      <option value="-1">请选择</option>
+      <option value="0">未领取</option>
+      <option value="1">已领取</option>
+    </select>
+    <div style="display:inline-block;">
+      参与时间：
+      <input type="text" name="start_time" maxlength="60" size="20" readonly="readonly" id="start_time" />
+      <input name="start_time_btn" type="button" id="start_time_btn" onclick="return showCalendar('start_time', '%Y-%m-%d %H:%M', '24', false, 'start_time_btn');" value="{$lang.btn_select}" class="button"/>
+      ~
+      <input type="text" name="end_time" maxlength="60" size="20" readonly="readonly" id="end_time" />
+      <input name="end_time_btn" type="button" id="end_time_btn" onclick="return showCalendar('end_time', '%Y-%m-%d %H:%M', '24', false, 'end_time_btn');" value="{$lang.btn_select}" class="button"/>
+      <input type="submit" value="{$lang.button_search}" class="button" />
+    </div>
+
+
+    <!--{if $can_export_recharge_card}-->
+    <span style="float:right;padding: 4px 10px;border: 1px solid #5FA6B6;border-right: 2px solid #5FA6B6;border-bottom: 2px solid #5FA6B6;background: #FFF url(../images/icon_add.gif) no-repeat 3px center;color: #666;text-decoration: none;"><a onclick="exportCard()">导出记录</a></span>
+    <!--{/if}-->
+  </form>
+
+</div>
+<div class="list-div" id="listDiv">
+  {/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>ID</th>
+      <th>用户</th>
+      <th>参与时间</th>
+      <th>领取时间</th>
+      <th>概述</th>
+      <!--<th>操作</th>-->
+    </tr>
+    {foreach from=$logs_list item=l}
+    <tr>
+      <td>{$l.id}</td>
+      <td align="center">{$l.user_id}</td>
+      <td align="center">{$l.addtime}</td>
+      <td align="center">{$l.gottime}</td>
+      <td align="center">{$l.remark}</td>
+      <!--<td align="center"></td>-->
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+  <table id="page-table" cellspacing="0">
+    <tr>
+      <td align="right" nowrap="true">
+        {include file="page.htm"}
+      </td>
+    </tr>
+  </table>
+
+  {if $full_page}
+</div>
+
+
+
+<script type="text/javascript" language="javascript">
+    listTable.recordCount = {$record_count};
+    listTable.pageCount = {$page_count};
+
+    {foreach from=$filter item=item key=key}
+    listTable.filter.{$key} = '{$item}';
+    {/foreach}
+  {literal}
+        function searchLog()
+        {
+            listTable.filter['username'] = Utils.trim(document.forms['searchForm'].elements['username'].value);
+            listTable.filter['award'] = Utils.trim(document.forms['searchForm'].elements['award'].value);
+            listTable.filter['gotit'] = Utils.trim(document.forms['searchForm'].elements['gotit'].value);
+            listTable.filter['start_time'] = Utils.trim(document.forms['searchForm'].elements['start_time'].value);
+            listTable.filter['end_time'] = document.forms['searchForm'].elements['end_time'].value;
+            listTable.filter['page'] = 1;
+            listTable.loadList();
+        }
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

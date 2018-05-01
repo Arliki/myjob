@@ -1,0 +1,90 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+<div class="form-div">
+  <form action="javascript:searchDls()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    承销商<input name="username" type="text" id="username">
+
+    <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+
+</div>
+
+<div class="list-div" id="listDiv">
+
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th><a href="javascript:listTable.sort('id'); ">ID</a>{$sort_id} </th>
+      <th>编号</th>
+      <th>姓名</th>
+      <th>电话</th>
+      <th>总收益</th>
+      <th>{$lang.handler}</th>
+    </tr>
+    {foreach from=$cxs_list item=cxs}
+    <tr>
+      <td>{$cxs.id}</td>
+      <td class="first-cell"><span>{$cxs.user_name}</span></td>
+      <td class="first-cell"><span>{$cxs.cxs_account_name}</span></td>
+      <td>{$cxs.cxs_phone}</td>
+      <td>￥{$cxs.cxs_account|default:0}元</td>
+      <td align="center">
+        {if $canEditCxs}
+        <a href="cxs_account.php?act=edit&id={$cxs.id}" title="{$lang.edit}">{$lang.edit}</a>
+        {/if}
+        <!-- |<a href="javascript:;" onclick="listTable.remove({$dls.dls_id}, '{$lang.drop_confirm}')" title="{$lang.remove}">{$lang.remove}</a>-->
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      // 开始检查订单
+      startCheckOrder();
+  }
+
+      /**
+       * 搜索代理商
+       */
+    function searchDls()
+    {
+        listTable.filter['username'] = Utils.trim(document.forms['searchForm'].elements['username'].value);
+        listTable.filter['page'] = 1;
+        listTable.loadList();
+    }
+
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

@@ -1,0 +1,126 @@
+*{padding:0;margin:0;border:0;}
+html,body{min-height:100%;}
+html{
+    background: url("../image/page-bg.png") no-repeat 100% 100%;
+    background-position: top center;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+header{
+    padding-top:40px;
+}
+header img{width:80%;height:auto;display: block;margin:0 auto;}
+.nav{
+    color: #fff;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    font-size:.8rem;
+    align-items:center;
+    padding-top:14px;
+}
+
+.nav .profile{
+    background: url(../image/profile-bg.png) no-repeat center;
+    -webkit-background-size: 80%;
+    background-size: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+.nav .profile .nickname, .nav .profile .points{
+    flex:1;
+}
+.nav .profile .nickname{
+    text-align: right;
+    -webkit-transform: rotate(-4deg);
+    -moz-transform: rotate(-4deg);
+    -ms-transform: rotate(-4deg);
+    -o-transform: rotate(-4deg);
+    transform: rotate(-4deg);
+}
+.nav .profile .points{
+    text-align: left;
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+    -ms-transform: rotate(4deg);
+    -o-transform: rotate(4deg);
+    transform: rotate(4deg);
+}
+.nav .profile .avatar{
+    width:10%;
+    border: 3px solid #9d6bd7;
+    border-radius:3px;
+    position: relative;
+    top: -5px;
+}
+.nav .profile .avatar img{
+    width:100%;
+    border-radius:3px;
+}
+.btns{
+    display: flex;
+    justify-content: center;
+    width:80%;
+}
+.btns a{
+    font-size:.8rem;
+    text-align: center;
+    background: #d97f28;
+    color: #fff;
+    text-decoration: none;
+    padding: .2rem 1rem;
+    border-radius:1rem;
+    margin: .5rem;
+    box-shadow: 0px 2px 0px #821701;
+}
+.game-list1{
+    position: relative;
+}
+.game-list1 .item{
+    display: flex;
+    justify-content: center;
+}
+.game-list1 .item a img{
+    width:100%;
+}
+.game-list1 .item2{
+    display: flex;
+    align-items:center;
+}
+.game-list1 .item2 a{
+    display: block;
+    width:100%;
+}
+.game-list1 .item2 a img{
+    display: block;
+    width:80%;margin:0 auto;
+}
+.game-list1 .more{
+    position: absolute;
+    top: 4rem;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    display: block;
+    background: transparent;
+}
+.guodouAlert {
+    display: none;
+}
+.guodouAlert {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background: rgba(0,0,0,.5);
+}
+.guodouAlert img{
+    width: 86%;
+    left: 7%;
+    position: absolute;
+    top: 15%;
+}

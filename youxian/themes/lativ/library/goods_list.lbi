@@ -1,0 +1,125 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="goodList">
+<!-- {if $category > 0} -->
+<form name="compareForm" action="compare.php" method="post" onSubmit="return compareGoods(this);">
+  <!-- {/if} -->
+  <!-- {if $pager.display == 'list'} -->
+  <div class="itemList">
+    <!-- {foreach from=$goods_list item=goods} -->
+    <div class="item">
+      <p class="pic"> <span><a href="javascript:;" onClick="Compare.add({$goods.goods_id},'{$goods.goods_name|escape:"html"}','{$goods.type}')">{$lang.compare}</a></span><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" /></a> </p>
+      <div class="info">
+        <p class="name">
+          <!-- {if $goods.watermark_img} -->
+          <span class="watermark_small {$goods.watermark_img}">{$goods.watermark_img}</span>
+          <!-- {/if} -->
+          <a href="{$goods.url}" title="{$goods.name|escape:html}">
+          <!-- {if $goods.goods_style_name} -->
+          {$goods.goods_style_name}
+          <!-- {else} -->
+          {$goods.goods_name}
+          <!-- {/if} -->
+          </a> </p>
+        <p class="brief">
+          <!-- {if $goods.goods_brief} 商品描述-->
+          {$lang.goods_brief}{$goods.goods_brief}
+          <!-- {/if} -->
+        </p>
+        <p class="price">
+          <!-- {if $show_marketprice} -->
+          {$lang.market_price}<span class="market-price">{$goods.market_price}</span><br />
+          <!-- {/if} -->
+          <!-- {if $goods.promote_price neq ""} -->
+          {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+          <!-- {else}-->
+          {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+          <!--{/if}-->
+        </p>
+        <p class="btnList"> <a href="javascript:collect({$goods.goods_id})"><img src="../images/collect.gif" alt="fav" /></a> <a href="javascript:addToCart({$goods.goods_id})"><img src="../images/add_cart.gif" alt="buy" /></a> </p>
+      </div>
+    </div>
+    <!-- {/foreach} -->
+  </div>
+  <!-- {elseif $pager.display == 'grid'} -->
+  <div class="itemGrid">
+    <!-- {foreach from=$goods_list item=goods} -->
+    <!-- {if $goods.goods_id} -->
+    <div class="item">
+      <p class="pic"> <a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" /></a> </p>
+      <p class="name">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a> </p>
+      <p class="price">
+        <!-- {if $show_marketprice} -->
+        {$lang.market_price}<span class="market-price">{$goods.market_price}</span><br />
+        <!-- {/if} -->
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+        <!-- {else}-->
+        {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+        <!--{/if}-->
+      </p>
+    </div>
+    <!-- {/if} -->
+    <!-- {/foreach} -->
+  </div>
+  <!-- {elseif $pager.display == 'text'} -->
+  <div class="itemText">
+    <!-- {foreach from=$goods_list item=goods} -->
+    <div class="item">
+      <p class="name">
+        <!-- {if $goods.watermark_img} -->
+        <span class="watermark_small {$goods.watermark_img}">{$goods.watermark_img}</span>
+        <!-- {/if} -->
+        <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a> </p>
+      <p class="brief">
+        <!-- {if $goods.goods_brief} 商品描述-->
+        {$lang.goods_brief}{$goods.goods_brief|truncate:50}
+        <!-- {/if} -->
+      </p>
+      <p class="price">
+        <!-- {if $show_marketprice} -->
+        {$lang.market_price}<span class="market-price">{$goods.market_price}</span>
+        <!-- {/if} -->
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+        <!-- {else}-->
+        {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+        <!--{/if}-->
+      </p>
+      <p class="btnList"> <a href="javascript:collect({$goods.goods_id})">{$lang.btn_collect}</a> | <a href="javascript:addToCart({$goods.goods_id})">{$lang.btn_buy}</a> | <a href="javascript:;" onClick="Compare.add({$goods.goods_id},'{$goods.goods_name|escape:"html"}','{$goods.type}')">{$lang.compare}</a> </p>
+    </div>
+    <!-- {/foreach} -->
+  </div>
+  <!-- {/if} -->
+  <!-- {if $category > 0} -->
+</form>
+<!-- {/if} -->
+</div>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+<script type="text/javascript">
+window.onload = function()
+{
+  Compare.init();
+  fixpng();
+}
+{foreach from=$lang.compare_js item=item key=key}
+{if $key neq 'button_compare'}
+var {$key} = "{$item}";
+{else}
+var button_compare = '';
+{/if}
+{/foreach}
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>

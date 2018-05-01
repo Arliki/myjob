@@ -1,0 +1,146 @@
+<!-- $Id: exchange_goods_info.htm 15544 2009-01-09 01:54:28Z zblikai $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,selectzone.js,validator.js"}
+<!-- start goods form -->
+<div class="tab-div">
+  <form  action="yxgame_awards.php" method="post" name="theForm" enctype="multipart/form-data"  onsubmit="return validate();">
+    <table width="90%" id="general-table">
+      <tr>
+        <td class="label">奖项名称：</td>
+        <td><input type="text" name="title" maxlength="60" value="{$game_award.title}" />{$lang.require_field}
+          <br/><span class="notice-span"></span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">中奖概率：</td>
+        <td><input type="number" name="rate" value="{$game_award.rate}" />{$lang.require_field}
+          <br/><span class="notice-span">每{$game_base_number}人参与有多少人中奖</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">中奖人数控制：</td>
+        <td>
+          <label><input type="radio" name="limit_num" {if $game_award.limit_num==1}checked{/if} value="1"/>限制数量</label>
+          <label><input type="radio" name="limit_num" {if $game_award.limit_num==0}checked{/if} value="0" />不限数量</label>
+          <br/><span class="notice-span">如果控制中奖人数,当有特定人数中奖后,该奖项不会再有人中奖；否则全凭概率中奖</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">图片：</td>
+        <td><input type="file" value="{$game_award.img}" name="img" />
+          <input type="hidden" name="award_img_url" value="{$game_award.img}"><br/>
+          <!--{if $game_award.img}-->
+          <img src="../{$game_award.img}" style="width:200px;" alt="">
+          <!--{/if}-->
+        </td>
+      </tr>
+
+      <tr>
+        <td class="label">奖品类型: </td>
+        <td>
+          <label><input type="radio" onchange="change_awards_type(this.value)" name="awards_type" {if $game_award.awards_type==0}checked{/if} value="0">积分奖励</label>
+          <label><input type="radio" onchange="change_awards_type(this.value)" name="awards_type" {if $game_award.awards_type==1}checked{/if} value="1">商城商品</label>
+        </td>
+      </tr>
+
+      <tr id="awards-integral">
+        <td class="label">奖励值</td>
+        <td>
+          <input type="number"  name="awards_value" value="{$game_award.awards_value}" /><span class="require-field">*</span>
+          <br/><span class="notice-span">奖品类型为积分时表示赠送积分数量，为商品时表示商品id</span>
+        </td>
+      </tr>
+
+      <tr id="goods-select" style="display:none;">
+        <td align="right" class="label">关键字:
+        <br/><br>奖励商品:
+        </td>
+        <td><input type="text" name="keywords" size="30" />
+          <input type="button" value="{$lang.button_search}" class="button" onclick="searchGoods()">
+        <br/><br>
+          <select name="goods_id">
+            {$goods.option}
+          </select>
+          {$lang.require_field}
+          <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticegoodsid">{$lang.notice_goodsid}</span></td>
+      </tr>
+    </table>
+    <div class="button-div">
+      <input type="submit" value="{$lang.button_submit}" class="button"  />
+      <input type="hidden" name="act" value="{$form_action}" />
+      <input type="hidden" name="gid" value="{$gid}" />
+      <input type="hidden" name="id" value="{$game_award.id}" />
+    </div>
+  </form>
+</div>
+<!-- end goods form -->
+<script language="JavaScript">
+
+    {literal}
+    onload = function() {}
+    function change_awards_type(value){
+        if(value==1){
+          document.getElementById('goods-select').style.display = 'table-row';
+          document.getElementById('awards-integral').style.display = 'none';
+        }else{
+            document.getElementById('awards-integral').style.display = 'table-row';
+            document.getElementById('goods-select').style.display = 'none';
+        }
+    }
+
+    function validate()
+    {
+//        var validator = new Validator('theForm');
+//        validator.isNullOption("goods_id", no_goods_id);
+//        validator.isNumber("exchange_integral", invalid_exchange_integral, true);
+        return validator.passed();
+    }
+
+    function searchGoods()
+    {
+        var filter = new Object;
+        filter.keyword = document.forms['theForm'].elements['keywords'].value;
+
+        Ajax.call('exchange_goods.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON')
+    }
+
+    function searchGoodsResponse(result)
+    {
+        var frm = document.forms['theForm'];
+        var sel = frm.elements['goods_id'];
+
+        if (result.error == 0)
+        {
+            /* 清除 options */
+            sel.length = 0;
+
+            /* 创建 options */
+            var goods = result.content;
+            if (goods)
+            {
+                for (i = 0; i < goods.length; i++)
+                {
+                    var opt = document.createElement("OPTION");
+                    opt.value = goods[i].goods_id;
+                    opt.text  = goods[i].goods_name;
+                    sel.options.add(opt);
+                }
+            }
+            else
+            {
+                var opt = document.createElement("OPTION");
+                opt.value = 0;
+                opt.text  = search_is_null;
+                sel.options.add(opt);
+            }
+        }
+
+        if (result.message.length > 0)
+        {
+            alert(result.message);
+        }
+    }
+
+    {/literal}
+</script>
+{include file="pagefooter.htm"}

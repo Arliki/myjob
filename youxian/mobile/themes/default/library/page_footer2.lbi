@@ -1,0 +1,16 @@
+<div class="art_footer">
+    <ul>
+        <li>
+            <a href="http://jiaoyi.mttxe.com/index.php?s=/index/product.html"><img src="__TPL__/out/icon-1.png"><br>产品</a>
+        </li>
+        <li>
+            <a href="http://jiaoyi.mttxe.com/index.php?s=/user/center.html"><img src="__TPL__/out/icon-2.png"><br>库存</a>
+        </li>
+        <li>
+            <a href="http://jiaoyi.mttxe.com/index.php?s=/index/notice.html"><img src="__TPL__/out/icon-3.png"><br>公告</a>
+        </li>
+        <li>
+            <a href="http://jiaoyi.mttxe.com/index.php?s=/user/search.html"><img src="__TPL__/out/icon-4.png"><br>查询</a>
+        </li>
+    </ul>
+</div>

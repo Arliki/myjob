@@ -1,0 +1,20 @@
+
+<div class="con">
+  <div class="ect-bg">
+  <header class="ect-header ect-margin-tb ect-margin-lr text-center ect-bg icon-write"> <a href="javascript:history.go(-1)" class="pull-left ect-icon ect-icon1 ect-icon-history"></a> <span>{$title}</span> <a href="javascript:;" onClick="openMune()" class="pull-right ect-icon ect-icon1 ect-icon-mune"></a></header>
+  <nav class="ect-nav ect-nav-list" style="display:none;"> <!-- #BeginLibraryItem "/library/page_menu.lbi" --><!-- #EndLibraryItem --> </nav>
+</div>
+  <section class="ect-bg-colorf ect-padding-lr flow-done">
+  		<i class="glyphicon glyphicon-ok"></i>
+        {foreach from=$orders item=order}
+        <p class="ect-margin-tb">订单号：<b class="ect-color">{$order.order_sn}</b> 应付款：<b>{$order[total].amount_formated}</b></p>
+        {/foreach}
+      {if 0 && $pay_desc}
+      <p class="ect-margin-tb">{$lang.select_payment}: <b>{$order.pay_name}</b></p>
+      <p class="ect-margin-tb text-center" style="background-color: rgb(255, 240, 240);padding: 10px;">{$pay_desc}</p>
+      {/if}
+      <p style="text-align:center;">订单总金额：￥{$total_amount} 元</p>
+      <p class="ect-margin-tb text-center">{$pay_online}</p>
+       <p class="ect-margin-tb text-center">{$order_submit_back}</p>
+  </section>
+</div>

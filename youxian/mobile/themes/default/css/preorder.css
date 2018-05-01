@@ -1,0 +1,29 @@
+.bgimg{
+    position: fixed;
+    bottom:9%;
+    left: 0px;
+    width: 100%;
+    display:block;
+}
+button{
+    position: fixed;
+    width: 50%;
+    left: 25%;
+    background:#4cba00;
+    height: 36px;
+    border-radius: 20px;
+    bottom: 2%;
+    border: 0px;
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+button.go_pay{
+}
+button.is_join{
+    background: #ccc;
+    color: red;
+}
+button.show_bingo{
+    background:#06c1fb;
+}

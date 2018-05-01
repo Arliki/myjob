@@ -1,0 +1,673 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	border:none;
+	display: block;
+	width: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color:transparent;
+    -moz-tap-highlight-color: rgba(0,0,0,0);
+    -moz-tap-highlight-color:transparent;
+    -ms-tap-highlight-color: rgba(0,0,0,0);
+    -ms-tap-highlight-color:transparent;
+    -o-tap-highlight-color: rgba(0,0,0,0);
+    -o-tap-highlight-color:transparent;
+    tap-highlight-color: rgba(0,0,0,0);
+    tap-highlight-color:transparent;
+    outline:none;
+}
+body{
+	width: 100%;
+    min-width: 320px;
+    max-width: 1024px;
+	position: relative;
+	background-color: #fff;
+	margin: 0 auto;
+}
+a:active{
+     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+     -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+     -ms-tap-highlight-color: rgba(0, 0, 0, 0);
+     -o-tap-highlight-color: rgba(0, 0, 0, 0);
+     tap-highlight-color: rgba(0, 0, 0, 0);
+
+}
+/*.tops {
+    width: 100%;
+    background-color: #5d9d07;
+    position: fixed;
+    z-index: 10;
+    padding: 5px;
+    height: 40px;
+    box-sizing: border-box;
+    padding-left: 0;
+}
+.tops p{
+	float: left;
+}
+.tops .location{
+        padding: 5px;
+    padding-top: 10px;
+    margin-left: 1%;
+    border: 0;
+    border-radius: 2px;
+    width: 10%;
+    float: left;
+    !* line-height: 16px; *!
+    background: #5d9d07;
+    color: white;
+    outline: none;
+    text-align: right;
+}
+.tops .top1{
+	width: 2.5%;
+	height: 100%;
+	line-height: 100%;
+	position: relative;
+	margin-left: 2%;
+}
+.tops .top1 img{
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	margin-top: -25%;
+}
+.tops .top2{
+	width: 75%;
+    background-color: #96bf5e;
+    border-radius: 20px;
+    margin-left: 6%;
+    position: relative;
+    overflow: hidden;
+}
+.tops .top2 img{
+	position: absolute;
+	left: 4%;
+	top: 50%;
+	width:5%;
+	top: 25%;
+}
+.tops .top2 #find{
+	width: 88%;
+    height: 100%;
+    float: right;
+    background-color: #96bf5e;
+    border: none;
+    outline: none;
+    height: 30px;
+    color: #fff;
+    font-family: "Microsoft Yahei";
+}
+span.location-down {
+   float: left;
+    width: 3%;
+    margin-top: 2%;
+}
+span.location-down img{
+	    width: 100%;
+    padding-top: 45%;
+}*/
+::-webkit-input-placeholder { 
+    color:white;
+    text-align: right;
+}
+.banner{
+	width: 100%;
+	position: relative;
+}
+.banner .banner-box{
+	width: 100%;
+	position: relative;
+}
+.banner .banner-inner{
+	width: 100%;
+	position: relative;
+}
+.banner .swiper-wrapper{
+	width: 100%;
+	position: relative;
+}
+.banner .swiper-wrapper img{
+	width: 100%;
+	position: relative;
+    margin-top:40px;
+}
+.banner .swiper-pagination-bullet.swiper-pagination-bullet-active{
+	background-color: #8fcc2c;
+}
+.banner .swiper-pagination-bullet{
+	width: 6px;
+	height: 6px;
+}
+.randomAdvertisement{
+	width: 100%;
+	position: relative;
+}
+.randomAdvertisement a {
+    width: 100%;
+    float: left;
+    padding: 0px 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.randomAdvertisement a  img {
+    width: 100%;
+}
+.classification{
+	    float: left;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.classification .classification_box{
+    float: left;
+    width: 25%;
+}
+.classification .classification_box a {
+ float: left;
+    width: 100%;
+    height: 100%;
+    padding: 15%;
+    padding-top: 0;
+    box-sizing: border-box;
+}
+.classification_box img{
+	width: 100%;
+}
+/*讯罗快报*/
+.star{
+	    height: 45px;
+    border: 1px solid #fff6f6;
+    position: relative;
+    overflow: hidden;
+}
+.star ul{
+    list-style: none;
+    position: absolute;
+    left: 25%;
+    width: 75%;
+    line-height: 45px;
+}
+.star ul li{
+	float: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+.star ul li a{
+    color: #333;
+    font-size: 12px;
+    width: 90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+    overflow: hidden;
+}
+.xunluokuaibao{
+	      width: 100%;
+    float: left;
+    padding: 2% 0%;
+}
+.xunluokuaibao img{
+	float: left;
+    width: 80%;
+}
+p.xunluokuaibao_p1 {
+    position:absolute;
+    padding: 5% 2%;
+    float: left;
+    width: 25%;
+    border-right: 2px solid #ccc;
+    box-sizing:border-box;
+}
+p.xunluokuaibao_p1 img{
+    width:85%;
+}
+.xunluokuaibao_p2{
+	    font-size: 12px;
+    font-family: "Microsoft Yahei";
+    color: #000;
+    font-weight: bold;
+    width: 65%;
+    margin-left: 5%;
+    float: left;
+}
+/*疯抢/专场*/
+.Berserk{
+	 width: 100%;
+    background-color: #f4f4f4;
+    position: relative;
+    /* margin: 2% 0; */
+    margin-top: 2%;
+    margin-bottom: 2%;
+    overflow: hidden;
+    display: flex;
+}
+.Berserk a{
+	width: 100%;
+}
+.Berserk a img{
+	width: 100%;
+    display: block
+}
+.Berserk-left {
+    width: 39%;
+}
+.Berserk-left-bottom {
+    display: flex;
+}
+.Berserk-right {
+    width: 60%;
+}
+.Berserk-left-bottom a.adlist4 {
+    width: 55%;
+}
+.Berserk-left-bottom a{
+	width: 45%;
+}
+.playGames{
+	width: 280px;
+	height: 90px;
+	position: absolute;
+	top: 35px;
+	left: 50%;
+	margin-left: -140px;
+}
+.playGames img{
+	width: 100%;
+}
+.playGamesshuiguo{
+	width: 316px;
+	height: 206px;
+	position: absolute;
+	left: 50%;
+	margin-left: -158px;
+	top: 138px;
+}
+.playGamesshuiguo img{
+	width: 100%;
+}
+/*精品礼果*/
+.AdvertisingMap{
+	width: 100%;
+}
+.AdvertisingMap img{
+	width: 100%;
+}
+.FruitsVarieties{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+/*li.shop-list{
+    overflow: hidden;
+}*/
+.FruitsVarieties a{
+    color: grey;
+    font-family: "Droidsansfallback"
+}
+.FruitsVarieties li.li-more {
+  float: right;
+    width: 12px;
+    font-size: 12px;
+    margin-top: 4%;
+    margin-right:0;
+    background: rgba(0,0,0,0.1);
+    padding: 25px 10px;
+    border-radius: 15px;
+}
+.FruitsVarieties li.li-more a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.FruitsVarieties li.li-more img{
+   width: 20px;
+    position: relative;
+    left: -5px;
+    margin-top: 10px;
+}
+.FruitsVarieties_outer{
+	width: 100%;
+    list-style: none;
+	overflow: hidden;
+}
+.FruitsVarieties_outer li{
+        float: left;
+    margin-right: 10px;
+    width: 100px;
+}
+
+#newcontainer .FruitsVarieties_outer li {
+        float: left;
+        margin-right: 0px;
+    width: 33.33%;
+}#newcontainer .FruitsVarieties_box{
+    width: 100%;
+}
+
+.FruitsVarieties_box a{
+	display: block;
+	width: 100%;
+}
+.FruitsVarieties_box{
+	    width: 100%;
+    float: left;
+    position: relative;
+    padding: 3%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.FruitsVarieties_box .p1{
+	    width: 100%;
+    /* height: 223px; */
+    margin-top: 30%;
+}
+.FruitsVarieties_box .p1 img{
+	width: 100%;
+}
+.FruitsVarieties_box .p2{
+	text-align: center;
+    font-size: 13px;
+    font-family: "Microsoft Yahei";
+    color: #000;
+    height: 40px;
+    margin-top: 20px;
+}
+.FruitsVarieties_box .p2 a{
+	color: #000;
+}
+.FruitsVarieties_box .p3{
+	    text-align: center;
+    font-size: 16px;
+    font-family: "Microsoft Yahei";
+    color: #767474;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.FruitsVarieties_box .p3 span{
+	color: #fc4b4b;
+	font-weight: bold;
+}
+.FruitsVarieties_box .news1{
+	position: absolute;
+    width: 35px;
+    left: 7%;
+    top: 5%;
+    z-index: 5;
+}
+li.li-more.swiper-slide a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+li.li-more.swiper-slide {
+  width: 20px !important;
+    font-size: 14px;
+    margin: 10% 7%;
+    float: left;
+    background: rgba(0,0,0,0.4);
+    padding: 15px 5px;
+    border-radius: 16px;
+}
+li.li-more.swiper-slide img{
+    width: 20px;
+    margin-top: 10px;
+}
+.remaipaihang {
+  position: absolute;
+    left: 37%;
+    top: 44%;
+    width: 73px;
+    background: rgba(0,0,0,.5);
+    padding: 3px 9px;
+    font-size: 13px;
+    border-radius: 14px;
+    color: white;
+}
+.remaipaihang img{
+     position: absolute;
+    top: 3px;
+    width: 16px !important;
+    height: 16px;
+    right: 6px;
+}
+.gengduo {
+    position: absolute;
+    right: 8px;
+    bottom: 24px;
+    background: #b1df58;
+    font-size: 12px;
+    width: 30px;
+    text-align: center;
+    padding: 2px;
+    color: white;
+}
+p.xinpin,p.rexiao {
+   position: absolute;
+    top: 5px;
+    width: 32px;
+    height: 34px;
+    font-size: 12px;
+    background: #76B91C;
+    line-height: 32px;
+    text-align: center;
+    color: white;
+    border-radius: 0px 11px 7px 11px;
+}
+p.rexiao {
+    background: #F98703;
+}
+.AdvertisingMap.addnewcase {
+    border-top: 10px solid #efeaea;
+    position: relative;
+}
+.AdvertisingMap.addnewcase .catname{
+       position: absolute;
+    left: 43%;
+    top: 30%;
+    font-size: 13px;
+    color: #000;
+
+}
+.addnew.FruitsVarieties_outer li {
+    float: left;
+    margin-right: 0;
+    width: 100%;
+}
+.addnew .FruitsVarieties_box{
+        width: 100%;
+   border-bottom: 3px solid #f7eded;
+}
+
+.addnew .FruitsVarieties_box .p1 {
+    float: left;
+    width: 40%;
+    /* height: 223px; */
+    margin-top: 10%;
+}
+
+.addnew .FruitsVarieties_box .p2 {
+    font-size: 16px;
+    text-align: center;
+    float: left;
+    font-weight: normal;
+    color: #000;
+}
+.addnew .FruitsVarieties_box .p2 {
+    width: 60%;
+    margin-left: 0%;
+    float: left;
+    height: 25px;
+}
+.addnew p.p2-2 {
+     width: 60%;
+    float: left;
+    font-size: 12px;
+    text-align: center;
+    padding: 1% 0;
+    margin-bottom: 6%;
+}
+.addnew .FruitsVarieties_box .p3{
+    float: right;
+    width: 60%;
+}
+.addnew2  .FruitsVarieties_box {
+    width: 50%;
+   
+}
+.NaturalFast{
+	width: 100%;
+	position: relative;
+/*	margin-bottom: 65px;*/
+overflow: hidden;
+}
+.NaturalFast img{
+	width: 100%;
+}
+footer{
+  margin-bottom: 37px;
+    text-align: center;
+    padding: 4% 0;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    background: #F4F4F4;
+}
+footer a{
+    color: #5d5a5a;
+}
+footer p.footer-list1 span {
+    float: left;
+    width: 15%;
+    height: 20px;
+    border-right: 1px solid #ccc;
+}
+footer p.footer-list1 span:last-child{
+    border-right: none;
+}
+footer p.footer-list1 {
+  width: 100%;
+    overflow: hidden;
+    margin-left: 27%;
+    font-size: 12px;
+    padding-bottom: 1%;
+    color: grey;
+}
+footer p.footer-list2,p.footer-list3{
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    color: grey;
+}
+footer p.footer-list3 a{
+    overflow: hidden;
+    font-size: 14px;
+}
+.brand-footer{
+    font-size: .8rem;
+}
+.index-footer {
+        width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #ccc;
+    background: white;
+    z-index: 99999;
+    box-shadow: 1px -2px 9px #CCC;
+}
+.index-footer li {
+    width: 25%;
+    float: left;
+}
+.index-footer li a{
+display: block;
+    width: 100%;
+    padding: 5% 23%;
+    text-align: center;
+    box-sizing: border-box;
+    color: #ccc;
+}
+.index-footer li a.curr{
+    color: #5d9d07;
+}
+.index-footer li a img{
+	width: 40%;
+}
+.index-footer li a span{
+	float: left;
+	width: 100%;
+	font-size: 12px;
+}
+/*媒体查询更改样式*/
+
+/*适配大屏幕*/
+@media screen and (min-width:600px){
+    .tops {
+    width: 100%;
+    max-width: 1024px;
+    background-color: #5d9d07;
+    position: fixed;
+    z-index: 10;
+    padding: 1.5%;
+    height: 80px !important;
+    box-sizing: border-box;
+    padding-left: 0;
+}
+  .tops .location {
+      padding: 13px 0px;
+      font-size: 25px;
+  }
+   span.location-down {
+       width: 22px;
+    height: 20px;
+    display: inline-block;
+    margin: 8px 21px 2px 7px;
+}
+.tops .top2 #find {
+    height: 50px;
+}
+.banner .swiper-wrapper img{
+    width: 100%;
+    position: relative;
+    margin-top:80px;
+}
+.tops .top2 img {
+    width: 3%;
+}
+}
+ @media screen and (min-width:400px) and (max-width:600px){
+     .tops {
+    width: 100%;
+    background-color: #5d9d07;
+    position: fixed;
+    z-index: 10;
+    padding: 1.5%;
+    height: 45px;
+    box-sizing: border-box;
+    padding-left: 0;
+}
+
+  .tops .location {
+       padding: 10px 0px;
+    font-size: 15px;
+  }
+  span.location-down {
+      margin: 1.9% 3% 3% 1%;
+}
+.tops .top2 #find {
+    height: 33px;
+    color: #fff;
+}
+
+
+}

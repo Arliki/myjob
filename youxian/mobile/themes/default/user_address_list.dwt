@@ -1,0 +1,21 @@
+<!-- #BeginLibraryItem "/library/user_header.lbi" --><!-- #EndLibraryItem -->
+<style>
+  .address_list{  display: flex;  justify-content:space-between;  align-items: center;  }  .address_list .consignee_info{  flex:1;  padding:0 1em;  } .address_list i.fa{position: relative;font-size:1rem;}  .address_list .opt{  display: flex;  justify-content: space-around;  flex-direction: column;  }
+</style>
+<div class="flow-consignee-list ect-bg-colorf">
+  <section>
+    <ul id="J_ItemList">
+      <li class="ect-padding-tb checkout-add single_item "> </li>
+      <a href="javascript:;" style="text-align:center" class="get_more"></a>
+    </ul>
+  </section>
+</div>
+<div class="ect-padding-lr ect-padding-tb ect-margin-tb"> <a href="{:url('user/add_address')}" type="botton" class="btn btn-info ect-btn-info ect-colorf ect-bg">{$lang.add_address}</a> </div>
+</div>
+<!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem --> <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+<script type="text/javascript" src="__PUBLIC__/js/jquery.more.js"></script>
+<script src="__TPL__/dlsStatic/js/common.js"></script>
+<script src="__TPL__/js/choose_consignee.js"></script>
+<script type="text/javascript">
+get_asynclist('{:url("user/address_list")}' , '__TPL__/images/loader.gif');
+</script> 

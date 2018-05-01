@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="messageList">
+  <!--{foreach name=message_lists from=$msg_lists key=key item=msg}-->
+  <div class="list"><font class="userName">{$msg.user_name}<!-- {if $msg.user_name eq ''} -->{$lang.anonymous}<!-- {/if} --></font>  {$msg.msg_time} {$msg.msg_type}
+    <p> · <!-- {if $msg.id_value gt 0} -->{$lang.feed_user_comment}"<a href="{$msg.goods_url}" target="_blank" title="{$msg.goods_name}">{$msg.goods_name}</a>"<!-- {/if} --> <!-- {if $msg.comment_rank gt 0} --><img src="../images/stars{$msg.comment_rank}.gif" alt="{$msg.comment_rank}" /><!-- {/if} --> {$msg.msg_title}<br>{$msg.msg_content}</p>
+    <!-- {if $msg.re_content} -->
+    <p class="admin"> {$lang.shopman_reply}：{$msg.re_content} </p>
+    <!-- {/if} -->
+  </div>
+  <!--{/foreach}-->
+</div>
+<div class="blank5"></div>
+

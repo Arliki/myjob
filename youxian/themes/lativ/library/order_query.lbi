@@ -1,0 +1,30 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!--{if empty($order_query)}-->
+<!--订单查询-->
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>
+<div class="libDiv">
+  <p class="top"></p>
+  <h2>{$lang.order_query}</h2>
+  <ul class="contentDiv">
+    <form name="ecsOrderQuery">
+    <input name="order_sn" type="text" class="libInput" value="请输入您的订单号/快递号" onclick="this.select();"/>
+    <input type="button" class="bnt_order" onclick="orderQuery()" />
+    </form>
+    <div id="ECS_ORDER_QUERY" style="margin-top:8px;">
+      <!--{else}-->
+      <!--{if $order_query.user_id}-->
+<b>{$lang.order_number}：</b><a href="user.php?act=order_detail&order_id={$order_query.order_id}" class="f6">{$order_query.order_sn}</a><br>
+  <!--{else}-->
+<b>{$lang.order_number}：</b>{$order_query.order_sn}<br>
+  <!--{/if}-->
+<b>{$lang.order_status}：</b><br><font class="f1">{$order_query.order_status}</font><br>
+  <!--{if $order_query.invoice_no }-->
+<b>{$lang.consignment}：</b>{$order_query.invoice_no}<br>
+  <!--{/if}-->
+      {if $order_query.shipping_date}：{$lang.shipping_date} {$order_query.shipping_date}<br>
+  <!--{/if}-->
+  <!--{/if}-->
+    </div>
+  </ul>
+  <p class="bot"></p>
+</div>

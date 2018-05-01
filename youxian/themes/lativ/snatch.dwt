@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+
+<body>
+<div id="globalWrapper">
+  <div id="wrapper"><!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+    <!-- End #search-bar --><!-- TemplateBeginEditable name="通栏广告位" --><!-- TemplateEndEditable -->
+    <div id="container">
+      <div id="pageLeft">
+      <!-- TemplateBeginEditable name="主区域左侧" -->
+    <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/cart.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_related.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_fittings.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_article.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" --><!-- #EndLibraryItem -->
+	  <!-- TemplateEndEditable -->
+        <div  id="ECS_PRICE_LIST"><!-- #BeginLibraryItem "/Library/snatch_price.lbi" -->
+          <div class="titleDiv"><img src="images/snatch_price.gif" alt="best products" width="158" height="39" /></div>
+          <div class="content-div">
+            <ul>
+              <!--{foreach from=$price_list item=item}-->
+              <li>{$item.user_name}<br />
+                {$item.bid_price}</li>
+              <!--{/foreach}-->
+            </ul>
+            <br style="clear:both"/>
+          </div>
+        <!-- #EndLibraryItem --></div>
+        <div class="titleDiv">活动列表</div>
+        <div class="content-div" style="padding:10px;">
+          <ul>
+            <!--{foreach from=$snatch_list item=item}-->
+            <li><a href="{$item.url}">{$item.snatch_name}</a>&nbsp;&nbsp;
+                <!--{if $item.overtime }-->
+              ({$lang.end})
+              <!--{/if}-->
+            </li>
+            <!--{/foreach}-->
+          </ul>
+          <br style="clear:both"/>
+        </div>
+      </div>
+      <!-- End #pageLeft -->
+      <div id="pageIn">
+       <!-- #BeginLibraryItem "/library/ur_here.lbi" --> {$lang.ur_here} {$ur_here} <!-- #EndLibraryItem -->
+       <div class="globalTitle">{$lang.treasure_info}</div>
+        {insert_scripts files='lefttime.js'}
+        <!-- 包含倒计时js -->
+        <table border="0" cellpadding="3" cellspacing="1" width="100%">
+          <tr>
+            <td align="center"><a href="{$snatch_goods.url}"><img src="{$snatch_goods.goods_thumb}" border="0" alt="{$snatch_goods.goods_name|escape:html}" class="thumb" /></a></td>
+            <td><h3><a href="{$snatch_goods.url}"> {$snatch_goods.goods_name|escape:html} </a></h3>
+            <table width="100%" >
+              <tr>
+                <td>{$lang.shop_price}</td>
+                <td><span class="goods-price">{$snatch_goods.formated_shop_price}</span></td>
+              </tr>
+              <tr>
+                <td>专柜价格：</td>
+                <td><span class="goods-price">{$snatch_goods.formated_market_price}</span></td>
+              </tr>
+              <tr>
+                <td>{$lang.residual_time}</td>
+                <td><font color="red"><span class="goods-price" id="leftTime">{$lang.please_waiting}</span></font></td>
+              </tr>
+              <tr>
+                <td colspan="2">{$snatch_goods.desc|escape:html|nl2br}</td>
+              </tr>
+          </table></td>
+          </tr>
+        </table>
+        <div class="globalTitle">{$lang.activity_intro}</div>
+        <div class="content-div">{$snatch_goods.snatch_time}<br />
+          {$lang.price_extent}{$snatch_goods.formated_start_price} - {$snatch_goods.formated_end_price} <br />
+          {$lang.user_to_use_up}{$snatch_goods.cost_points} {$points_name}<br />
+          {$lang.snatch_victory_desc}<br />
+          <!--{if $snatch_goods.max_price neq 0}-->
+          {$lang.price_less_victory}{$snatch_goods.formated_max_price}，{$lang.price_than_victory}{$snatch_goods.formated_max_price}，{$lang.or_can}{$snatch_goods.formated_max_price}{$lang.shopping_product}。
+          <!--{else}-->
+          {$lang.victory_price_product}
+          <!--{/if}-->
+        </div>
+        <br style="clear:both"/>
+        
+        <!-- 如果没有活动，活动参与部分也不显示 -->
+        <div id="ECS_SNATCH"><!-- #BeginLibraryItem "/Library/snatch.lbi" -->
+          <!-- {if $myprice.is_end eq false} -->
+          <div class="titleDiv"><img src="images/snatch_bid.gif" alt="best products" width="158" height="39" /></div>
+          <div class="content-div">
+            <form action="javascript:bid()" method="post" name="formBid" id="formBid">
+              <table width="98%" border="0">
+                <tr>
+                  <td>{$lang.my_integral}</td>
+                  <td>{$myprice.pay_points}</td>
+                </tr>
+                <tr>
+                  <td>{$lang.bid}</td>
+                  <td><input type="hidden" name="snatch_id" value="{$id}" />
+                      <input name="price" type="text" id="price" /></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td><input type="submit" name="Submit" value="{$lang.me_bid}" /></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <div class="titleDiv"><img src="images/grey_arrow.gif" width="37" height="37" /> <strong>{$lang.me_now_bid}</strong></div>
+          <div class="content-div">
+            <ul>
+              <!--{foreach from=$myprice.bid_price item=item}-->
+              <li>{$item.price}
+                <!--{if $item.is_only}-->
+                ({$lang.only_price})
+                <!--{/if}-->
+              </li>
+              <!--{/foreach}-->
+            </ul>
+          </div>
+          <!-- {else} -->
+          <div class="titleDiv"><img src="images/grey_arrow.gif" width="37" height="37" style="vertical-align:middle"/> <strong>{$lang.view_snatch_result}</strong></div>
+          <!--{if $result}-->
+          <form action="Library/snatch.php" method="get" name="buy" id="buy">
+            <table width="98%" border="0">
+              <tr>
+                <td>{$lang.victory_user} </td>
+                <td>{$result.user_name}
+                  <input type="hidden" name="act" value="buy" />
+                    <input type="hidden" name="id" value="{$id}" />
+                    <!-- {if $result.order_count eq 0} -->
+                    <input type="submit" name="buy" value="{$lang.button_buy}" />
+                    <!--{/if}-->
+                </td>
+              </tr>
+              <tr>
+                <td>{$lang.price_bid}</td>
+                <td>{$result.formated_bid_price}</td>
+              </tr>
+              <tr>
+                <td>{$lang.bid_time}</td>
+                <td>{$result.bid_time}</td>
+              </tr>
+            </table>
+          </form>
+          <!--{else}-->
+          {$lang.not_victory_user}
+          <!--{/if}-->
+          <!-- {/if} -->
+        <!-- #EndLibraryItem --></div>
+      </div>
+      <!-- End #indexMiddle -->
+      <div class="clear"></div>
+    </div>
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --></div>
+  <!-- End #Wrapper -->
+  </div>
+<!-- End #globalWrapper -->
+<script type="text/javascript">
+var gmt_end_time = {$snatch_goods.gmt_end_time|default:0};
+var id = {$id};
+{foreach from=$lang.snatch_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    window.setInterval("newPrice(" + id + ")", 8000);
+    onload_leftTime();
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+</body>
+</html>

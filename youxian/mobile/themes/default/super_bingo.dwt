@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <script type="text/javascript" src="__TPL__/js/dot.js"></script>
+    <script type="text/javascript" src="__TPL__/js/jquery.js"></script>
+    <title>中奖名单</title>
+    <style type="text/css"> * { margin:0px; padding: 0px; } .gungong-box { position: absolute; top: 36%; height: 305px; width: 87%; padding-left:9%; line-height: 40px; overflow: hidden; color: white; } .gundong { position: absolute; top: 0px; overflow: hidden; width: 100%; } .gundong p{ height: 25px; line-height: 12px; font-size: 12px; width: 70%; overflow: hidden; margin-left: 14%; line-height: 25px; font-size: 14px; color:black; white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow: hidden; } .gundong p img{ float: left; width: 12px; height: 12px; } .gundong p span{ padding-left: 8px; } .gundong p i{ font-style: normal; } .bgimg{ position: fixed; bottom: 0; left: 0px; width: 100%; display: block;top:0px;height:100% } .laba { margin-top: 8px; } .btnbox { overflow: hidden; position: absolute; left: 10px; bottom:5%; width: 100%; height: 55px; } .btnbox .btn { position: absolute; width: 25%; height: 35px; border-radius: 5%; background: rgba(0, 0, 0, 0); } .btnbox .golocal { left: 17%; top: 8px; width: 30%; border-radius: 35%; } .btnbox .gomore { right: 24%; height: 28px; top: 28%; width: 24%; border-radius: 21%; } .weikaijiang { font-size: 20px !important; text-align: center; margin-top: 20%; margin-left: -10px; margin-left: 13% !important; }
+    @media screen and (width: 375px) { .gungong-box { top: 36%; width: 85%; padding-left: 8%; } .weikaijiang { font-size: 20px !important; text-align: center; margin-top: 10%; margin-left: -10px; margin-left: 11% !important; } }
+    @media screen and (min-width: 400px) { .gungong-box { top: 36%; width: 85%; padding-left: 11%; height: 340px;} .btnbox .golocal { top: 3px; height: 40px; } .weikaijiang { font-size: 20px !important; text-align: center; margin-top: 10%; margin-left: -10px; margin-left: 11% !important; } }
+    @media screen and (width: 320px) { .gungong-box { top: 37%; width: 92%; padding-left:27px; height: 250px} .gungong-box p { font-size: 12px !important; } .btnbox .golocal { top: 11px; } .weikaijiang { font-size: 20px !important; text-align: center; margin-top: 10%; margin-left: -10px; margin-left: 11% !important; } } </style>
+</head>
+<body>
+<img src="__TPL__/images/bg2.jpg" class="bgimg">
+<div class="gungong-box">
+    <div class="gundong">
+    </div>
+</div>
+<div class="btnbox">
+    <a href='{$own_order}' class="btn gomore"></a>
+    <a href='{$goto_index}' class="btn golocal"></a>
+</div>
+<input type="hidden" id="url" value="{$url}">
+<script type="text/template" charset="utf-8" id='gundong'>
+    {{for(var i=0; i
+    <it.length; i++){ }}
+    <p>
+        <img src="__TPL__/images/laba.png" class="laba">
+        <span>恭喜<i>{{=it[i].name}}</i>已抢到</span>
+    </p>
+    {{ } }}
+</script>
+<script type="text/javascript">
+    var gundongHtml = $("#gundong").html()
+    var idx = 0;
+    var url = $("#url").attr('value');
+    $.ajax({
+        type: "get",
+        url: url,
+        async: true,
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data['none']==1) {
+                $(".gundong").html("<p class='weikaijiang'>尚未开奖,请稍等</p>");
+                clearInterval(name1);
+            } else {
+                var zhongjiangdata = data.zhongjiang;
+                console.log(zhongjiangdata);
+                $('.gundong').html(doT.template(gundongHtml)(zhongjiangdata));
+            }
+        }
+    });
+    var name1 = "";
+    name1 = setInterval(function () {
+        idx++;
+        $(".gundong").animate({"top": -24 * idx}, 600, function () {
+            if (idx >= $(".gundong p").length - 6) {
+                idx = 0;
+                $(".gundong").css("top", 0);
+            }
+        });
+    }, 1500);
+
+</script>
+</body>
+</html>

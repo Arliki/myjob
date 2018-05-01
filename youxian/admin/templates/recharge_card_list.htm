@@ -1,0 +1,136 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+  <form action="javascript:searchCard()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    卡号<input name="card_num" type="text" id="card_num" size="9">
+    面值
+    <select name="price" id="price">
+      <option value="0">请选择</option>
+      {foreach from=$face_value item=fv}
+      <option value="{$fv.value}">{$fv.text}</option>
+      {/foreach}
+
+    </select>
+    投放状态
+    <select name="canuse" id="canuse">
+      <option value="-1">请选择</option>
+      <option value="0">未投放</option>
+      <option value="1">投放中</option>
+    </select>
+    使用状态
+    <select name="usestatus" id="usestatus">
+      <option value="-1">请选择</option>
+      <option value="0">未使用</option>
+      <option value="1">已使用</option>
+    </select>
+    异常
+    <select name="warning" id="warning">
+      <option value="-1">请选择</option>
+      <option value="0">无</option>
+      <option value="1">有异常</option>
+    </select>
+    <input type="submit" value="{$lang.button_search}" class="button" />
+    <!--{if $can_export_recharge_card}-->
+    <span style="float:right;padding: 4px 10px;border: 1px solid #5FA6B6;border-right: 2px solid #5FA6B6;border-bottom: 2px solid #5FA6B6;background: #FFF url(../images/icon_add.gif) no-repeat 3px center;color: #666;text-decoration: none;"><a onclick="exportCard()">卡密导出</a></span>
+    <!--{/if}-->
+  </form>
+
+</div>
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>ID</th>
+      <th>卡号</th>
+      <th>面值</th>
+      <th>重复使用</th>
+      <th>生成时间</th>
+      <th>使用时间</th>
+      <th>状态</th>
+      <th>异常</th>
+    </tr>
+    {foreach from=$card_list item=c}
+    <tr>
+      <td>{$c.id}</td>
+      <td>{$c.card_num}</td>
+      <td>{$c.price}</td>
+      <td>
+        {if $c.multiuse==1}是{else}否{/if}
+      </td>
+      <td>{$c.addtime}</td>
+      <td>{$c.usetime}</td>
+      <td>
+        <!--{if $c.usetime>0}-->
+        <span>已使用</span>
+        <!--{else}-->
+        <!--{if $c.canuse==1}-->
+        <span>正常</span> |
+        <a href="recharge_card.php?act=change_state&id={$c.id}&canuse=0" title="停用">停用</a>
+        <!--{else}-->
+        <span>未投放</span> |
+        <a href="recharge_card.php?act=change_state&id={$c.id}&canuse=1" title="投放">投放</a>
+        <!--{/if}-->
+        <!--{/if}-->
+      </td>
+      <td>
+        <!--{if $c.watchout==0}-->
+        <span>无</span>
+        <!--{else}-->
+        <a style="color:red;" href="recharge_card_log.php?act=list&card_id={$c.id}">查看</a>
+        <!--{/if}-->
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+  {literal}
+      function searchCard()
+      {
+          listTable.filter['card_num'] = Utils.trim(document.forms['searchForm'].elements['card_num'].value);
+          listTable.filter['price'] = Utils.trim(document.forms['searchForm'].elements['price'].value);
+          listTable.filter['canuse'] = Utils.trim(document.forms['searchForm'].elements['canuse'].value);
+          listTable.filter['usestatus'] = Utils.trim(document.forms['searchForm'].elements['usestatus'].value);
+          listTable.filter['warning'] = document.forms['searchForm'].elements['warning'].value;
+          listTable.filter['page'] = 1;
+          listTable.loadList();
+      }
+      function exportCard() {
+          var params = '&card_num='+Utils.trim(document.forms['searchForm'].elements['card_num'].value)+
+                  '&price='+Utils.trim(document.forms['searchForm'].elements['price'].value)+
+                  '&canuse='+Utils.trim(document.forms['searchForm'].elements['canuse'].value)+
+                  '&usestatus='+Utils.trim(document.forms['searchForm'].elements['usestatus'].value)+
+                  '&warning='+Utils.trim(document.forms['searchForm'].elements['warning'].value)+
+                  '&page='+listTable.filter.page;
+          location.href = 'recharge_card.php?act=export_card'+params;
+      }
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

@@ -1,0 +1,83 @@
+
+
+<!-- $Id: user_account_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<div class="main-div">
+  <form action="gys_out_account.php?act=insert" method="post" name="theForm" onsubmit="return validate()">
+    <table width="100%">
+      <tr>
+        <td class="label">账户余额:</td>
+        <td>{$gys_total_money}</td>
+      </tr>
+      <tr>
+        <td class="label">冻结金额:</td>
+        <td>{$frozen_money} <span style="padding-left:20px;color:#868686;">(审核中的提现申请总金额)</span></td>
+      </tr>
+      <tr>
+        <td class="label">可提现金额:</td>
+        <td>{$gys_can_use_money}</td>
+      </tr>
+      <tr>
+        <td class="label">金额：</td>
+        <td>
+          <input type="number" name="amount" step="0.01" min="10" /> <span class="require-field">* <span style="padding-left:20px;color:#868686;">(最低10元起)</span></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="label">说明：</td>
+        <td>
+          <textarea name="gys_note" cols="55" rows="3"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">&nbsp;</td>
+        <td>
+          <input type="submit" value="{$lang.button_submit}" class="button" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<script language="JavaScript">
+    <!--
+    {literal}
+    onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
+
+    /**
+     * 检查表单输入的数据
+     */
+    function validate()
+    {
+        validator = new Validator("theForm");
+
+        validator.required("amount",    deposit_amount_empty);
+        validator.isNumber("amount",    deposit_amount_error, true);
+
+        var deposit_amount = document['theForm'].elements['amount'].value;
+        if (deposit_amount.length > 0)
+        {
+            if (deposit_amount == 0 || deposit_amount < 0)
+            {
+                alert(deposit_amount_error);
+                return false;
+            }
+            if(deposit_amount<10){
+              alert('最低10元起提现');return false;
+            }
+        }
+        }
+
+        return validator.passed();
+    }
+
+    //-->
+    {/literal}
+</script>
+{include file="pagefooter.htm"}

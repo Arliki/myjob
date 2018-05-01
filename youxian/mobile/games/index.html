@@ -1,0 +1,169 @@
+﻿
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>小游戏</title>
+<meta name="keywords" content="讯罗小游戏" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<meta name=”format-detection” content=”telphone=no” /> 
+<meta content=”yes” name=”apple-mobile-web-app-capable” />
+<meta content=”black” name=”apple-mobile-web-app-status-bar-style” />
+<meta content=”telephone=no” name=”format-detection” />
+<meta name="baidu-site-verification" content="yu3S6qg3OZ" />
+<link rel="stylesheet" type="text/css" href="index/main.min.css?v=1020">
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+</head>
+<body>
+<div class="hide">
+</div>
+
+<section id="content" class="clearfix"></section>
+<script language=javascript>
+var Game = {
+	request:function(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) return unescape(r[2]); return null;
+	}
+}
+var games = new Array();
+var baseurl='';
+var i=0;
+
+games[i]=new Array();
+games[i].name = "火鸡来闹";
+// games[i].type= "动作游戏";
+// games[i].score=87;
+games[i].icon = "games/hjln/icon.png";
+games[i].ishot = true;
+games[i].src =baseurl+ "games/hjln";
+i++;
+games[i]=new Array();
+games[i].name = "古老的矿石";
+// games[i].type= "动作游戏";
+// games[i].score=87;
+games[i].icon = "games/gulaodekuangshi/icon.png";
+games[i].ishot = true;
+games[i].src =baseurl+ "games/gulaodekuangshi";
+i++;
+games[i]=new Array();
+games[i].name = "68小鸟";
+// games[i].type= "动作游戏";
+// games[i].score=87;
+games[i].icon = "games/68xn/icon.png";
+games[i].ishot = true;
+games[i].src =baseurl+ "games/68xn";
+i++;
+games[i]=new Array();
+games[i].name = "消消看";
+// games[i].type= "动作游戏";
+// games[i].score=87;
+games[i].icon = "games/xxk1000/icon.png";
+games[i].ishot = true;
+games[i].src =baseurl+ "games/xxk1000/";
+i++;
+
+
+games[i]=new Array();
+games[i].name = "喵咪瑜伽";
+// games[i].type= "动作游戏";
+// games[i].score=87;
+games[i].icon = "games/mmyj/icon.png";
+games[i].ishot = true;
+games[i].src =baseurl+ "games/mmyj";
+i++;
+
+
+
+games[i]=new Array();
+games[i].name = "算术题";
+// games[i].type= "动作游戏";
+// games[i].score=87;
+games[i].icon = "games/123sst/icon.png";
+games[i].ishot = true;
+games[i].src =baseurl+ "games/123sst";
+i++;
+
+
+games[i]=new Array();
+games[i].name = "滑你妹";
+// games[i].type= "动作游戏";
+// games[i].score=87;
+games[i].icon = "games/hnm/icon.png";
+games[i].ishot = true;
+games[i].src =baseurl+ "games/hnm";
+i++;
+
+
+
+var startpos=0;
+var endpos=0;
+
+function draw(){
+	var sr="";
+	
+	if(endpos!=games.length) endpos += 12;
+	if(endpos>games.length) endpos=games.length;
+	if (startpos == endpos) return ;
+	if (startpos != 0) sr = "";
+	
+	var content = document.getElementById("content");
+	
+	for(var i=startpos;i<endpos;i++){
+		var gtype=games[i].type;
+		if(!gtype)gtype="休闲竞技";
+		var score=games[i].score;
+		if(!score)score=60;		
+		sr +="<div class='game clearfix'><div class='game-logo'><a href='" + games[i].src + "' target='_blank'><img src='" + games[i].icon + "'></a></div><div class='game-info'><section><p class='title'>" + games[i].name + "</p><p class='des'>有" + (100000+parseInt(Math.random()*1000000)) + "人玩过</p></section><footer class='clearfix'><a href='" + games[i].src + "' target='_blank' class='btn-play'>开始游戏</a><div class='qr-wrap'><span class='qr'></span><div class='game-qr'><img src='http://s.jiathis.com/qrcode.php?url="+encodeURIComponent(games[i].src)+"'></div></div></footer></div></div>";
+
+	}
+	
+	startpos=endpos;
+	content.innerHTML=content.innerHTML + sr;
+	
+	// 
+
+}
+draw();
+</script>
+
+<style>
+#fix_footer {
+	-moz-box-shadow:0px 0px 11px #191919;
+	-webkit-box-shadow:0px 0px 11px #191919;
+	box-shadow:0px 0px 11px #191919;
+}
+#fix_footer_menu{
+	border-right:1px solid rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.1);
+	font-family: 黑体;
+}
+#fix_footer_menu_on {
+	border-right:1px solid rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.3);
+	font-family: 黑体;
+	background:#202020; /* Fallback color for old browsers */
+}
+#loading{
+	height: 34px;
+	line-height: 34px;
+	margin: 10px;
+	background-image: -webkit-gradient(linear,0 100%,0 0,color-stop(0.03,rgb(224,224,224)),color-stop(.31,rgb(226,226,226)),color-stop(1,rgb(236,236,236)));
+	background: -webkit-linear-gradient(bottom,rgb(224,224,224) 3%,rgb(226,226,226) 31%,rgb(236,236,236)) rgb(236,236,236);
+	border-radius: 3px;
+	text-align: center;
+        text-shadow: #fff 0 1px 0;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(34,34,34,0.31);
+	box-shadow: 0px 1px 2px 0px rgba(34,34,34,0.31);
+	font-size: 16px;
+	color: rgb(80,80,80);
+	-webkit-text-shadow: 1px 1px 0px rgba(12,3,7,.1);
+	display: block;
+}
+</style>
+
+
+
+</body>
+</html>

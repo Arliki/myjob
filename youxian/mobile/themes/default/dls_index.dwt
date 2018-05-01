@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>代理商中心</title>
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/amazeui.min.css">
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/dls_center.css">
+	</head>
+	<body>
+	<header>
+		<div class="top">
+			<!--<a href="{:url('user/index')}" class="am-icon am-icon-angle-left"> 返回</a>-->
+			<!--<a href="{:url('dls/profile')}" class="am-icon am-icon-gear"></a>-->
+		</div>
+		<div class="avatar">
+			<img src="{$dls.avatar_url}" alt="" width="100" height="100">
+			<span>{$dls.username}</span>
+		</div>
+		<!--<div class="boxs">-->
+			<!--<div class="box"><span class="num">{$dls.total_account}</span><span class="txt">累计销售</span></div>-->
+			<!--<div class="box flex-c-bd"><span class="num">{$dls.out_account}</span><span class="txt">累计提成</span></div>-->
+			<!--<div class="box"><span class="num">{$dls.team_num}</span><span class="txt">我的团队</span></div>-->
+		<!--</div>-->
+	</header>
+	<div class="main">
+		<div class="grid-title"><span class="am-icon am-icon-line-chart"></span> 我的业绩</div>
+		<div class="boxs grid-con">
+			<div class="box"><span class="num">{$total_sale}</span><span class="txt">累计销售</span></div>
+			<div class="box flex-c-bd"><span class="num">{$daijiesuan}</span><span class="txt">待结算</span></div>
+			<div class="box"><span class="num">{$yitixian}</span><span class="txt">已提现</span></div>
+		</div>
+		<div class="grid-title"><span class="am-icon am-icon-users"></span> 我的团队</div>
+		<div class="boxs grid-con">
+			<div class="box"><span class="num">{$team_num}</span><span class="txt">总人数</span></div>
+			<a href="{:url('dls/jjr_list')}" class="box flex-c-bd"><span class="num">{$jjr_num}</span><span class="txt">经纪人</span></a>
+			<div class="box"><span class="num">{$reguser_num}</span><span class="txt">注册会员</span></div>
+		</div>
+		<!--<ul>-->
+			<!--<li>-->
+				<!--<span class="am-icon am-icon-users"> 团队管理</span>-->
+				<!--<span class="am-icon am-icon-angle-right"></span>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<span class="am-icon am-icon-money"> 资金管理</span>-->
+				<!--<span class="am-icon am-icon-angle-right"></span>-->
+			<!--</li>-->
+		<!--</ul>-->
+		<ul>
+			<li class="pay_deposit" data-paied="{$dls.dls_deposit}">
+				<span class="am-icon am-icon-heart"> 诚意金</span>
+				<!--{if $dls.dls_deposit}-->
+				<span>已缴纳</span>
+				<!--{else}-->
+				<span> 未缴纳 <i class="am-icon am-icon-angle-right"></i></span>
+				<!--{/if}-->
+			</li>
+			<li class="tg_qrcode">
+				<span class="am-icon am-icon-qrcode"> 推广二维码</span>
+				<span class="am-icon am-icon-angle-right"></span>
+			</li>
+			<li url="{:url('dls/jiesuan_list')}">
+				<span class="am-icon am-icon-rmb"> 结算记录</span>
+				<span class="am-icon am-icon-angle-right"></span>
+			</li>
+			<li url="{:url('dls/change_password')}">
+				<span class="am-icon am-icon-lock"> 修改密码</span>
+				<span class="am-icon am-icon-angle-right"></span>
+			</li>
+			<li url="tel:400-11717-01">
+				<span class="am-icon am-icon-phone"> 联系客服</span>
+				<span class="flex-grow-item" style="text-align: right;padding-right:1rem;">400-11717-01</span>
+				<span class="am-icon am-icon-angle-right"></span>
+			</li>
+		</ul>
+		<!--<div class="am-padding">-->
+			<!--<a href="{:url('dls/logout')}" class="am-btn am-btn-block am-btn-danger">退出登录</a>-->
+		<!--</div>-->
+	</div>
+	<style>
+		.body-model{
+			position: fixed;
+			top:0;bottom:0;width:100%;
+			z-index: 999;
+			display: none;
+		}
+		.body-model .wmask{
+			position: absolute;
+			top:0;bottom:0;width:100%;
+			background:#000;
+			opacity: .36;
+			z-index: 999;
+		}
+		.body-model .tg-qrcode-div{
+			display: flex;
+			flex-direction:column;
+			align-items:center;
+			position: absolute;
+			top: 25%;
+			left: 50%;
+			margin-left: -40%;
+			width: 80%;
+			z-index: 1000;
+		}
+		#qrcode-img{
+			width: 80%;
+		}
+	</style>
+	<div class="body-model">
+		<div class="wmask"></div>
+		<div class="tg-qrcode-div">
+			<img id="qrcode-img" src="{:url('dls/sence_qrcode')}" alt="">
+			<!--<span>我的推广二维码</span>-->
+		</div>
+	</div>
+	<script src="__TPL__/dlsStatic/js/jquery-1.10.2.min.js"></script>
+	<script src="__TPL__/dlsStatic/js/common.js"></script>
+		<script>
+			$(function(){
+			    $('.pay_deposit').on('click', function(){
+			        if($(this).data('paied') > 0){
+			            $.walert('已缴纳');
+			            return;
+					}
+                    $.get("{:url('dls/pay_deposit')}","",function(res){
+                        if(res.success){
+                            $('body').append('<div style="display:none;">'+res.js+'</div>');
+                        }else{
+                            $.walert(res.info);
+                        }
+                    },'json')
+				})
+				$('ul li').on('click',function(){
+				    var jurl = $(this).attr('url');
+				    if(undefined !== jurl){
+				        window.location.href = jurl;
+					}
+				})
+				$('.tg_qrcode').on('click',function(){
+				    $.get("{:url('dls/sence_qrcode')}","",function(res){
+				        if(res.success){
+							$('#qrcode-img').attr('src',res.imgurl);
+                            $('.body-model').fadeIn();
+						}else{
+				            $.walert(res.info);
+						}
+					},'json')
+
+				})
+				$('.body-model .wmask').on('click',function(){
+				    $('.body-model').fadeOut();
+				})
+			})
+		</script>
+	</body>
+</html>

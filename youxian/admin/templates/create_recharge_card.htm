@@ -1,0 +1,96 @@
+<!-- $Id: agency_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="validator.js,../js/transport.js"}
+<div class="main-div">
+  <form method="post" action="recharge_card.php" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+    <table cellspacing="1" cellpadding="3" width="100%">
+      <tr>
+        <td class="label">面值：</td>
+        <td>
+          <select name="price" id="card-price">
+            <!--{foreach from=$face_value item=fv}-->
+            <option value="{$fv.value}">{$fv.text}</option>
+            <!--{/foreach}-->
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">生成数量: </td>
+        <td><input type="number" name="number" /><span class="require-field">*</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">状态: </td>
+        <td>
+          <label><input type="radio" name="canuse" value="1">投放使用</label>
+          <label><input type="radio" name="canuse" checked value="0">暂不投放</label>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">多次使用: </td>
+        <td>
+          <label><input type="radio" name="multiuse" checked value="1">允许</label>
+          <label><input type="radio" name="multiuse" value="0">不允许</label>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">密码类型: </td>
+        <td>
+          <label><input type="radio" name="onlyNum" value="1">纯数字</label>
+          <label><input type="radio" name="onlyNum" checked value="0">字母+数字</label>
+        </td>
+      </tr>
+    </table>
+    <table align="center">
+      <tr>
+        <td colspan="2" align="center">
+          <input type="button" class="button" name="submitBtn" onclick="validate()" value="{$lang.button_submit}" />
+          <input type="hidden" name="act" value="{$form_action}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+{literal}
+<script language="JavaScript">
+    <!--
+    /**
+     * 检查表单输入的数据
+     */
+    function validate()
+    {
+        validator = new Validator("theForm");
+        validator.required("price",  '请选择面值');
+        validator.required("number",  '请填写生成数量');
+        if(validator.passed()){
+            var frm      = document.forms['theForm'];
+            var price = frm.elements['price'].value;
+            var number = frm.elements['number'].value;
+            var canuse = frm.elements['canuse'].value;
+            var onlyNum = frm.elements['onlyNum'].value;
+
+            frm.elements['submitBtn'].disabled = true;
+            frm.elements['submitBtn'].value = '生成中,请稍等...';
+
+            Ajax.call( 'recharge_card.php?act=insert', 'price=' + price+'&number='+number+'&canuse='+canuse+'&onlyNum='+onlyNum, act_callback , 'POST', 'JSON', true, true );
+        }
+
+//        return validator.passed();
+    }
+    function act_callback(res) {
+        alert(res.info);
+        if(res.status==1){
+            window.location.href = res.url;
+        }else{
+            var frm      = document.forms['theForm'];
+            frm.elements['submitBtn'].disabled = false;
+            frm.elements['submitBtn'].value = '确定';
+        }
+    }
+    //-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

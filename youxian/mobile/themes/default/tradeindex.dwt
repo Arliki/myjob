@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>{$page_title}</title>
+    <link rel="stylesheet" href="__TPL__/out/home.css">
+    <link rel="stylesheet" href="__TPL__/out/idangerous.swiper.css">
+
+</head>
+<body class="trade_wrapper">
+<div class="art_top">
+    <div class="art_t_l fl"><span>&nbsp;<!-- <em></em> --></span></div>
+    <div class="art_t_c fl"><span>艺术品应价转让</span></div>
+    <div class="art_t_r fr">
+        <!--<img src="images/arrownav.png" />-->
+        &nbsp;<a href="http://jiaoyi.mttxe.com/index.php?s=/pick/subgoodslist.html">提货</a>
+    </div>
+</div>
+<div class="art_banner">
+    <img src="__TPL__/out/58a9896c2ba36.png">
+</div>
+
+<div class="art_pro_list">
+    <div class="tabs">
+        <ul>
+            <li class="active"><a href="javascript:;">产品列表</a></li>
+            <!--<li><a href="javascript:;" >消费品</a></li>-->
+        </ul>
+    </div>
+    <div id="tabs-container" class="swiper-container margin-swiper">
+        <div class="swiper-wrapper" style="width: 1024px; height: 542px;">
+            <div class="swiper-slide swiper-slide-visible swiper-slide-active" style="width: 1024px; height: 542px;">
+                <div class="content-slide">
+                    <ul id="product_list">
+                                                        <li>
+                                    <a href="http://jiaoyi.mttxe.com/index.php?s=/user/producttrade/code/1003.html">
+                                        <div class="slide_list">
+                                            <div class="slist_c fl">
+                                                <p><b>黄格胜水墨山涧</b></p>
+                                                <p>商品代码：1003</p>
+                                            </div>
+                                            <div class="slist_r fr">
+                                                <p>当前价格</p>
+                                                <p class="plus red">188.50</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </a>
+                                    <div class="slist_type type_bg_red"><span>流通期</span></div>
+                                </li>                                <li>
+                                    <a href="http://jiaoyi.mttxe.com/index.php?s=/user/producttrade/code/1002.html">
+                                        <div class="slide_list">
+                                            <div class="slist_c fl">
+                                                <p><b>赵红斌天使童年</b></p>
+                                                <p>商品代码：1002</p>
+                                            </div>
+                                            <div class="slist_r fr">
+                                                <p>当前价格</p>
+                                                <p class="plus red">364.00</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </a>
+                                    <div class="slist_type type_bg_red"><span>流通期</span></div>
+                                </li>                                <li>
+                                    <a href="http://jiaoyi.mttxe.com/index.php?s=/user/producttrade/code/1001.html">
+                                        <div class="slide_list">
+                                            <div class="slist_c fl">
+                                                <p><b>常青鎏金岁月</b></p>
+                                                <p>商品代码：1001</p>
+                                            </div>
+                                            <div class="slist_r fr">
+                                                <p>当前价格</p>
+                                                <p class="plus red">74.20</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </a>
+                                    <div class="slist_type type_bg_red"><span>流通期</span></div>
+                                </li>  
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #BeginLibraryItem "/library/page_footer2.lbi" --><!-- #EndLibraryItem -->
+
+<script type="text/javascript" src="__TPL__/out/jquery.js"></script>
+<script type="text/javascript" src="__TPL__/out/idangerous.swiper.min.js"></script>
+<script type="text/javascript">
+    function getProducts() {
+        var url = '/index.php?s=/index/product/act/list.html';
+        $.get(url,function(data){
+            if(data.status == 1) {
+                var list = data.list;
+                var html = '';
+                
+                for(x in list) {
+                    var product = list[x];
+                    if(product.status == 3) {
+                        var url = '/index.php?s=/index/producttrade/code/url_replace.html';
+                        url = url.replace('url_replace',product.code,url);
+                        if(product.quota.price == 0) {
+                            product.quota.price = product.quota.close;
+                        } 
+                        html += '<li>'+
+                                    '<a href="'+url+'">'+
+                                        '<div class="slide_list">'+
+                                            '<div class="slist_c fl">'+
+                                                '<p><b>'+product.name+'</b></p>'+
+                                                '<p>商品代码：'+product.code+'</p>'+
+                                            '</div>'+
+                                            '<div class="slist_r fr">'+
+                                                '<p>当前价格</p>'+
+                                                '<p class="plus red">'+product.quota.price+'</p>'+
+                                            '</div>'+
+                                            '<div class="clear"></div>'+
+                                        '</div>'+
+                                    '</a>'+
+                                    '<div class="slist_type type_bg_red"><span>'+product.status_text+'</span></div>'+
+                                '</li>';
+                    } else {
+                        var url = '/index.php?s=/index/productdetail/code/url_replace.html';
+                        url = url.replace('url_replace',product.code,url);
+                        html += '<li>'+
+                                    '<a href="'+url+'">'+
+                                        '<div class="slide_list">'+
+                                            '<div class="slist_c fl">'+
+                                                '<p><b>'+product.name+'</b></p>'+
+                                                '<p>商品代码：'+product.code+'</p>'+
+                                                '<p>截止时间：'+product.sub_end_time+'</p>'+
+                                            '</div>'+
+                                            '<div class="slist_r fr">'+
+                                                '<p>认购价格</p>'+
+                                                '<p class="plus red">'+product.issue_price+'</p>'+
+                                            '</div>'+
+                                            '<div class="clear"></div>'+
+                                        '</div>'+
+                                    '</a>'+
+                                    '<div class="slist_type type_bg_red"><span>'+product.status_text+'</span></div>'+
+                                '</li>';
+                    }  
+                }
+                $("#product_list").html(html);
+            }
+        },'json');
+    }
+    // getProducts();
+    // setInterval(function(){getProducts()},8000);
+</script>
+<script type="text/javascript">
+    $(function(){
+        var tabsSwiper = new Swiper('#tabs-container',{
+            speed:500,
+            onSlideChangeStart: function(){
+                $(".tabs .active").removeClass('active')
+                $(".tabs li").eq(tabsSwiper.activeIndex).addClass('active')
+            }
+        })
+        $(".tabs li").on('touchstart mousedown',function(e){
+            e.preventDefault()
+            $(".tabs .active").removeClass('active')
+            $(this).addClass('active')
+            tabsSwiper.swipeTo( $(this).index() )
+        })
+        $(".tabs li").click(function(e){
+            e.preventDefault()
+        })
+    });
+</script>
+
+</body>
+</html>

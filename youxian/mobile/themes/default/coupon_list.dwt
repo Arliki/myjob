@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>{$page_title}</title>
+		<!--<link rel="stylesheet" href="__TPL__/dlsStatic/css/amazeui.min.css" />-->
+		<link rel="stylesheet" href="__TPL__/newTheme/font/iconfont.css" />
+		<link rel="stylesheet" href="__TPL__/newTheme/css/footer.css" />
+		<style>
+			body{
+				font-size:1rem;
+				line-height:normal;
+				background:#f1f1f1;
+			}
+			html,body,h1,ul,li,ol{
+				padding:0;margin:0;
+			}
+			ul,ol,li{
+				list-style: none;
+			}
+			.tab{
+				display: flex;
+				justify-content: space-around;
+			}
+			.tab a{
+				text-decoration: none;
+				color:#686868;
+				text-align: center;
+				padding: .5rem 0;
+				flex:1;
+				border-bottom:2px solid #d8d8d8;
+			}
+			.tab a.on{
+				color:#5d9d07;
+				border-bottom:2px solid #5d9d07;
+			}
+			.coupon{
+				margin: 1rem;
+				display: flex;
+				border-radius: 6px;
+				border-left:8px solid #5d9d07;
+				background: #ffffff;
+				justify-content: space-between;
+				font-size:1rem;
+			}
+			.coupon .price{
+				display: flex;
+				flex-direction: column;
+				color: #5d9d07;
+				justify-content: space-around;
+				padding: 6px 1rem;
+				margin-top: 8px;
+				margin-bottom: 8px;
+				border-left: 8px dotted #ffffff;
+				margin-left: -4px;
+				flex-basis:88px;
+			}
+			.coupon .price .price-val .num{
+				font-size: 2.4rem;
+				font-weight:bold;
+			}
+			.coupon .price .price-if{
+				font-size: .8rem;
+			}
+			.coupon .intro{
+				font-size:.7rem;
+				color:#a8a8a8;
+				display: flex;
+				flex-direction:column;
+				justify-content: space-around;
+				padding: 0 1rem;
+				flex:1;
+				border-left: 4px dotted #dadada;
+				border-right: 2px dashed #d8d8d8;
+				position: relative;
+			}
+			.coupon .intro .intro-tit{
+				font-size: .8rem;
+				color:#363636;
+			}
+			.coupon .intro .card-hole{
+				width:14px;
+				height:14px;
+				background: #f1f1f1;
+				position: absolute;
+				left:-9px;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+			}
+			.coupon .intro .card-hole.top{
+				top:-7px;
+			}
+			.coupon .intro .card-hole.bottom{
+				bottom:-7px;
+			}
+			.coupon .get-coupon{
+				display: flex;
+				align-items:center;
+			}
+			.coupon .get-coupon span{
+				display: block;
+				font-size:.8rem;
+				width:1rem;
+				writing-mode: lr-tb;
+				padding: .3rem;
+			}
+			/*.coupon_list>a{
+				display: block;
+				text-align: center;
+				padding: .5rem 0;
+			}
+			.coupon_list img.coupon_img{
+				width:80%;margin:0 auto;
+			}
+			*/
+			.gray {
+				-webkit-filter: grayscale(100%);
+				-moz-filter: grayscale(100%);
+				-ms-filter: grayscale(100%);
+				-o-filter: grayscale(100%);
+
+				filter: grayscale(100%);
+
+				filter: gray;
+			}
+			.coupon_intro {
+				margin: 1rem;
+				font-size: 1rem;
+				line-height:2rem;
+			}
+
+			.coupon_intro ol,.coupon_intro ol li{
+				list-style: decimal;
+				margin-left:1rem;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="tab">
+		<a {if !$type} class="on" {/if} href="{:url('Coupon/coupon_list')}">未使用</a>
+		<!--<a {if $type=='unuse'} class="on" {/if} href="{:url('Coupon/coupon_list',array('type'=>'unuse'))}">未使用</a>-->
+		<a {if $type=='exceed'} class="on" {/if} href="{:url('Coupon/coupon_list',array('type'=>'exceed'))}">已过期</a>
+	</div>
+	<div class="main">
+		{if $coupon_list}
+		<div class="coupon_list">
+			{foreach from=$coupon_list name=coupon_list item=coupon}
+			<div class="coupon {if $coupon.type=='exceed'}gray{/if}" data-type="{$coupon.type}" data-url="{$coupon.get_url}">
+				<div class="price">
+					<div class="price-val">
+						<span class="unit">￥</span><span class="num">{$coupon.coupon_val}</span>
+					</div>
+					<div class="price-if">
+						满{$coupon.min_money}元可用
+					</div>
+				</div>
+				<div class="intro">
+					<span class="card-hole top"></span>
+					<span class="card-hole bottom"></span>
+					<div class="intro-tit">{$coupon.coupon_title}</div>
+					<div class="intro-con">全场商品可用</div>
+					<!--{$goods.add_time|date_format:"%Y-%m-%d %H:%M:%S"}-->
+					<div class="intro-date">使用期限： {$coupon.use_start_date|date_format}-{$coupon.use_end_date}</div>
+				</div>
+				<div class="get-coupon">
+					<span>{$coupon.opt_text}</span>
+				</div>
+
+			</div>
+			{/foreach}
+		</div>
+		<!--<div class="coupon_intro">-->
+			<!--<ol>-->
+				<!--<li>每个ID只能领取一张。</li>-->
+				<!--<li>优惠券不能进行兑现、出售、转让或其他用途。</li>-->
+				<!--<li>订单未支付时取消订单，返还相应的优惠券。</li>-->
+				<!--<li>如果订单确认支付后申请退款、或退货时优惠劵不返还。</li>-->
+				<!--<li>最终解释权归讯罗优鲜</li>-->
+			<!--</ol>-->
+		<!--</div>-->
+		{else}
+		<div style="margin:2rem auto;text-align:center;">
+			<span>暂无数据</span>
+		</div>
+		{/if}
+	</div>
+	<!-- #BeginLibraryItem "/library/newTheme_footer_nav.lbi" --><!-- #EndLibraryItem -->
+	<script src="__TPL__/dlsStatic/js/jquery-1.10.2.min.js"></script>
+	<script src="__TPL__/dlsStatic/js/common.js"></script>
+		<script>
+			$(function(){
+				$('.coupon').on('click',function () {
+				    var _this = $(this);
+				    if(_this.hasClass('gray')){
+				        return;
+					}
+				    var url = $(this).data('url');
+				    if($(this).data('type') == 'unuse'){
+				        window.location.href = url;
+					}
+					$.get(url,'',function(res){
+					    console.log(res);
+					    if(res.no_login){
+                            $.walert(res.info);
+                            setTimeout(function(){
+                                window.location.href = "{:url('user/login')}";
+							},2000);
+							return;
+					    }
+						if(res.send_out || res.have_get || res.error==0){
+					        $.walert(res.info);
+					        _this.addClass('gray');
+					        setTimeout(function(){
+					            window.location.reload();
+							}, 2000)
+					        return;
+						}
+                        $.walert(res.info);return;
+					},'JSON')
+                })
+			})
+		</script>
+	</body>
+</html>

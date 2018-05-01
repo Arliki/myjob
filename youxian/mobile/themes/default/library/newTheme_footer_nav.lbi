@@ -1,0 +1,29 @@
+<div class="index-footer" >
+  <ul class="index-footer-nav">
+    <li>
+      <a href="{:url('index/index')}" {if $currNav=='Index'} class="curr" {/if} >
+        <i class="new-theme-iconfont icon-shouye"></i>
+        <span>首页</span>
+      </a>
+    </li>
+    <li>
+      <a href="{:url('category/top_all')}"  {if $currNav=='Category'}class="curr"{/if}>
+        <i class="new-theme-iconfont icon-apps"></i>
+        <span>分类</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="{:url('flow/cart')}"  {if $currNav=='Flow'}class="curr"{/if}>
+        <i class="new-theme-iconfont icon-gouwuche"></i>
+        <span>购物车</span>
+      </a>
+    </li>
+    <li>
+      <a href="{:url('user/index')}"  {if $currNav=='User'}class="curr"{/if}>
+        <i class="new-theme-iconfont icon-my"></i>
+        <span>我的</span>
+      </a>
+    </li>
+  </ul>
+</div>

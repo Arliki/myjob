@@ -1,0 +1,53 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="ur_here">{$lang.ur_here} {$ur_here}
+  <form method="GET" class="goodsForm" name="listform">
+    <select name="sort" style="border:1px solid #ccc;">
+      
+            {html_options options=$lang.exchange_sort selected=$pager.sort}
+            
+    </select>
+    <select name="order" style="border:1px solid #ccc;">
+      
+            {html_options options=$lang.order selected=$pager.order}
+            
+    </select>
+    <input type="image" name="imageField" src="images/btn_go.gif" alt="go" align="absMiddle"/>
+    <input type="hidden" name="category" value="{$category}" />
+    <input type="hidden" name="display" value="{$pager.display}" id="display" />
+    <input type="hidden" name="integral_min" value="{$integral_min}" />
+    <input type="hidden" name="integral_max" value="{$integral_max}" />
+    <input type="hidden" name="page" value="{$pager.page}" />
+  </form>
+</div>
+<form name="compareForm" method="post" style="padding:15px;">
+  <div class="exchange">
+    <!--{foreach from=$goods_list item=goods}-->
+    <!-- {if $goods.goods_id} -->
+    <ul>
+      <li class="ex_1"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" /></a></li>
+      <li class="ex_2"> <a href="{$goods.url}" class="f6">
+        <!-- {if $goods.goods_style_name} -->
+        {$goods.goods_style_name}<br />
+        <!-- {else} -->
+        {$goods.goods_name}<br />
+        <!-- {/if} -->
+        </a>
+        <!-- {if $goods.goods_brief} -->
+        {$lang.goods_brief}{$goods.goods_brief}<br />
+        <!-- {/if} -->
+      </li>
+      <li class="ex_3"> {$lang.exchange_integral}<font class="shop_s">{$goods.exchange_integral}</font> </li>
+    </ul>
+    <!--{/if}-->
+    <!--{/foreach}-->
+  </div>
+</form>
+<div class="blank5"></div>
+<script type="text/javascript">
+  window.onload = function()
+  {
+    Compare.init();
+    fixpng();
+  }
+  var button_compare = '';
+</script>

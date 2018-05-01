@@ -1,0 +1,155 @@
+.msg{
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(0,0,0,.5);
+    z-index: 99999;
+    display: none;
+}
+.msg .textbox{
+    height: 92%;
+    overflow-y: scroll;
+    text-indent: 26px;
+    margin-right: -50px;
+    padding: 0px 60px 0px 16px;
+}
+.msg span.title{
+    font-size: 12px;
+    line-height: 20px;
+    text-indent: 35px;
+    margin: 6px 0px 6px 0px;
+    display: block;
+}
+.msg span.content{
+    font-size: 12px;
+    text-indent: 26px;
+    display: block;
+    line-height: 23px;
+}
+.msg span.telpeople{
+    display: block;
+    font-size: 12px;
+    margin: 5px 0px;
+}
+.msg h3{
+    display: block;
+    font-size: 14px;
+}
+.msg .msgbox{
+    margin: 30% auto;
+    width: 70%;
+    height: 55%;
+    background: white;
+    border-radius: 5px;
+    padding: 1% 0% 1% 0%;
+    overflow: hidden;
+}
+.msg .msgbox a{
+    text-decoration:none;
+    color:#aaa;
+    line-height:14px;
+    margin:10px 0px;
+    width:48%;
+    float:left;
+    text-align:center;
+    box-sizing:border-box;
+    font-size:12px;
+    box-sizing:border-box;
+    display:inline-block;
+}
+.msg .msgbox a.back{
+    border-right: 1px solid #ccc;
+}
+.msg .msgbox a.rightnow{
+    color: red;
+}
+/*login box*/
+.alertbox{
+    position: fixed;
+    top: 0px;
+    left:0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+}
+.alertbox .content{
+    position: absolute;
+    top: 25%;
+    left: 13%;
+    width: 66%;
+    padding: 2% 5%;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 12px;
+}
+.alertbox .content h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 2%;
+}
+.alertbox .content .label1 input{
+    height: 38px;
+    width: 88%;
+    margin-left: 6%;
+    outline: none;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 7%;
+    text-indent: 1em;
+    font-size: 12px;
+}
+.alertbox .content .label2{
+    margin-top: 5%;
+    overflow: hidden;
+
+}
+.alertbox .content .label2 input{
+    height: 38px;
+    width: 50%;
+    margin-left: 6%;
+    margin-right: 3%;
+    outline: none;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 7%;
+    text-indent: 1em;
+    float: left;
+    font-size: 12px;
+
+}
+.alertbox .content .label2 .getnum{
+    text-decoration: none;
+    color:white;
+    float: left;
+    background: #00a0e9;
+    height: 40px;
+    width: 35%;
+    border:0;
+    outline: none;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 7%;
+}
+.alertbox button.yesbtn {
+    width: 90%;
+    margin: 8% 0px 7% 6%;
+    border: 0px;
+    outline: none;
+    background: #f05757;
+    height: 39px;
+    border-radius: 5px;
+}
+.alertbox .bggrey{
+    background: #ccc !important;
+}
+.alertbox p.tips {
+    margin: 3% 5% 0% 9%;
+    font-size: 10px;
+    color: red;
+}

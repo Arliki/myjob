@@ -1,0 +1,94 @@
+html, body {
+    font-size: 14px;
+    padding:0;margin:0;
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction:column;
+}
+ol, ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none
+}
+h2, h3, h4, h5, ul, li, p, hr {
+    padding: 0;
+    margin: 0;
+}
+input, select{
+    outline: none;
+    border: none;
+    background: transparent;
+    width: 100%;
+    color: #686868;
+}
+/*登录、注册、找回密码*/
+.login-logo {
+    text-align: center;
+    padding:4rem 0;
+}
+.login-logo img {
+    width: 36%;
+}
+.iconfont.icon-quxiao{
+    display:none;
+}
+.btn-block{
+    padding: .8rem;
+    border-radius: .8rem;
+    display: block;
+    background: #d8d8d8;
+    text-align: center;
+    text-decoration: none;
+    color: #62BF1D;
+    margin: .8rem 0;
+}
+.btn-block.btn-success{
+    background: #62BF1D;
+    color: #ffffff;
+}
+.form-box{
+    width: 72%;
+    margin:0 auto;
+    flex: 1;
+}
+.form-box .item{
+    vertical-align: middle;
+    border-bottom: 1px solid #e8e6e6;
+    padding: .8rem 0;
+    display: flex;
+    align-items:center;
+}
+.form-box .info{
+    font-size: .8rem;
+    color: #a2a0a0;
+    padding: 0 .8rem;
+}
+.form-box .submit-box{
+    padding-top: 1rem;
+}
+.form-box .item .iconfont{
+    padding: 0 .8rem;
+    color: #686868;
+}
+.form-box .item .con{
+    flex: 1;
+    vertical-align: bottom;
+}
+.form-box .item .con input{
+    height:100%;
+}
+.form-box .item .need{
+    color: #ff0000;
+}
+.register{
+    display: none;
+}
+.tips{
+    text-align: center;
+    color: #62BF1D;
+}
+footer{
+    text-align: center;color:#999;padding: 1rem 0;
+}

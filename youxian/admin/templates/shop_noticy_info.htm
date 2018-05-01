@@ -1,0 +1,105 @@
+<!-- $Id: snatch_info.htm 16992 2010-01-19 08:45:49Z wangleisvn $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js,validator.js,../js/jquery.js"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{if $is_view}
+<div class="main-div">
+    <form method="post" action="shop_notify.php" name="theForm" onsubmit="return validate()">
+        <table cellspacing="1" cellpadding="3" width="100%">
+            <tr>
+                <td class="label">{$lang.name}</td>
+                <td><input type="text" name="notify_name" id="notify_name" maxlength="60" size="40" value="{$notify.name}" /></td>
+            </tr>
+            <tr>
+                <td class="label">{$lang.link}</td>
+                <td><input type="text" name="link" id="link" maxlength="60" size="40" value="{$notify.link}" /></td>
+            </tr>
+            <tr>
+                <td class="label">{$lang.link_name}</td>
+                <td><input type="text" name="link_name" id="link_name" maxlength="60" size="40" value="{$notify.link_name}" /></td>
+            </tr>
+            <tr>
+                <td class="label">{$lang.ctime}</td>
+                <td>
+                    <input type="text" name="ctime" maxlength="60" size="40" value="{$notify.ctime}" readonly="readonly" id="start_time_id" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">{$lang.content}</td>
+                <td><textarea  name="content" cols="60" rows="4" id="content" >{$notify.content}</textarea></td>
+            </tr>
+        </table>
+    </form>
+</div>
+{else}
+<div class="main-div">
+    <form method="post" action="shop_notify.php" name="theForm" onsubmit="return validate()">
+        <table cellspacing="1" cellpadding="3" width="100%">
+            <tr>
+                <td class="label">{$lang.name}</td>
+                <td><input type="text" name="notify_name" id="notify_name" maxlength="60" size="40" value="{$notify.name}" />{$lang.require_field}</td>
+            </tr>
+            <tr>
+                <td class="label">{$lang.link}</td>
+                {if $notify.link}
+                <td><input type="text" name="link" id="link" maxlength="60" size="40" value="{$notify.link}" /><br><span class="notice-span">{$lang.notify_link}</span></td>
+                {else}
+                <td><input type="text" name="link" id="link" maxlength="60" size="40" value="" /><br><span class="notice-span">{$lang.notify_link}</span></td>
+                {/if}
+            </tr>
+            <tr>
+                <td class="label">{$lang.link_name}</td>
+                <td><input type="text" name="link_name" id="link_name" maxlength="60" size="40" value="{$notify.link_name}" /><br><span class="notice-span">{$lang.notify_link_name}</span></td>
+            </tr>
+            <tr>
+                <td class="label">{$lang.ctime}</td>
+                <td>
+                    <input type="text" name="ctime" maxlength="60" size="40" value="{$notify.ctime}" readonly="readonly" id="start_time_id" />
+                    <input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('start_time_id', '%Y-%m-%d %H:%M', '24', false, 'selbtn1');" value="{$lang.btn_select}" class="button"/>{$lang.require_field}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">{$lang.content}</td>
+                <td><textarea  name="content" cols="60" rows="4" id="content" >{$notify.content}</textarea>{$lang.require_field}</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="{$lang.button_submit}" class="button" />
+                    <input type="reset" value="{$lang.button_reset}" class="button" />
+                    <input type="hidden" name="act" value="{$form_action}" />
+                    <input type="hidden" name="id" value="{$notify.nid}" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{/if}
+<script language="JavaScript">
+    function validate()
+    {
+        var nname=$("#notify_name").val();
+        var ctime=$("#start_time_id").val();
+        var content=$("#content").val();
+        var link=$("#link").val();
+        var link_name=$("#link_name").val();
+        if (nname&& ctime&& content){
+            if (link){
+                if(link_name){
+                    return true;
+                }else{
+                    alert("请输入链接名称");
+                    return false;
+                }
+            }else{
+                $("#link_name").attr('value','');
+                return true;
+            }
+        }else {
+            alert("请检查输入信息");
+            return false;
+        }
+    }
+</script>
+{include file="pagefooter.htm"}

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+
+<body>
+<div id="globalWrapper">
+<div id="wrapper"><!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem --><!-- End #search-bar --><!-- TemplateBeginEditable name="通栏广告位" --><!-- TemplateEndEditable -->
+<div id="container">
+<div id="pageLeft">
+<!-- TemplateBeginEditable name="主区域左侧" --><!-- #BeginLibraryItem "/library/article_category_tree.lbi" -->
+<div class="titleDiv"><img src="images/article_category.gif" alt="Category" width="158" height="39" /></div>
+<div id="catDiv" style="padding:5px 10px;">
+  <ul>
+    <!--{foreach from=$article_categories item=cat}-->
+    <li> <span class="parent-cat"><a href="{$cat.url}">{$cat.name|escape:html}</a></span><br />
+      <!--{foreach from=$cat.children item=child}-->
+      <span style="white-space:nowrap;"><a href="{$child.url}">{$child.name|escape:html}</a></span>
+      <!--{/foreach}-->
+    </li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/cart.lbi" --> {insert_scripts files='transport.js'}
+<div class="cartDiv" id="ECS_CARTINFO">{insert name='cart_info'}</div>
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/top10.lbi" -->
+
+<div class="titleDiv"><img src="../images/top10List.gif" alt="Top 10" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="top-list">
+    <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+    <li><img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" width="12" height="11" alt="top" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+
+ <!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/history.lbi" -->
+<div class="titleDiv"><img src="images/history.gif" alt="History" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="history-list">
+    {insert name='history'}
+  </ul>
+</div><!-- #EndLibraryItem --><!-- TemplateEndEditable --></div>
+<!-- End #pageLeft -->
+<div id="pageIn">
+
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --> {$lang.ur_here} {$ur_here} <!-- #EndLibraryItem -->
+  <div class="globalTitle">{$lang.article_list}</div>
+  <div style="margin-bottom:10px;"><form action="{$search_url}" name="search_form" method="post" class="article_search">
+        <input name="keywords" type="text" id="requirement" value="{$search_value}" class="inputBox" />
+        <input name="id" type="hidden" value="{$cat_id}" />
+        <input name="cur_url" id="cur_url" type="hidden" value="" />
+        <input type="submit" value="{$lang.button_search}" class="btn4" />
+      </form></div>
+  <table width="100%" border="0" cellpadding="3" cellspacing="1">
+  <tr>
+    <th height="25" bgcolor="#DADADA">{$lang.article_title}</th>
+      <th bgcolor="#DADADA">{$lang.article_author}</th>
+      <th bgcolor="#DADADA">{$lang.article_add_time}</th>
+    </tr>
+  <!-- {foreach from=$artciles_list item=article} -->
+  <tr>
+    <td height="25"><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a></td>
+      <td>{$article.author}</td>
+      <td align="right">{$article.add_time}</td>
+    </tr>
+  <!-- {/foreach} -->
+</table>
+<!-- #BeginLibraryItem "/library/pages.lbi" -->
+<form action="{$smarty.server.PHP_SELF}" method="get" name="selectPageForm" id="selectPageForm">
+  <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+  </div>
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+<!-- #EndLibraryItem --></div>
+<!-- End #indexMiddle -->
+<!-- End #indexRrigh -->
+<div class="clear"></div>
+</div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --></div>
+<!-- End #Wrapper -->
+</div><!-- End #globalWrapper -->
+</body>
+<script type="text/javascript">
+document.getElementById('cur_url').value = window.location.href;
+</script>
+</html>
+

@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="libDiv">
+  <p class="top"></p>
+  <h2>{$lang.top10}</h2>
+  <ul class="top10">
+    <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+      <li>
+      <img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif"  /> 
+	<!-- {if $smarty.foreach.top_goods.iteration<4}-->
+      <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="samllimg" /></a>
+	<!-- {/if} -->		
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>
+      <br />
+      {$lang.shop_price}<font class="f1">{$goods.price}</font></li>
+    <!--{/foreach}-->
+  </ul>
+<div><br style="clear:both"/></div>
+  <p class="bot"></p>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>结算记录</title>
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/amazeui.min.css">
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/dls_center.css">
+	</head>
+	<body>
+	<div class="header-title">
+		<a href="javascript:history.go(-1)" class="title-back am-icon am-icon-angle-left"></a>
+		<h1>结算记录</h1>
+	</div>
+	<div class="main">
+		<!--{if !empty($jiesuan_list)}-->
+		<!--{foreach name=jiesuan_list from=$jiesuan_list item=item}-->
+		<div style="padding:.5rem 0 0 .5rem;border-bottom:1px solid #d8d8d8;"><span class="am-icon am-icon-clock-o"></span> {$item.add_time|date:'Y-m-d'}</div>
+		<div style="background: #fff;padding: 1rem;display: flex;justify-content: space-between;">
+			<span><i class="am-icon am-icon-calendar"></i> {$item.start_day} / {$item.end_day}</span>
+			<span>{$item.amount}</span>
+		</div>
+		<!--{/foreach}-->
+		<!--{else}-->
+		<div style="margin: 3rem auto;text-align: center;">没有数据 <a href="javascript:history.go(-1)">返回</a></div>
+		<!--{/if}-->
+	</div>
+	<script src="__TPL__/dlsStatic/js/jquery-1.10.2.min.js"></script>
+	<script src="__TPL__/dlsStatic/js/common.js"></script>
+		<script>
+			$(function(){
+				$('#submit').on('click',function(){
+				    var password = $('#password').val(),
+						cpassword = $('#cpassword').val(),
+						old_password = $('#old_password').val();
+				    if(!password || !old_password){
+                        $.walert('请输入原始密码和新密码');return;
+					}
+					if(password != cpassword){
+                        $.walert('两次新密码输入不一致');return;
+					}
+					var data = {
+					    password: password,
+						cpassword: cpassword,
+						old_password: old_password
+					}
+					$.post("",data,function(res){
+						$.walert(res.info, 2);
+						if(res.success){
+						    setTimeout(function(){
+						        history.go(-1);
+                            },3000)
+						}
+					},'json');
+				})
+			})
+		</script>
+	</body>
+</html>

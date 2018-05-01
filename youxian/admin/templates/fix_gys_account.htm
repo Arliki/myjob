@@ -1,0 +1,55 @@
+<!-- $Id: user_account_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<div class="main-div">
+  <form action="gys_account.php" method="post" name="theForm">
+    <table width="100%">
+      <tr>
+        <td class="label">供应商:</td>
+        <td>
+          <select name="gys_id">
+            <!--{foreach from=$agency_list name=gys_list item=gys}-->
+            <option value="{$gys.agency_id}">{$gys.agency_name}</option>
+            <!--{/foreach}-->
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">金额:</td>
+        <td>
+          <select name="opt">
+            <option value="1">增加</option>
+            <option value="-1">减少</option>
+          </select>
+          <input type="text" name="amount">元
+        </td>
+      </tr>
+      <tr>
+        <td class="label">说明：</td>
+        <td>
+          <textarea name="admin_note" cols="55" rows="3">{$row_info.admin_note}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">&nbsp;</td>
+        <td>
+          <input type="hidden" name="act" value="action">
+          <input type="submit" value="{$lang.button_submit}" class="button" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<script language="JavaScript">
+    <!--
+    {literal}
+    onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
+    //-->
+    {/literal}
+</script>
+{include file="pagefooter.htm"}

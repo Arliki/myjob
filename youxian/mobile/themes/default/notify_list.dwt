@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$title}</title>
+    <link rel="stylesheet" href="__TPL__/css/style.css">
+    <link rel="stylesheet" href="__TPL__/css/notify.css">
+
+    <script type="text/javascript" src="__TPL__/js/jquery.js"></script>
+</head>
+<body>
+<div class="shop_notify">
+    {if $shop_notify}
+        {foreach from=$shop_notify item=vo}
+        <a href="{:url('notice/shop_detail')}&nid={$vo.nid}">
+            <div class="n_list">
+                <li>
+                    <span class="n_name">{$vo.name}</span>
+                    <span class="n_ctime">{$vo.ctime}</span>
+                    <br>
+                    <span class="n_abs">{$vo.abs}</span>
+                    {if $vo.is_read}
+                    <span class="is_read">已读</span>
+                    {else}
+                    <span class="no_read">未读</span>
+                    {/if}
+                </li>
+            </div>
+        </a>
+        {/foreach}
+        {if $all_read}
+        <a href="javascript:;" id="shop_all_read"><img src="__TPL__/images/notify_do.png" alt="" class="do_upd"></a>
+        {else}
+        <a href="javascript:;"><img src="__TPL__/images/notify_all.png" alt="" class="no_upd"></a>
+        {/if}
+    {else}
+    <p class="no_notify">目前还没有通知</p>
+    {/if}
+</div>
+</body>
+<script>
+    $("#shop_all_read").click(function () {
+        $.get('{$url}',function () {
+            location.reload();
+        });
+    });
+</script>
+</html>

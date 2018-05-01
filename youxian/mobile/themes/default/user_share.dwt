@@ -1,0 +1,99 @@
+<!-- #BeginLibraryItem "/library/user_header.lbi" --><!-- #EndLibraryItem -->
+<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/font-awesome.min.css">
+<style>
+ul{
+    background: #ffffff;
+  }
+li{
+  padding: 1rem .6rem;
+  border-bottom: 1px solid #e3e3e3;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+  .body-model{
+    position: fixed;
+    top:0;bottom:0;width:100%;
+    z-index: 999;
+    display: none;
+  }
+  .body-model .wmask{
+    position: absolute;
+    top:0;bottom:0;width:100%;
+    background:#000;
+    opacity: .36;
+    z-index: 999;
+  }
+  .body-model .tg-qrcode-div{
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-left: -40%;
+    width: 80%;
+    z-index: 1000;
+  }
+  #qrcode-img{
+    width: 80%;
+  }
+  .user-list img{
+    width:50px;height:50px;border-radius:50%;
+  }
+</style>
+<div class="body-model">
+  <div class="wmask"></div>
+  <div class="tg-qrcode-div">
+    <img id="qrcode-img" src="{$qrcode_url}" alt="">
+    <!--<span>我的推广二维码</span>-->
+  </div>
+</div>
+<div class="share-level-list">
+  <ul>
+    <li class="qrcode-item">
+      <span class="fl"><i class="fa fa-qrcode"> 我的二维码</i></span>
+      <span>查看 <i class="fa fa-angle-right"></i></span>
+    </li>
+    <li>
+      <span class="fl"><i class="fa fa-user"> 累计推荐量</i></span>
+      <span>{$tj_num}人</span>
+    </li>
+  </ul>
+</div>
+<div class="user-list">
+  <ul>
+    <!-- {foreach from=$tj_users item=val} -->
+    <li>
+      <div class="avatar">
+        <img src="{$val.headimgurl}" alt=""> <span>{$val.nickname}</span>
+      </div>
+      <span>{$val.addtime}</span>
+    </li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+
+
+
+<!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<script src="__TPL__/dlsStatic/js/common.js"></script>
+<script>
+    $(function(){
+        $('.qrcode-item').on('click',function(){
+                $.get("{:url('user/sence_qrcode')}","",function(res){
+                    if(res.success){
+                        $('#qrcode-img').attr('src',res.imgurl);
+                        $('.body-model').fadeIn();
+                    }else{
+                        $.walert(res.info);
+                    }
+                },'json')
+        })
+        $('.body-model .wmask').on('click',function(){
+            $('.body-model').fadeOut();
+        })
+    })
+</script>

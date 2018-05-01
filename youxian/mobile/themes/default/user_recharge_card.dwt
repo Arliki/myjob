@@ -1,0 +1,43 @@
+<!-- #BeginLibraryItem "/library/user_header.lbi" --><!-- #EndLibraryItem -->
+<ul class="nav nav-tabs account" role="tablist">
+    <li><a href="{:url('User/account_deposit')}" >在线充值</a></li>
+    <li class="active"><a href="javascript:;" >充值卡充值</a></li>
+    <li><a href="{:url('User/account_detail')}" >{$lang.add_surplus_log}</a></li>
+    <li><a href="{:url('User/account_log')}" >{$lang.view_application}</a></li>
+	
+  </ul>
+<form action="{:url('user/recharge_card')}" method="post" name="theForm" >
+  <div style="padding: .5rem;margin-bottom:-0.6em;">
+    <span>提示：卡号为大写字母+数字, 密码不区分大小写</span>
+  </div>
+  <div class="ect-bg-colorf flow-consignee">
+    <ul class="o-info">
+      <li>
+        <div class="input-text"><b class="pull-left">卡号：</b><span>
+          <input name="card_num" placeholder="格式如AYX000001" type="text" class="inputBg_touch" />
+          </span></div>
+      </li>
+      <li>
+        <div class="input-text"><b class="pull-left">密码：</b><span>
+          <input name="password" placeholder="密码不区分大小写" type="text" class="inputBg_touch"/>
+          </span></div>
+      </li>
+    </ul>
+  </div>
+  <div class="two-btn ect-padding-tb ect-padding-lr ect-margin-tb text-center">
+    <input type="submit" name="submit"  class="btn btn-info ect-bg"  value="{$lang.submit_request}"/>
+  </div>
+</form>
+</div>
+<!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem --> <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<script type="text/javascript">
+	{literal}
+	onload = function() {
+	      if (!document.all)
+	      {
+	        document.forms['theForm'].reset();
+	      }
+	}
+	{/literal}
+</script>
+</body></html>

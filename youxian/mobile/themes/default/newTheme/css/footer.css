@@ -1,0 +1,40 @@
+.index-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #ccc;
+    background: white;
+    z-index: 99;
+    box-shadow: 1px -2px 9px #CCC;
+}
+.index-footer li {
+    width: 25%;
+    float: left;
+}
+.index-footer li a{
+    display: block;
+    width: 100%;
+    padding: 5% 23%;
+    text-align: center;
+    box-sizing: border-box;
+    color: #ccc;
+}
+.index-footer li a.curr{
+    color: #5d9d07;
+}
+.index-footer li a img{
+    width: 40%;
+}
+.index-footer li a span{
+    float: left;
+    width: 100%;
+    font-size: 12px;
+}
+/*
+.index-footer li a{
+    color: #a1a1a1;
+}
+.index-footer li a.curr{
+    color: #ca1238;
+}*/

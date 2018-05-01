@@ -1,0 +1,544 @@
+/*
+* @Author: xian
+* @Date:   2018-01-22 16:21:17
+* @Last Modified by:   Administrator
+* @Last Modified time: 2018-01-30 11:30:42
+*/
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    margin-bottom: 20%;
+        background: #fddf4b;
+}
+span.goodsimg {
+    float: left;
+    overflow: hidden;
+    width: 30%;
+}
+.collage_list img{
+    display: block;
+    width: 100%;
+}
+p.bannerbtn {
+    overflow: hidden;
+    width: 100%;
+    float: left;
+    background:#fddf4b; 
+}
+.collage_list a.guize, .collage_list a.liucheng {
+    width: 40%;
+    border: 0px;
+    background: #fddf4b;
+    box-shadow: none;
+    margin: 0px 0% 0px 7%;
+}
+a.show_bingo {
+    float: left;
+    width: 37%;
+    margin: 5% 0% 5% 9%;
+}
+a.show_bingo img {
+    width: 100%;
+}
+a.guize {
+    margin-left: 8%;
+}
+.altermask {
+    position: fixed;
+    background: rgba(0,0,0,.7);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 12;
+    overflow: auto;
+    display: none;
+}
+.collage_list .altermask a {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 5%;
+    border-radius: 50%;
+    top: 3%;
+    background: red;
+    text-align: center;
+    color: white;
+    padding: 0px;
+    border: 0px;
+    box-shadow: none;
+}
+.collage_list .altermask img{
+    display: block;
+    position: absolute;
+    top: 8%;
+    width: 80%;
+    margin-left: 10%;
+    display: none;
+}
+img.xiaohonghua {
+    position: absolute;
+    right: 2%;
+    top: 6%;
+    width: 26px;
+}
+.goodsbox {
+    width: 61%;
+    float: left;
+    margin-left: 6%;
+}
+.goodsbox span{
+	width: 100%;
+    float: left;
+    line-height: 32px;
+}
+span.goodsname {
+    float: left;
+    width: 100%;
+    font-size: 16px;
+}
+span.goodsnum i{
+	font-size: 15px;
+	color: red;
+	padding: 0px 5px;
+}
+i {
+    font-style: normal;
+    font-size: 12px;
+    padding: 0px 8px;
+}
+.launch_list {
+    position: relative;
+    float: left;
+    width: 96%;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    margin: 5px 2%;
+    box-shadow: 1px 3px 9px #ccc;
+    border-radius: 15px 3px;
+    background: #fff;
+    padding: 7px 4%;
+}
+img.goodsimg {
+    float: left;
+    width: 30%;
+}
+.launch_list span {
+    float: left;
+    width: 60%;
+    margin-left: 2%;
+    line-height: 30px;
+    font-size:13px;
+}
+span.goodsname {
+    font-size: 15px;
+}
+a.makebtn {
+    position: absolute;
+    top: 33%;
+    right: 0%;
+    width: 25%;
+    /* background: #1babe9; */
+    text-align: center;
+    padding: 5px 20px;
+    border-radius: 18px;
+    color: white;
+    font-size: 12px;
+}
+button#wx_share {
+    position: absolute;
+    left: 76%;
+    top: 8px;
+    width: 20%;
+    height: 25px;
+    line-height: 17px;
+    background: #1babe9;
+}
+#wx_share{
+	position: absolute;
+	right: 5%;
+}
+.notify {
+    float: left;
+    width: 100%;
+    font-family: microsofit YaHei;
+    overflow: hidden;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 1%;
+}
+span.surplus {
+    padding: 0px 5px;
+    color: #ff5d5d;
+    font-size: 19px;
+}
+.notify i {
+    font-style: normal;
+    font-size: 12px;
+    padding: 0px 8px;
+    text-align: center;
+    float: left;
+    width: 100%;
+    margin: 5px;
+    color: white;
+}
+ul.notify2 {
+    float: left;
+    width: 71%;
+    margin-left: 16%;
+    color: white;
+    font-size: 12px;
+    line-height: 25px;
+}
+.top_top a{
+    position:absolute;
+    left:6%;
+    top:18px;
+    text-decoration:none;
+    color:white;
+    width:10px;
+    height:10px;
+    border-left:1px solid #fff;
+    border-bottom:1px solid #fff;
+    transform:rotate(45deg);
+}
+button#my_list{
+    background:#8BC34A;
+}
+button.show_bingo{
+    background:#f37851;
+}
+.not_full span.goodsnum{
+    color: #f58d04;
+}
+.is_over span.goodsnum{
+    color:#159867;
+}
+.is_refun span.goodsnum{
+    color:#9c9c9c;
+}
+.is_wait span.goodsnum{
+    color: #ff0303;
+}
+.sharebox {
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+    background: rgba(0,0,0,0.7);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+p.sharetitle {
+    position: absolute;
+    top: 40%;
+    width: 50%;
+    left: 20%;
+    color: #fff;
+    padding: 5%;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 30px;
+    background: skyblue;
+    box-shadow: 1px 1px 10px 1px #383737;
+    text-align: center;
+}
+img.shareimg {
+    position: absolute;
+    width: 15%;
+    left: 78%;
+    top: 18%;
+    animation: myfirst 1s linear 0s infinite alternate;
+    -webkit-animation: myfirst 1s linear 0s infinite alternate;
+}
+@keyframes myfirst {
+    0% {top:18%;}
+    50% {top:21%;}
+    100% {top:18%;}
+}
+@-webkit-keyframes myfirst {
+    0% {top:18%;}
+    50% {top:21%;}
+    100% {top:18%;}
+}
+.top_top{
+    display: none;
+}
+p.pull-left {
+    position: absolute;
+    line-height: 40px;
+    height: 40px;
+    bottom: 7%;
+    width: 100%;
+    text-align: center;
+}
+.goods_size {
+    overflow: hidden;
+    position: relative;
+    top: -6%;
+    color: red;
+}
+.goods_size p {
+    line-height: 26px;
+    padding: 3px 10px;
+    float: left;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #555555;
+}
+.goods_size p:nth-child(1){
+    width: 50%;
+    float: left;
+    padding-left: 5%;
+    text-align: center;
+    box-sizing: border-box;
+}
+.goods_size p:nth-child(2){
+    width: 50%;
+    float: left;
+    text-align: center;
+    padding-right: 5%;
+    box-sizing: border-box;
+}
+.xian {
+    margin-top: -5%;
+    background: url(../images/collage_time.png) no-repeat;
+    background-size: 100%;
+    width: 50%;
+    margin-left: 25%;
+    color: white;
+    height: 46px;
+    line-height: 46px;
+    margin-bottom: 2%;
+    overflow: hidden;
+    text-align: center;
+}
+.user_list li {
+    float: left;
+    width: 90%;
+    margin: 1% 5% 2% 5%;
+    margin-left: 5%;
+    border-radius: 10px;
+    padding: 2% 5%;
+    background: #fff;
+    box-sizing: border-box;
+}
+.userimg {
+    width: 17% !important;
+    float: left;
+    height: auto !important;
+    display: block;
+    border-radius: 50%;
+}
+.user_list li span.username {
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.user_list li span.userpay {
+    float: right;
+    margin-top: 5%;
+    color: #ff5d5d;
+}
+p.nohave2 {
+    width: 100%;
+    text-align: center;
+    margin-top: 20%;
+    line-height: 40px;
+}
+p.atnow{
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    margin-bottom: 10%;
+}
+a.gobigin {
+    margin-left: 31.5% !important;
+}
+a.makebtn img{
+    width: 100%;
+}
+.collage_f .xian{
+    background: #fff !important;
+}
+.goods_size.collage_f{
+    top:1%;
+    background:#1babe9;
+    width:80%;
+    margin: 0 auto;
+    padding:5px;
+    border:3px solid #6b5656;
+    border-radius:6px;
+    color:#fffefc;
+    line-height:24px;
+    font-size:13px;
+}
+.goods_size.collage_f span{
+    float:left;
+    width:23%;
+    text-align:center;
+}
+.collage_price{
+    max-width: 80%;
+    height:60px;
+    margin: .5rem auto;
+    display:flex;
+    justify-content:center;
+    background: url(../images/collage_f_p.png) no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.collage_price .txt{
+    color: #fe413e;
+}
+.collage_price .price{
+    color: #1babe8;
+}
+.collage_price span{
+    /*z-index: 99;*/
+    line-height: 50px;
+    font-size: 1rem;
+    padding: 0 .5rem;
+    font-weight:bold;
+}
+    /*.xian.showmoney {
+        background: #fddf4b;
+        float: left;
+        margin: 0px;
+        margin-top: 5%;
+        width: 100%;
+        overflow: hidden;
+        height: 70px;
+        display: flex;
+        justify-content:center;
+    }
+    p.money1 {
+        float: left;
+        width: 30%;
+        !*margin: 0 0 0 16%;*!
+        background: url(../images/collage_f_p.png) no-repeat 0 12%;
+        background-position: 47% 0;
+        background-size: 70%;
+        height: 68px;
+        line-height: 67px;
+        font-weight: bold;
+        color: red;
+        font-size: 10px;
+    }
+    p.money2 {
+        float: left;
+        width: 30%;
+        margin: 0 0 0 6%;
+        background: url(../images/collage_o_p.png) no-repeat 0 12%;
+        background-position: 47% 0;
+        background-size: 70%;
+        height: 68px;
+        line-height: 67px;
+        font-weight: bold;
+        color: red;
+        font-size: 10px;
+    }*/
+.goods_size.collage_f p:nth-child(1){
+    width:50%;
+    float:left;
+    color:white;
+    text-align:center;
+    box-sizing:border-box;
+    padding:0px;
+    font-size:13px;
+    float:left;
+    width:50%;
+    margin:0px;
+    line-height:20px;
+    text-align:center;
+    padding-left:2%;
+}
+a#go_pay{
+    margin-left:23.5%;
+    width:53%;
+}
+a.show_bingo{
+    float:left;
+    width:40%;
+    margin:5% 0 5% 7%;
+}
+.collage_list a {
+    position: relative;
+    float: left;
+    width: 96%;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 0 solid #ccc;
+    margin: 5px 2%;
+    box-shadow: none;
+    border-radius: 10px;
+    background: #fff;
+    padding: 7px 4%;
+}
+.goodsbox  {
+    width:  61%;
+    float:  left;
+    margin-left:  6%;
+    color:  #505050;
+}
+span.goodsname  {
+    font-size:  15px;
+    font-weight:  600;
+}
+.launch_list span {
+    float: left;
+    width: 60%;
+    margin-left: 2%;
+    line-height: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 13px;
+}
+a.makebtn {
+    position: absolute;
+    top: 52%;
+    right: -1%;
+    width: 26%;
+    text-align: center;
+    padding: 5px 20px;
+    border-radius: 18px;
+    color: white;
+    font-size: 12px;
+}
+a.timeout{
+    float:left;
+    margin: 5% 0 5% 30%;
+    margin-left:23.5%;
+    width:53%;
+}
+a.makebtn {
+    position: absolute;
+    top: 34%;
+    right: -1%;
+    width: 26%;
+    text-align: center;
+    padding: 5px 20px;
+    border-radius: 18px;
+    color: white;
+    font-size: 12px;
+}
+.xian {
+    margin-top: -5%;
+    background: url(../images/collage_time.png) no-repeat;
+    background-size: 100%;
+    width: 50%;
+    margin-left: 25%;
+    color: white;
+    height: 50px;
+    line-height: 46px;
+    margin-bottom: 2%;
+    overflow: hidden;
+    text-align: center;
+}

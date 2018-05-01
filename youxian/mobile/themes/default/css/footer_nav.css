@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'footerIconfont';
+    src: url("../fonts/iconfont.eot");
+    /* IE9*/
+    src: url("../fonts/iconfont.eot?#iefix") format("embedded-opentype"), url("../fonts/iconfont.woff") format("woff"), url("../fonts/iconfont.ttf") format("truetype"), url("../fonts/iconfont.svg#iconfont") format("svg");
+    /* iOS 4.1- */ }
+.index-footer .iconfont {
+    font-family: "footerIconfont" !important;
+    font-size: 1.6rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale; }
+.index-footer-list {
+    width: 20%;
+    text-align: center; }
+.index-footer-list i {
+    padding-top: 0.35rem;
+    color: #D7D7D7;
+    display: block; }
+.index-footer-list span {
+    font-size: 0.93rem;
+    color: #D7D7D7;
+    line-height: 1.5rem; }
+
+.index-footer {
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 4;
+    overflow: hidden;
+    margin: 0 auto;
+    height: 4rem;
+    bottom: 0;
+    z-index: 4;
+    background-color: #383838; }
+.index-footer ul {
+    overflow: hidden; }
+
+.index-footer-list {
+    padding: 0;
+    width: 20%;
+    text-align: center; }
+.index-footer-list i {
+    font-size: 1.6rem;
+    color: #D7D7D7;
+    display: block;
+    line-height: 1.6rem; }
+.index-footer-list span {
+    font-size: 0.9rem;
+    color: #D7D7D7; }
+
+body, .index-header, .index-footer {
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+body.active, .index-header.active, .index-footer.active {
+    left: 30%; }

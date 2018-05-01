@@ -1,0 +1,50 @@
+<!-- #BeginLibraryItem "/library/user_header.lbi" --><!-- #EndLibraryItem -->
+<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/font-awesome.min.css">
+<style>
+  h3.wu-title{
+    font-size: 1.5rem;
+    font-weight:bold;
+    color: #363636;
+    padding: .4rem .5rem;
+    border-left: 3px solid #1CBB7F;
+    margin: .5rem 0;
+  }
+  .share-level-list ul{
+    background: #ffffff;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+.share-level-list li{
+  width:20%;
+  padding: 1rem .6rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction:column;
+}
+  .share-level-list li img{
+    width: 50px;height:50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+  .share-level-list li span{
+    text-align: center;
+  }
+</style>
+
+<div class="share-level-list">
+  <h3 class="wu-title">我的{$level}({$count}人)</h3>
+  <ul>
+    <!-- {foreach from=$my_users item=val} -->
+    <li>
+      <img src="{$val.headimgurl}" alt="">
+      <span>{$val.nickname}</span>
+    </li>
+    <!-- {/foreach} -->
+  </ul>
+</div>
+
+
+<!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->

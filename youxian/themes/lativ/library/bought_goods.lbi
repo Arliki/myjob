@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $bought_goods} -->
+  <div class="globalTitle"><span class="titleDiv">{$lang.shopping_and_other}</span></div>
+  <div class="content-div">
+    <!--{foreach from=$bought_goods item=goods}-->
+    <table border="0" cellpadding="3" cellspacing="0" class="re_goods-table" style="float: left">
+      <tr>
+        <td align="center"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" border="0" alt="{$goods.goods_name}" /></a></td>
+      </tr>
+      <tr>
+        <td><a href="{$goods.url}" title="{$goods.goods_name}">{$goods.short_name}</a>
+        </td>
+      </tr>
+    </table>
+    <!--{/foreach}-->
+    <br style="clear: both" />
+  </div>
+<!-- {/if} -->

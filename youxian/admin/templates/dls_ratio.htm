@@ -1,0 +1,63 @@
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+{insert_scripts files="validator.js"}
+
+<div id="separate">
+<div class="list-div" id="listDiv">
+{/if}
+<table cellspacing='1' cellpadding='3'>
+	<tr>
+		<th name="levels" ReadOnly="true" width="10%">等级</th>
+		<th name="step_money" Type="TextBox">阶梯金额</th>
+		<th name="step_ratio" Type="TextBox">提成比例</th>
+		<th Type="Button">{$lang.handler}</th>
+	</tr>
+{foreach from=$config item=val name=nav}
+<tr align="center">
+	<td class="ttt">{$smarty.foreach.nav.iteration}</td>
+	<td><span onclick="listTable.edit(this, 'edit_money', '{$smarty.foreach.nav.iteration}'); return false;">{$val.step_money}</span>万</td>
+	<td><span onclick="listTable.edit(this, 'edit_ratio', '{$smarty.foreach.nav.iteration}'); return false;">{$val.step_ratio}</span>%</td>
+	<td ><a href="javascript:confirm_redirect('确定删除？', 'dls_ratio.php?act=del&id={$smarty.foreach.nav.iteration}')"><img style="border:0px;" src="images/no.gif" /></a></td>
+</tr>
+{/foreach}
+</table>
+{if $full_page}
+</div>
+</div>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+
+var all_null = '{$lang.all_null}';
+{literal}
+onload = function()
+{
+  // 开始检查订单
+  startCheckOrder();
+  cleanWhitespace(document.getElementById("listDiv"));
+  if (document.getElementById("listDiv").childNodes[0].rows.length<5)
+  {
+    listTable.addRow(check);
+  }
+  
+}
+function check(frm)
+{
+  if (frm['step_money'].value == "" && frm['step_ratio'].value == "")
+  {
+     frm['step_money'].focus();
+     alert(all_null);
+     return false;  
+  }
+  
+  return true;
+}
+function actDiv(divname, flag)
+{
+    document.getElementById(divname).style.display = flag;
+}
+{/literal}
+//-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

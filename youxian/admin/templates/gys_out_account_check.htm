@@ -1,0 +1,90 @@
+<!-- $Id: user_account_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<style>
+  .processed input, .processed textarea{disabled:disabled}
+</style>
+<div class="main-div">
+  <form class="{$processed}" action="gys_out_account.php" method="post" name="theForm">
+    <table width="100%">
+      <tr>
+        <td class="label">供应商:</td>
+        <td>{$gys_info.agency_name}</td>
+      </tr>
+      <tr>
+        <td class="label">手机:</td>
+        <td>{$gys_info.agency_phone}</td>
+      </tr>
+      <tr>
+        <td class="label">收款账号:</td>
+        <td>{$gys_info.agency_account}</td>
+      </tr>
+      <tr>
+        <td class="label">收款人:</td>
+        <td>{$gys_info.agency_account_name}</td>
+      </tr>
+      <tr>
+        <td class="label">账户余额:</td>
+        <td>
+          <!--{if $warning_info}-->
+          <span style="color:red">{$warning_info}</span>
+          <input type="hidden" name="account_error" value="1">
+          <!--{else}-->
+          {$gys_account_money}
+          <!--{/if}-->
+        </td>
+      </tr>
+      <tr>
+        <td class="label">冻结金额:</td>
+        <td>{$frozen_money}</td>
+      </tr>
+      <tr>
+        <td class="label">本次申请提现:</td>
+        <td>{$row_info.amount}</td>
+      </tr>
+      <tr>
+        <td class="label">申请时间:</td>
+        <td>{$row_info.add_time}</td>
+      </tr>
+      <tr>
+        <td class="label">供应商留言:</td>
+        <td>{$row_info.gys_note}</td>
+      </tr>
+      <tr>
+        <td class="label">到款状态：</td>
+        <td>
+          <label><input type="radio" {if $processed}disabled{/if} name="is_paid" value="0" {if $row_info.is_paid==0} checked="true" {/if} <span>待打款</span></label>
+          <label><input type="radio" {if $processed}disabled{/if} name="is_paid" value="1" {if $row_info.is_paid==1} checked="true" {/if} <span style="color:green;">已完成</span></label>
+            <label><input type="radio" {if $processed}disabled{/if} name="is_paid" value="-1" {if $row_info.is_paid==-1} checked="true" {/if} <span style="color:red;">已取消</span></label>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">说明：</td>
+        <td>
+          <textarea {if $processed}disabled{/if} name="admin_note" cols="55" rows="3">{$row_info.admin_note}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">&nbsp;</td>
+        <td>
+          <input type="hidden" name="act" value="action">
+          <input type="hidden" name="id" value="{$row_info.id}">
+          <input {if $processed}disabled{/if} type="submit" value="{$lang.button_submit}" class="button" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<script language="JavaScript">
+    <!--
+    {literal}
+    onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
+    //-->
+    {/literal}
+</script>
+{include file="pagefooter.htm"}

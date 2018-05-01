@@ -1,0 +1,63 @@
+<!-- $Id: agency_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div"><span>优惠券：</span>{$coupon_title}</div>
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>ID</th>
+      <th>优惠券SN</th>
+      <th>用户名</th>
+      <th>获取时间</th>
+      <th>使用时间</th>
+      <th>订单SN</th>
+    </tr>
+    {foreach from=$coupon_list item=c}
+    <tr>
+      <td>{$c.id}</td>
+      <td>{$c.sn}</td>
+      <td>{$c.user_name}</td>
+      <td>{$c.get_time}</td>
+      <td>{$c.use_time}</td>
+      <td>{$c.order_sn}</td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      // 开始检查订单
+      startCheckOrder();
+  }
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

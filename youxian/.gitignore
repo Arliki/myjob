@@ -1,0 +1,11 @@
+.idea/*
+data/*
+images/*
+temp/*
+admin/*.json
+mobile/check.txt
+mobile/last.txt
+mobile/nums.txt
+mobile/super.txt
+*.log
+webhook/*

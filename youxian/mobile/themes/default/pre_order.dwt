@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="__TPL__/css/preorder.css">
+    <script type="text/javascript" src="__TPL__/js/jquery.js"></script>
+    <title>超值抢购</title>
+</head>
+<body>
+<img src="__TPL__/images/super_bg.jpg" class="bgimg">
+{$show_btn}
+<script>
+    $("#go_pay").click(function () {
+        $.ajax({
+            type:"get",
+            url:'{$url}',
+            success:function (data) {
+                $("button").after(data);
+                callpay();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    var $button=document.getElementsByTagName("button");
+    var $show_bingo=document.getElementById("show_bingo");
+    if($button.className=="go_pay"){
+    }else if($button.className=="is_join"){
+        $button.disabled="disabled";
+    }else if($button.className=="show_bingo"){
+    }
+    $show_bingo.onclick=function () {
+        window.location.href='{$url}';
+    }
+
+</script>
+</body>
+</html>

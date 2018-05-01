@@ -1,0 +1,81 @@
+{if $full_page}
+<!-- $Id: user_account_list.htm 17030 2010-02-08 09:39:33Z sxc_shop $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+{if $balance}
+<div class="form-div" style="text-align: right;">
+  代付账户余额：￥{$balance}元
+</div>
+{/if}
+<!-- start user_deposit list -->
+<div class="list-div" id="listDiv">
+  {/if}
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th><a href="javascript:; ">ID</a></th>
+      <th><a href="javascript:; ">编号</a></th>
+      <th><a href="javascript:; ">金额</a></th>
+      <th><a href="javascript:; ">下单时间</a></th>
+      <th><a href="javascript:; ">支付状态</a></th>
+      <th><a href="javascript:; ">支付方式</a></th>
+      <th><a href="javascript:; ">银行状态</a></th>
+      <th><a href="javascript:; ">银行通知时间</a></th>
+    </tr>
+    {foreach from=$list item=item}
+    <tr>
+      <td align="center">{$item.id}</td>
+      <td align="center">{$item.oid}</td>
+      <td align="center">{$item.amount}</td>
+      <td align="center">{$item.order_time}</td>
+      <td align="center">{$item.pstring}</td>
+      <td align="center">{$item.pmode}</td>
+      <td align="center">{$item.pb_string}</td>
+      <td align="center">{$item.pb_time}</td>
+    </tr>
+    {foreachelse}
+    <tr>
+      <td class="no-records" colspan="8">{$lang.no_records}</td>
+    </tr>
+    {/foreach}
+
+    <table id="page-table" cellspacing="0">
+      <tr>
+        <td>&nbsp;</td>
+        <td align="right" nowrap="true">
+          {include file="page.htm"}
+        </td>
+      </tr>
+    </table>
+    {if $full_page}
+</div>
+<!-- end user_deposit list -->
+
+
+<script type="text/javascript" language="JavaScript">
+    listTable.recordCount = {$record_count};
+    listTable.pageCount = {$page_count};
+    {foreach from=$filter item=item key=key}
+    listTable.filter.{$key} = '{$item}';
+    {/foreach}
+        {literal}
+    <!--
+
+        onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
+        /**
+         * 搜索用户
+         */
+        function searchOrder()
+        {
+            listTable.filter['keywords'] = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+            listTable.filter['page'] = 1;
+            listTable.loadList();
+        }
+    //-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}
+{/if}

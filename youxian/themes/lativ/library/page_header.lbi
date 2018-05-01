@@ -1,0 +1,26 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+
+<div id="topNav">
+<!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} --><a href="{$nav.url}">{$nav.name}</a><!-- {if !$smarty.foreach.nav_top_list.last} --> . <!-- {/if} --><!-- {/foreach} -->
+</div>
+<div id="pageHeader">
+  <p id="logo"><a href="../index.php"><img src="images/logo.gif" alt="logo" /></a></p>
+  <ul id="mainNav">
+    <li><a href="../index.php"><img src="../images/top_icon01a.gif">回首页</a></li>
+    <li><a href="../search.php?intro=new"><img src="../images/top_icon02a.gif">最新商品</a></li>
+    <li><a href="../article.php?id=1"><img src="../images/top_icon03a.gif">购物说明</a></li>
+    <li class="orange"><a href="../flow.php"><img src="../images/top_icon04a.gif">购物车</a></li>
+    <li id="ECS_MEMBERZONE" class="member orange">{insert name='member_info'}</li>
+  </ul>
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="subNav"><tr>
+<td class="qSearch"><form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td><input name="keywords" onClick="this.select();" class="textbox-search" type="text" id="keyword" value="商品搜索" /></td>
+      <td><input type="image" name="imageField" src="../images/btn_go.gif"/></td>
+      </tr>
+    </table></form></td>
+<!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} --><td><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a></td><!-- {/foreach} -->
+<td style="border-right: 1px solid #D3C08D;" onmouseover="document.rImage1.src='themes/lativ/images/topnav_sale0.gif';" onmouseout="document.rImage1.src='images/topnav_sale.gif';"><A href="../activity.php"><IMG alt="优惠活动" src="images/topnav_sale.gif" border=0 name="rImage1"></A></td>
+</tr></table>

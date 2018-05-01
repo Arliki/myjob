@@ -1,0 +1,40 @@
+<form action="{url('edit')}" method="post" class="form-horizontal" role="form">
+<table class="table table-hover ectouch-table">
+    <tr>
+        <td width="200">功能名称</td>
+        <td><div class="col-md-4">{$config['name']}</div></td>
+    </tr>
+    <tr>
+        <td width="200">关键词</td>
+        <td><div class="col-md-4">{$config['command']}</div></td>
+    </tr>
+    <tr>
+        <td width="200">扩展词</td>
+        <td>
+            <div class="col-md-4">
+                <input type="text" name="data[keywords]" class="form-control" value="{$config['keywords']}" />
+                <p class="help-block">多个变形词，请用“,”隔开</p>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td width="200">功能说明</td>
+        <td><div class="col-md-10">微信用户扫描分销商二维码后，如果没有关注，自动跳转到关注页面，如果已关注，发送推荐人信息。</div></td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td>
+            <div class="col-md-4">
+                <input type="hidden" name="data[command]" value="{$config['command']}" />
+                <input type="hidden" name="data[name]" value="{$config['name']}" />
+                <input type="hidden" name="data[author]" value="{$config['author']}">
+                <input type="hidden" name="data[website]" value="{$config['website']}">
+                <input type="hidden" name="handler" value="{$config['handler']}">
+                <input type="submit" name="submit" class="btn btn-primary" value="确认" />
+                <input type="reset" name="reset" class="btn btn-default" value="重置" />
+            </div>
+        </td>
+    </tr>
+</table>
+</form>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>图片上传</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/iconfont.js"></script>
+    <style type="text/css">
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+            float: left;
+            font-size: 20px;
+            margin: 5px 9px;
+        }
+
+        i {
+            font-style: normal;
+        }
+
+        body {
+            background: #fff;
+        }
+
+        .section {
+            width: 100%;
+            margin: 5% auto;
+        }
+
+        .item {
+            width: 125px;
+            height: 125px;
+            float: left;
+            position: relative;
+            margin: 1% 0% 0% 10%;
+        }
+
+        .addImg {
+            width: 125px;
+            height: 125px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .preview, .preBlock {
+            position: absolute;
+            display: block;
+            width: 125px;
+            height: 125px;
+            left: 0;
+            top: 0;
+        }
+
+        .delete {
+            width: 30px;
+            position: absolute;
+            right: -15px;
+            top: -15px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .preBlock img {
+            display: block;
+            width: 125px;
+            height: 125px;
+        }
+
+        .upload_input {
+            display: block;
+            width: 0;
+            height: 0;
+            -webkit-opacity: 0.0;
+            /* Netscape and Older than Firefox 0.9 */
+            -moz-opacity: 0.0;
+            /* Safari 1.x (pre WebKit!) 老式khtml内核的Safari浏览器*/
+            -khtml-opacity: 0.0;
+            /* IE9 + etc...modern browsers */
+            opacity: .0;
+            /* IE 4-9 */
+            filter: alpha(opacity=0);
+            /*This works in IE 8 & 9 too*/
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            /*IE4-IE9*/
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        }
+    </style>
+</head>
+<body>
+<div class="section">
+    <p class="title">"每天都新鲜"</p>
+    <div class="namebox">
+    	<span>
+    		<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-xingming"></use>
+			</svg>
+			<i>姓  &nbsp;&nbsp;&nbsp;名:</i>
+    	</span>
+        <input type="text" name="" class="name">
+    </div>
+    <div class="phonebox">
+    	<span>
+    		<svg class="icon" aria-hidden="true">
+  			  <use xlink:href="#icon-shoujihao"></use>
+  			</svg>
+			<i>手机号:</i>
+    	</span>
+        <input type="text" name="" class="phone">
+    </div>
+    <div class="phonebox" style="display:flex;margin-right:1.6rem;">
+    	<span>
+    		<svg style="color:#f1f1f1;" class="icon" aria-hidden="true">
+  			  <use xlink:href="#icon-yifu1"></use>
+  			</svg>
+			<i>尺 &nbsp;&nbsp;码:</i>
+    	</span>
+        <select name="cloth_size" class="cloth_size" style="flex:1;margin-left:.6rem;border:none;border-bottom:1px solid #d8d8d8;background:transparent;">
+            <!--<option value="S">S</option>-->
+            <!--<option value="M">M</option>-->
+            <!--<option value="L">L</option>-->
+            <!--<option value="XL">XL</option>-->
+            <!--<option value="2XL">2XL</option>-->
+            <!--<option value="3XL">3XL</option>-->
+            <option value="均码">均码</option>
+        </select>
+    </div>
+    <div class="iphone">
+        <div class="browser">
+            <!--选择地区-->
+            <section class="express-area">
+                <a id="expressArea" href="javascript:void(0)">
+                    <dl>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-gongsidizhi"></use>
+                        </svg>
+                        <dt>选择地区：</dt>
+                        <dd class="local">省 市 区/县</dd>
+                    </dl>
+                </a>
+            </section>
+            <!--选择地区弹层-->
+            <section id="areaLayer" class="express-area-box">
+                <header>
+                    <h3>选择地区</h3>
+                    <a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+                    <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+                </header>
+                <article id="areaBox">
+                    <ul id="areaList" class="area-list">
+
+                    </ul>
+                </article>
+            </section>
+            <!--遮罩层-->
+            <div id="areaMask" class="mask"></div>
+            <script src="js/jquery.area.js"></script>
+        </div>
+    </div>
+    <div class="detailbox">
+        <span>
+            <svg class="icon" aria-hidden="true">
+               <use xlink:href="#icon-xxx"></use>
+            </svg>
+            <i>详细地址:</i>
+        </span>
+        <textarea class="detailtext"></textarea>
+    </div>
+    <div class="article">
+        <p class="picgotop">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-tupian"></use>
+            </svg>
+            <i>上传图片</i>
+        </p>
+        <div class="item">
+            <img class="addImg" onclick="clickImg(this);" src="img/addImg.png">
+            <input name="url" type="file" class="upload_input" onchange="change(this)">
+            <div class="preBlock">
+                <img class="preview" id="preview" alt="" name="pic" width="190" height="190" src="">
+            </div>
+            <img class="delete" onclick="deleteImg(this)" src="img/delete.png">
+        </div>
+        <div class="item">
+            <img class="addImg" onclick="clickImg(this);" src="img/addImg.png">
+            <input name="url" type="file" class="upload_input" onchange="change(this)">
+            <div class="preBlock">
+                <img class="preview" alt="" name="pic" width="190" height="190" src="">
+            </div>
+            <img class="delete" onclick="deleteImg(this)" src="img/delete.png">
+        </div>
+        <div style="clear: left;"></div>
+    </div>
+    <a href="javascript:void(0)" class="submitnow">立即提交</a>
+</div>
+<script type="text/javascript">
+    //点击
+    var clickImg = function (obj) {
+        $(obj).parent().find('.upload_input').click();
+    }
+    //删除
+    var deleteImg = function (obj) {
+        $(obj).parent().find('input').val('');
+        $(obj).parent().find('img.preview').attr("src", "");
+        //IE9以下
+        $(obj).parent().find('img.preview').css("filter", "");
+        $(obj).hide();
+        $(obj).parent().find('.addImg').show();
+    }
+
+    //选择图片
+    function change(file) {
+        //预览
+        var pic = $(file).parent().find(".preview");
+        //添加按钮
+        var addImg = $(file).parent().find(".addImg");
+        //删除按钮
+        var deleteImg = $(file).parent().find(".delete");
+
+        var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
+
+        // gif在IE浏览器暂时无法显示
+        if (ext != 'png' && ext != 'jpg' && ext != 'jpeg') {
+            if (ext != '') {
+                alert("图片的格式必须为png或者jpg或者jpeg格式！");
+            }
+            return;
+        }
+        //判断IE版本
+        var isIE = navigator.userAgent.match(/MSIE/) != null,
+            isIE6 = navigator.userAgent.match(/MSIE 6.0/) != null;
+        isIE10 = navigator.userAgent.match(/MSIE 10.0/) != null;
+        if (isIE && !isIE10) {
+            file.select();
+            var reallocalpath = document.selection.createRange().text;
+            // IE6浏览器设置img的src为本地路径可以直接显示图片
+            if (isIE6) {
+                pic.attr("src", reallocalpath);
+            } else {
+                // 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
+                pic.css("filter", "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=\"" + reallocalpath + "\")");
+                // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+                pic.attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+            }
+            addImg.hide();
+            deleteImg.show();
+        } else {
+            html5Reader(file, pic, addImg, deleteImg);
+        }
+    }
+
+    //H5渲染
+    function html5Reader(file, pic, addImg, deleteImg) {
+        var file = file.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            pic.attr("src", this.result);
+        }
+        addImg.hide();
+        deleteImg.show();
+    }
+
+    $(document).on("click", ".submitnow", function () {
+        var picnum = 0;
+        for (var i = 0; i < $(".item").length; i++) {
+            if ($(".item").eq(i).find(".preview").attr("src") == "") {
+                picnum++;
+            }
+        }
+        var name = $(".name").val();
+        var phone = $(".phone").val(),
+            cloth_size = $('.cloth_size').val();
+        var local = $("dd.local").html();
+        var local2 = $("textarea").val();
+        if ($(".name").val() != "") {
+            // 验证手机号
+            if ((/^1[34578]\d{9}$/.test(phone))) {
+                if ($("dd.local").html() != "" && $("textarea").val() != "") {
+                    if (picnum !== 2) {
+                        var pic1 = $(".item").eq(0).find(".preview").attr("src");
+                        var pic2 = $(".item").eq(1).find(".preview").attr("src");
+                        $.ajax({
+                            type: "post",
+                            url: "../../mobile/index.php?m=default&c=Yxactivity&a=index",
+                            async: true,
+                            dataType: 'json',
+                            data: {
+                                "name": name,
+                                "phone": phone,
+                                "size": cloth_size,
+                                "addr": local+' '+local2,
+                                "pic1": pic1,
+                                "pic2": pic2
+                            },
+                            success: function (res) {
+                                alert(res.info)
+                                if(res.error==0){
+                                    window.location.href = '/';
+                                }
+                            },
+                            error: function () {
+                                alert("请刷新重试")
+                            }
+                        })
+                    } else {
+                        alert("请选择图片")
+                    }
+                } else {
+                    alert("地址不能为空")
+                }
+            } else {
+                alert("手机号码不正确")
+            }
+        } else {
+            alert("姓名不能为空")
+        }
+    })
+</script>
+
+</body>
+</html>

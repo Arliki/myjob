@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>我的经纪人</title>
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/amazeui.min.css">
+		<link rel="stylesheet" href="__TPL__/dlsStatic/css/dls_center.css">
+	</head>
+	<body>
+	<div class="header-title">
+		<a href="javascript:history.go(-1)" class="title-back am-icon am-icon-angle-left"></a>
+		<h1>我的经纪人</h1>
+		<div class="img-item my-jjr">
+			<div class="avatar">
+				<img src="{$jjr_info.info[headimgurl]}" alt="">
+				<span>{$jjr_info[info].nickname}</span>
+			</div>
+			<div style="text-align: left;" class="flex-column">
+				<span>注册会员: {$jjr_info.reguser_num}人</span>
+				<span>会员消费：{$jjr_info.total_sale}元</span>
+			</div>
+			<div class="flex-column">
+				<a href="{:url('dls/sale_tj',array('jid'=>$_GET['jid']))}" style="color:#868686;font-size:2rem;" class="am-icon am-icon-calendar"></a>
+			</div>
+		</div>
+		<div class="tab-tit">
+			<span data-url="{:url('dls/get_jjr_reguser',array('jid'=>$_GET['jid']))}" class="on">推荐会员</span>
+			<span data-url="{:url('dls/get_jjr_order',array('jid'=>$_GET['jid']))}">会员消费</span>
+		</div>
+	</div>
+
+	<div class="main">
+		<div class="tab-con">
+			<div class="tab-con-item on" data-tpl-id="reguser-tpl"></div>
+			<div class="tab-con-item" data-tpl-id="usercost-tpl"></div>
+		</div>
+		<div class="get-more">
+			点击加载更多
+		</div>
+	</div>
+	<script id="reguser-tpl" type="text/x-dot-template">
+		{{ if(it.error==0 && it.data.length>0){ }}
+		{{ for(var i=0;i<it.data.length;i++) { }}
+		<div class="img-item sm">
+			<div class="img-item-left">
+				<div class="avatar">
+					<img src="{{=it.data[i].headimgurl}}" alt="">
+					<span>{{=it.data[i].nickname}}</span>
+				</div>
+				<div>{{=it.data[i].addtime}}</div>
+			</div>
+		</div>
+		{{ } }}
+		{{ }else{ }}
+		<div class="no-more-data" style="margin: 3rem auto;text-align: center;">{{=it.data}}</div>
+		{{ } }}
+	</script>
+	<script id="usercost-tpl" type="text/x-dot-template">
+		{{ if(it.error==0 && it.data.length>0){ }}
+		{{ for(var i=0;i<it.data.length;i++) { }}
+		<div class="img-item sm">
+			<div class="img-item-left">
+				<div class="avatar">
+					<img src="{{=it.data[i].headimgurl}}" alt="">
+					<span>{{=it.data[i].nickname}}</span>
+				</div>
+				<div class="flex-column" style="text-align: left;">
+					<span>购买时间：{{=it.data[i].buy_time}}</span>
+					<span>订单号：{{=it.data[i].order_sn}}</span>
+				</div>
+				<div>
+					<span>￥{{=it.data[i].goods_amount}}元</span>
+				</div>
+			</div>
+		</div>
+		{{ } }}
+		{{ }else{ }}
+		<div class="no-more-data" style="margin: 3rem auto;text-align: center;">{{=it.data}}</div>
+		{{ } }}
+	</script>
+	<script src="__TPL__/dlsStatic/js/jquery-1.10.2.min.js"></script>
+	<script src="__TPL__/dlsStatic/js/common.js"></script>
+	<script src="__TPL__/js/doT.min.js" type="text/javascript"></script>
+		<script>
+			$(function(){
+                var pagecount = 10;
+                function get_more(url,start,num,render){
+                    var container = $('.tab-con-item.on');
+                    var render = render || 'append';
+                    var tpl_id = container.data('tpl-id');
+                    $.get(url,{start:start,num:num},function(res){
+                        if(res.error>0){
+                            $('.get-more').hide();
+                        }
+                        var _tpl = $("#"+tpl_id).html();
+                        var pagefn = doT.template(_tpl);
+                        if(render=='append'){
+                            container.append(pagefn(res));
+                        }else{
+                            container.html(pagefn(res));
+                        }
+                    },'JSON');
+                }
+                get_more("{:url('dls/get_jjr_reguser',array('jid'=>$_GET['jid']))}",0,pagecount);
+			    $('.tab-tit span').on('click',function () {
+					$(this).addClass('on').siblings().removeClass('on');
+					var _idx = $(this).index();
+					$('.tab-con-item').eq(_idx).addClass('on').siblings().removeClass('on');
+					console.log($('.tab-con-item').eq(_idx).find('.no-more-data'));
+					if($('.tab-con-item').eq(_idx).find('.no-more-data').length==0){
+                        $('.get-more').show();
+					}else{
+					    $('.get-more').hide();
+					}
+					if($('.tab-con-item').eq(_idx).find('.img-item').length==0){
+                        var _url = $('.tab-tit span.on').data('url');
+                        get_more(_url,0,pagecount,'fresh');
+					}
+
+                })
+				$('.get-more').on('click', function () {
+				    var _url = $('.tab-tit span.on').data('url');
+				    var _start = $('.tab-con-item.on').find('.img-item').length;
+                    get_more(_url,_start,pagecount);
+                })
+			})
+		</script>
+	</body>
+</html>

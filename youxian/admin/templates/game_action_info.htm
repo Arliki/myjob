@@ -1,0 +1,67 @@
+<!-- $Id: agency_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="validator.js,../js/transport.js"}
+<div class="main-div">
+  <form method="post" action="yxgame_action.php" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+    <table cellspacing="1" cellpadding="3" width="100%">
+      <tr>
+        <td class="label">操作名称：</td>
+        <td><input type="text" name="title" maxlength="60" value="{$game_action.title}" />{$lang.require_field}
+          <br/><span class="notice-span">操作名称</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">消耗果豆：</td>
+        <td><input type="number" name="costs" value="{$game_action.costs}" />{$lang.require_field}
+          <br/><span class="notice-span">每次操作消耗果豆数量</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">中奖权重增加: </td>
+        <td>
+          <input type="number" step="0.00000001" name="weight" value="{$game_action.weight|default:0}" /><span class="require-field">*</span>
+          <br/><span class="notice-span">默认为0</span>
+        </td>
+      </tr>
+
+    </table>
+    <table align="center">
+      <tr>
+        <td colspan="2" align="center">
+          <input type="submit" class="button" value="{$lang.button_submit}" />
+          <!--<input type="reset" class="button" value="{$lang.button_reset}" />-->
+          <input type="hidden" name="act" value="{$form_action}" />
+          <input type="hidden" name="gid" value="{$gid}" />
+          <input type="hidden" name="id" value="{$game_action.id}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+{literal}
+<script language="JavaScript">
+    <!--
+    onload = function() {}
+    /**
+     * 检查表单输入的数据
+     */
+    function validate()
+    {
+        validator = new Validator("theForm");
+//        validator.required("coupon_title",  '请填写优惠券名称');
+//        validator.required("coupon_money",  '请填写优惠券面值');
+//        validator.required("min_money",  '请填写最小订单金额');
+//        validator.required("send_start_date",  '请选择优惠券发放开始日期');
+//        validator.required("send_end_date",  '请选择优惠券发放结束日期');
+//        validator.required("use_start_date",  '请选择优惠券使用开始日期');
+//        validator.required("use_end_date",  '请选择优惠券使用结束日期');
+//        validator.required("coupon_num",  '请填写总发放量');
+        return validator.passed();
+    }
+    //-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

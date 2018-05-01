@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <script type="text/javascript" src="__TPL__/js/dot.js"></script>
+    <script type="text/javascript" src="__TPL__/js/jquery.js"></script>
+    <title>一元抢购</title>
+    <style type="text/css">
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        .daojishi {
+            height: 85px;
+            background: #FE6B04;
+            text-align: center;
+            line-height: 74px;
+            font-size: 28px;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            left: 0px;
+        }
+        .daojishi span {
+            padding: 4px;
+            border-radius: 4px;
+            color: white;
+            display: inline-block;
+        }
+        .shuiguo {
+            width: 100%;
+            overflow: hidden;
+        }
+        .shuiguo img{
+            width: 100%;
+        }
+        .center-box {
+            overflow: hidden;
+        }
+        .shengyu-box {
+            float: left;
+            width: 40%;
+            box-sizing: border-box;
+            margin-left: 12%;
+        }
+        .shengyu-box span{
+            width: 100%;
+            float: left;
+            font-size: 19px;
+            text-align: left;
+        }
+        .shengyu-box span i{
+            color: red;
+            font-size: 22px;
+            padding:0px 3px;
+            font-style: normal;
+        }
+        .btn {
+            float: left;
+            width: 130px;
+            margin: 11px 10px 0px 22px;
+            height: 45px;
+            background: #FF4933;
+            text-align: center;
+            line-height: 45px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            border: 0;
+            outline: none;
+            border-radius: 5px;
+        }
+        .gungong-box {
+            position: relative;
+            height: 60px;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+        .gundong{
+            position: absolute;
+            top: 0px;
+            overflow: hidden;
+            width: 100%;
+            display: none;
+        }
+        .gundong p{
+            height: 20px;
+            line-height: 12px;
+            font-size: 12px;
+            width: 70%;
+            margin-left: 20%;
+        }
+        .gundong p img{
+            float: left;
+            width: 12px;
+            height: 12px;
+        }
+        .gundong p span{
+            padding-left: 8px;
+        }
+        .bggrey{
+            background: #ccc;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="shuiguo">
+    <img src="__TPL__/images/bg.jpg">
+</div>
+<div class="center-box">
+    <div class="shengyu-box">
+        <span class="shengyu">剩余<i>1000</i>件</span>
+        <span class="yiqiang">已抢<i>0</i>件</span>
+    </div>
+    <button type="button"  class="btn bggrey" value="1">立即抢购</button>
+</div>
+{$pay_online}
+<div class="gungong-box">
+    <div class="gundong">
+    </div>
+</div>
+<div class="daojishi">
+    倒计时：<span class="hour">--</span>:<span class="minits">--</span>:<span class="second">--</span>
+    <input type="hidden" value="{$timecha}" id="timecha">
+</div>
+<input type="hidden" value="{$first_alert}" id="first_alert">
+<input type="hidden" value="{$fankui.che}" id="fankuic">
+<input type="hidden" value="{$send_time}" id="send_time">
+<script type="text/template" charset="utf-8" id='gundong'>
+    {{for(var i=0; i<it.length; i++){ }}
+    <p>
+        <img src="__TPL__/images/laba.png">
+        <span>恭喜<i>{{=it[i]}}</i>已抢到秒杀资格</span>
+    </p>
+    {{ } }}
+</script>
+</body>
+</html>

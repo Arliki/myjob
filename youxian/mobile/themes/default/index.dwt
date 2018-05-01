@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+  <title>讯罗优选</title>
+  <link rel="stylesheet" href="__TPL__/statics/css/ectouch.css" />
+  <link rel="stylesheet" href="__TPL__/newTheme/css/index.css">
+  <link rel="stylesheet" href="__TPL__/newTheme/css/swiper-3.4.0.min.css">
+  <link rel="stylesheet" type="text/css" href="__TPL__/newTheme/font/iconfont.css">
+  <link rel="stylesheet" href="__TPL__/newTheme/css/body-model.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_565034_7o52frssrp2pgb9.css">
+  <style>
+    /*.tops{background: #ca1238 !important;}*/
+    .tops .j-search-input{
+      /*background:#de6866 !important;*/
+      margin:0 1rem;padding:0;
+      height:34px;
+    }
+  </style>
+</head>
+<body>
+<!-- 顶部 -->
+<div class="tops">
+  <span class="title">搜宝贝</span>
+  <div class="top2 j-search-input">
+    <span class="iconfont icon-search"></span>
+  </div>
+  <div class="notice">
+    <a href="{:url('notice/shop')}" class="iconfont icon-notice"></a>
+    {if $shop_notify}
+    <span class="dot"></span>
+    {else}
+    {/if}
+  </div>
+</div>
+<!-- 滚动大图 -->
+<div class="banner">
+  <div class="banner-box">
+    <div class="banner-inner swiper-container">
+      <div class="swiper-wrapper">{insert name='ads' id=255 num=3}</div>
+      <!--<div class="swiper-pagination"></div>-->
+    </div>
+  </div>
+</div>
+<!-- 不规则广告 -->
+<div class="randomAdvertisement">{insert name='ads' id=263 num=1}</div>
+<!-- 水果分类 -->
+<div style="clear: both;"></div>
+<div class="navbox">
+  {foreach from=$navs item=nav}
+    <a href="{$nav.ad_link}" class="item">
+      <img src="{$nav.ad_code}" title="{$nav.ad_img_text}">
+      <span class="nav_title" style="color:#{$nav.ad_text_color}">{$nav.ad_img_text}</span>
+      {if $nav.ad_name=='1coupon' && $notice_coupon}
+      <span style="/*background-color:#{$nav.ad_text_color}*/" class="notice_coupon"></span>
+      {/if}
+    </a>
+  {/foreach}
+</div>
+<!-- 讯罗快报 -->
+<div class="star">
+  <p class="xunluokuaibao_p1"><img src="__TPL__/newTheme/image/xunluokuaibao.png"></p>
+  <ul>{insert name='ads' id=266 num=2}</ul>
+</div>
+<!-- 疯抢/专场 -->
+<div class="Berserk">
+  <div class="Berserk-left">{insert name='ads' id=260 num=1}</div>
+  <div class="Berserk-right">
+    <div class="Berserk-left-top">{insert name='ads' id=259 num=1}</div>
+    <div class="Berserk-left-bottom">{insert name='ads' id=265 num=2}</div>
+  </div>
+</div>
+<!-- 八大分类 -->
+<div id="container" data-url="{:url('index/ajax_data')}"></div>
+<!-- 商标声明 -->
+<footer class="brand-footer"><div><p class="footer-list2"><a href="#">新ICP备17000749号</a></p><p class="footer-list3"><a href="#">讯罗电子商务有限公司</a></p></div></footer>
+    <!-- #BeginLibraryItem "/library/newTheme_footer_nav.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/new_search.lbi" --><!-- #EndLibraryItem -->
+<div class="body-model" data-url="{:url('Index/get_idx_tp_ad')}">
+  <div class="wmask"></div>
+  <div class="body-model-con"><img id="model-con-img" src="" alt=""><span class="close">&times;</span></div>
+</div>
+<!-- 八大分类模板 -->
+<script type="text/template" charset="utf-8" id='template'>
+  {{if( it && it.length>0 ){ }}
+  {{for(var i=0; i<it.length; i++){ }}
+  <div class="AdvertisingMap"><a href="{{=it[i].cat_url}}"><img src="{{=it[i].cat_img}}"></a></div>
+  <div class="swiper-container2">
+    <ul class="swiper-wrapper">
+      {{for(var j=0; j<it[i]['goods'].length; j++){ }}
+      <li class="swiper-slide">
+        <div class="FruitsVarieties_box">
+          <a href="{{=it[i]['goods'][j].goods_url}}">
+            {{? it[i]['goods'][j].is_new==1}}
+            <p class="xinpin">新品</p>
+            {{?? it[i]['goods'][j].is_hot==1}}
+            <p class="rexiao">热销</p>
+            {{?}}
+            <p class="p1"><img src="{{=it[i]['goods'][j].goods_img}}"></p>
+            <p class="p2">{{=it[i]['goods'][j].goods_name}}</p>
+            <p class="p3"><span>￥{{=it[i]['goods'][j].shop_price}}</span>/<i class="unit-style">{{=it[i]['goods'][j].unit}}</i></p>
+          </a></div></li>{{ } }}
+      <li class="li-more swiper-slide">
+        <a style="height:auto;margin-top:20px;width:20px;line-height:24px;color:#8d8a8a;writing-mode:lr-tb;margin-right:12%" href="{{=it[i].cat_url}}">查看更多<img style="width:20px;" src="__TPL__/newTheme/image/rightbutton2.png"></a></li></ul>
+  </div>{{ } }}
+  {{ }else{ }}
+  <!--<li>没有数据。</li>-->
+  {{ } }}
+</script>
+<script type="text/javascript" src="__TPL__/newTheme/js/swiper-3.4.0.min.js"></script>
+<script type="text/javascript" src="__TPL__/newTheme/js/jquery.min.js"></script>
+<script type="text/javascript" src="__TPL__/statics/js/ectouch.js"></script>
+<script type="text/javascript" src="__TPL__/newTheme/js/dot.js"></script>
+<script type="text/javascript" src="__TPL__/newTheme/js/index.js"></script>
+</body>
+</html>

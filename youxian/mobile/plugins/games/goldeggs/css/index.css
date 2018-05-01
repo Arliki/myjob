@@ -1,0 +1,307 @@
+/*
+* @Author: Administrator
+* @Date:   2017-12-27 11:23:26
+* @Last Modified by:   Administrator
+* @Last Modified time: 2017-12-30 13:25:33
+*/
+.egg {
+    width: 100% !important;
+    overflow: hidden !important;
+	height: 330px;
+	position: relative;
+	margin-top: 22%;
+}
+img.zjimg {
+    width: 50%;
+    margin: 5% 22%;
+    display: block;
+}
+.egg .bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+a.again {
+    position: absolute;
+    top: 70%;
+    left: 53%;
+    height: 4%;
+    width: 32%;
+    text-decoration: none;
+    /* background: red; */
+}
+a.num {
+    position: absolute;
+    top: 70%;
+    left: 32%;
+    height: 4%;
+    text-decoration: none;
+    color: wheat;
+    margin-top: 1%;
+    font-size: 1rem;
+}
+a.zjbtn {
+    position: absolute;
+    bottom: 44%;
+    left: 36%;
+    height: 8%;
+    width: 23%;
+    display: none;
+}
+a.close {
+    position: absolute;
+    top: 3%;
+    right: 26%;
+    background: white;
+    padding: 8px 8px;
+    text-decoration: none;
+    border-radius: 50%;
+    color: red;
+    font-size: 15px;
+    display: none;
+}
+body{
+    width: 100% !important;
+    overflow: hidden !important;
+	margin:  0px;
+	padding:  0px;
+}
+.egg .bg{
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+}
+.egg ul li {
+	z-index: 999;
+}
+
+.eggList {
+	padding-top: 115px;
+	position: relative;
+    width: 100% !important;
+    overflow: hidden !important;
+	height: 260px;
+	z-index:  66666;
+}
+
+.eggList li {
+	    list-style-type: none;
+	    float: left;
+	    background: url(../images/egg1.png) no-repeat bottom;
+	    background-size: 100%;
+	    width: 23%;
+	    height: 120px;
+	    cursor: pointer;
+	    position: relative;
+	    margin-left: 35px;
+	    z-index: 555;
+}
+li.num1 {
+    position: absolute;
+    top: 14%;
+    left: 23%;
+}
+li.num2 {
+    position: absolute;
+    top: 46%;
+    left: 8%;
+}
+li.num3 {
+    position: absolute;
+    top: 46%;
+    left: 37%;
+}
+.eggList li span {
+	position: absolute;
+	width: 30px;
+	height: 60px;
+	left: 68px;
+	top: 64px;
+	color: #ff0;
+	font-size: 42px;
+	font-weight: bold
+}
+a.again {
+    position: absolute;
+    top: 71%;
+    left: 50%;
+    background: rgba(0,0,0,0);
+    z-index: 99999;
+}
+a.awards_list{
+    text-decoration: none;
+    font-size:9px;
+    z-index: 99;
+    position: fixed;
+    top:6px;
+    right:.5rem;
+    width: 60px;
+    height: 60px;
+    color: #f00;
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+}
+a.awards_list b{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;height: 100%;
+    background: #000000;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: .6;
+}
+a.awards_list img{
+    width: 50%;padding-top:3px;
+}
+.eggList li.curr {
+	background: url(../images/egg2.png) no-repeat bottom;
+	cursor: default;
+	width: 23%;
+	/* left: 37%; */
+	background-size: 100%;
+	z-index: 300;
+}
+
+.eggList li.curr sup {
+	position: absolute;
+	/*background: url(../images/img-4.png) no-repeat;*/
+	background-size:  100%;
+	width: 20%;
+	height: 181px;
+	top: -36px;
+	left: -34px;
+	z-index: 800;
+}
+
+.hammer {
+	background: url(../images/chuizi.png) no-repeat;
+    width: 74px;
+    height: 87px;
+    position: absolute;
+    text-indent: -9999px;
+    z-index: 150;
+    left: 218px;
+    top: 17px;
+    background-size: 81%;
+}
+
+.resultTip {
+	    position: absolute;
+	    width: 100%;
+	    width: 100%;
+	    font-size: 10px;
+	    z-index: 500;
+	    top: 186px;
+	    left: 19px;
+	    top: 114px;
+	    color: #f60;
+	    text-align: center;
+	    overflow: hidden;
+	    display: none;
+	    z-index: 500;
+	    height: 98%;
+	    line-height: 7px;
+	    left: 0px;
+	    z-index: 9999;
+}
+
+.resultTip b {
+	font-size: 14px;
+	line-height: 24px;
+	width:  100%;
+	overflow:  hidden;
+}
+.msg {
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 99999;
+    display: none;
+}
+.msgbox {
+    margin: 65% auto;
+    width: 62%;
+    text-align: center;
+    background: white;
+    border-radius: 5px;
+    padding: 1% 2%;
+}
+.msgbox a{
+	text-decoration: none;
+    color: #aaa;
+    line-height: 14px;
+    margin: 10px 0px;
+    width: 42%;
+    font-size: 12px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+.msgbox a.back{
+	border-right: 1px solid #ccc;
+}
+.msgbox a.rightnow{
+	color: red;
+}
+a,button,input,span{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+/*.egg {*/
+    /*width:100%;*/
+    /*height:330px;*/
+    /*position:relative;*/
+    /*margin-top:23%;*/
+/*}*/
+@media screen and (width: 375px)
+{
+    .egg {
+        margin-top: 115px;
+    }
+}
+@media screen and (width: 320px)
+{
+    .egg {
+        margin-top:40px;
+    }
+    li.num1 {
+        position: absolute;
+        top: 18%;
+        left: 23%;
+    }
+    .hammer {
+        background: url(../images/chuizi.png) no-repeat;
+        width: 74px;
+        height: 87px;
+        position: absolute;
+        text-indent: -9999px;
+        z-index: 150;
+        left: 190px;
+        top: 44px;
+        background-size: 81%;
+    }
+}
+@media screen and (min-width: 400px)
+{
+    .egg {
+        width: 100%;
+        margin-top: 161px;
+    }
+    .hammer {
+        background: url(../images/chuizi.png) no-repeat;
+        width: 74px;
+        height: 87px;
+        position: absolute;
+        text-indent: -9999px;
+        z-index: 150;
+        left: 229px;
+        top: 0px;
+        background-size: 81%;
+    }
+}
